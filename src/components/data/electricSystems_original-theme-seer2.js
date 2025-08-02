@@ -8,30 +8,30 @@ export const electricSystems = {
   "1.5": {
     productImage: defaultImgUrl,
     productTitle: "1.5 Ton Split A/C System",
-    pricingLevels: ["High Efficiency", "Standard Efficiency", "Regional Best Cost"],
+    pricingLevels: ["Platinum", "Gold", "Silver"],
     seers: ["15.2", "14.3", "13.4"],
     levelDescriptions: [
-      "Highest SEER2 Efficiency, R-32 Refrigerant",
-      "Standard SEER2 Efficiency, R-32 Refrigerant", 
-      "Regional Best Cost Option, R-32 Refrigerant"
+      "Highest Efficiency, Total Comfort",
+      "Higher Energy Efficient Choice",
+      "Increased Efficiency, Competitive Price",
     ],
     levelFeatureLists: [
       [
         "Free Duct Cleaning ($1K Value)",
-        "15.2 SEER2 High Efficiency",
-        "R-32 Refrigerant (Eco-Friendly)",
+        "15.2 SEER2 Inverter Variable",
+        "Variable speed Indoor Fan",
         "10 Year Parts & 10 Year Labor Warranty",
       ],
       [
         "Free Duct Cleaning ($1K Value)", 
-        "14.3 SEER2 Standard Efficiency",
-        "R-32 Refrigerant (Eco-Friendly)",
+        "14.3 SEER2 Two Stage Compressor",
+        "Multi-Speed Air Handler - Multiposition",
         "10 Year Parts / 1 Year Labor Warranty",
       ],
       [
         "Free Duct Cleaning ($1K Value)",
-        "13.4 SEER2 Regional Option",
-        "R-32 Refrigerant (Eco-Friendly)", 
+        "13.4 SEER2 Single Stage Compressor",
+        "Multi-Speed Air Handler - Multiposition", 
         "10 Year Parts / 1 Year Labor Warranty",
       ],
     ],
@@ -47,30 +47,30 @@ export const electricSystems = {
   "2.0": {
     productImage: defaultImgUrl,
     productTitle: "2.0 Ton Split A/C System",
-    pricingLevels: ["Platinum", "Gold", "Silver"],
+    pricingLevels: ["High Efficiency", "Standard Efficiency", "Regional Best Cost"],
     seers: ["15.2", "14.3", "13.4"],
     levelDescriptions: [
-      "Highest Efficiency, Total Comfort",
-      "Higher Energy Efficient Choice",
-      "Increased Efficiency, Competitive Price",
+      "Highest SEER2 Efficiency, R-32 Refrigerant",
+      "Standard SEER2 Efficiency, R-32 Refrigerant",
+      "Regional Best Cost Option, R-32 Refrigerant"
     ],
     levelFeatureLists: [
       [
         "Free Duct Cleaning ($1K Value)",
-        "15.2 SEER2 Inverter Variable", 
-        "Variable speed Indoor Fan",
+        "15.2 SEER2 High Efficiency", 
+        "R-32 Refrigerant (Eco-Friendly)",
         "10 Year Parts & 10 Year Labor Warranty",
       ],
       [
         "Free Duct Cleaning ($1K Value)",
-        "14.3 SEER2 Two Stage Compressor",
-        "Multi-Speed Air Handler - Multiposition",
+        "14.3 SEER2 Standard Efficiency",
+        "R-32 Refrigerant (Eco-Friendly)",
         "10 Year Parts / 1 Year Labor Warranty", 
       ],
       [
         "Free Duct Cleaning ($1K Value)",
-        "13.4 SEER2 Single Stage Compressor",
-        "Multi-Speed Air Handler - Multiposition",
+        "13.4 SEER2 Regional Option",
+        "R-32 Refrigerant (Eco-Friendly)",
         "10 Year Parts / 1 Year Labor Warranty",
       ],
     ],

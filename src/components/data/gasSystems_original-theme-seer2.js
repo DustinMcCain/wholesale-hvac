@@ -9,17 +9,16 @@ export const gasSystems = {
   "1.5": {
     productImage: defaultImgUrl,
     productTitle: "1.5 Ton Split-System Gas", 
-    pricingLevels: ["Regional Best Cost"],
+    pricingLevels: ["Silver"],
     seers: ["13.4"],
     levelDescriptions: [
-      "Best Cost Gas System, 80% AFUE, R-32 Refrigerant",
+      "Increased Efficiency, Competitive Price",
     ],
     levelFeatureLists: [
       [
         "Entire Duct Cleaning & Sanitization ($1K Value)",
-        "13.4 SEER2 Cooling Efficiency",
+        "13.4 SEER2 Single Stage Compressor",
         "80% AFUE Gas Furnace",
-        "R-32 Refrigerant (Eco-Friendly)",
         "10 Year Parts / 1 Year Labor Warranty",
       ],
     ],
