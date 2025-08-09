@@ -13,6 +13,7 @@ import lowPriceGuarantee from './images/lowest-price-guarantee.png';
 
 
 const NewSystemRec = (props, { ...rest }) => {
+  console.log('🔍 NewSystemRec rendering with props:', props);
   // const [showFirstStep, setShowFirstStep] = useState(false);
   const [zipcode, setZipcode] = useState('');
   const [zipcodeText, setZipcodeText] = useState('');
@@ -34,9 +35,10 @@ const NewSystemRec = (props, { ...rest }) => {
 
   
 
-  useEffect(
-    () => props.changeRoute('shop')
-  )
+  useEffect(() => {
+    console.log('🔍 NewSystemRec useEffect - calling changeRoute');
+    props.changeRoute('shop');
+  })
 
 
   const handleZipChange = e => {
@@ -108,6 +110,8 @@ const NewSystemRec = (props, { ...rest }) => {
     }
   }, [])
 
+  console.log('🔍 NewSystemRec about to render, zipcode:', zipcode, 'validZipcodes.includes(zipcode):', validZipcodes.includes(zipcode));
+  
   return (
     <div className="NewSystemRec" ref={(e) => setScrollRef(e)}>
 

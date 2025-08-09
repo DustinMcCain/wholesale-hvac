@@ -5,10 +5,12 @@ import './styles/shop.css';
 import sealOfTransparency from './images/seal-of-transparency.png';
 import lowPriceGuarantee from './images/lowest-price-guarantee.png';
 
-const Shop = props => {
+const NewShop = props => {
+  console.log('🔍 NewShop rendering with props:', props);
 
   const setScrollRef = useCallback(node => {
         if (node !== null) {
+              console.log('🔍 NewShop scrolling into view');
               node.parentNode.parentNode.scrollIntoView({
                     behavior: 'smooth',
                     block: 'start',
@@ -16,9 +18,10 @@ const Shop = props => {
         }
   }, [])
 
-useEffect(
-  ()=>props.changeRoute('shop')
-)
+useEffect(() => {
+  console.log('🔍 NewShop useEffect - calling changeRoute');
+  props.changeRoute('shop');
+})
 
 return <div className="Shop" ref={setScrollRef}>
 
@@ -62,4 +65,4 @@ If using financing there is no down payment NOR Payment due until the time of co
   
 };
 
-export default Shop;
+export default NewShop;
