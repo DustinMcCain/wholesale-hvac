@@ -90,9 +90,12 @@ const NewSystemRec = (props, { ...rest }) => {
   }
 
   const fullOrReplaceComponent = (sysType, sysTon, fullOrReplace) => {
-    if (fullOrReplace === 'full') {
+    if (fullOrReplace === 'full' && sysType && sysTon) {
       return <RecommendedSystem sysType={sysType} sysTonnage={sysTon} fullOrReplace={(sysType === 'gas') ? 'gasSystems' : 'electricSystems'} />
-    } else return <RecommendedReplacements sysType={sysType} sysTonnage={sysTon} fullOrReplace={fullOrReplace} />
+    } else if (fullOrReplace === 'replacement' && sysType && sysTon) {
+      return <RecommendedReplacements sysType={sysType} sysTonnage={sysTon} fullOrReplace={fullOrReplace} />
+    }
+    return null;
   }
 
   const setScrollRef = useCallback(node => {
