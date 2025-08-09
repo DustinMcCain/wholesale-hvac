@@ -1,6 +1,7 @@
 {
   "name": "shop-react",
   "version": "0.1.0",
+  "homepage": "https://CommitToProfit.github.io/wholesale-hvac",
   "private": true,
   "dependencies": {
     "eslint": "^6.6.0",
@@ -26,7 +27,9 @@
     "build": "cross-env NODE_OPTIONS=--openssl-legacy-provider react-scripts build",
     "postbuild": "react-snap",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build"
   },
   "eslintConfig": {
     "extends": "react-app",
@@ -53,6 +56,7 @@
   "devDependencies": {
     "cross-env": "^7.0.3",
     "eslint-plugin-react-hooks": "^2.2.0",
+    "gh-pages": "^6.3.0",
     "react-snap": "^1.23.0"
   },
   "packageManager": "yarn@1.22.19+sha512.ff4579ab459bb25aa7c0ff75b62acebe576f6084b36aa842971cf250a5d8c6cd3bc9420b22ce63c7f93a0857bc6ef29291db39c3e7a23aab5adfd5a4dd6c5d71"

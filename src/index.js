@@ -5,17 +5,17 @@ import keys from './keys/keys';
 import ReactGA from 'react-ga';
 import App from './App';
 
-
 const initializeReactGA = () => {
-  ReactGA.initialize(keys.REACT_APP_GA_TRACKING_CODE);
-  // ReactGA.pageview('/homepage');
+  if (keys.gaTrackingCode) {  // Changed from REACT_APP_GA_TRACKING_CODE to gaTrackingCode
+    ReactGA.initialize(keys.gaTrackingCode);
+  }
 }
 
 const rootElement = document.getElementById("root");
 initializeReactGA();
+
 if (rootElement.hasChildNodes()) {
   hydrate(<App />, rootElement);
 } else {
   render(<App />, rootElement);
 }
-
