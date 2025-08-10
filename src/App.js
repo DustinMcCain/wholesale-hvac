@@ -7,7 +7,7 @@ function App() {
 
   return (
     <div className="App">
-      <BrowserRouter>
+      <BrowserRouter basename={process.env.NODE_ENV === 'production' ? '/wholesale-hvac' : '/'}>
         <Main />
       </BrowserRouter>
     </div>

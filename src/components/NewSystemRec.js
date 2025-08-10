@@ -13,6 +13,7 @@ import lowPriceGuarantee from './images/lowest-price-guarantee.png';
 
 
 const NewSystemRec = (props, { ...rest }) => {
+  console.log('🔍 NewSystemRec rendering with props:', props);
   // const [showFirstStep, setShowFirstStep] = useState(false);
   const [zipcode, setZipcode] = useState('');
   const [zipcodeText, setZipcodeText] = useState('');
@@ -34,9 +35,10 @@ const NewSystemRec = (props, { ...rest }) => {
 
   
 
-  useEffect(
-    () => props.changeRoute('shop')
-  )
+  useEffect(() => {
+    console.log('🔍 NewSystemRec useEffect - calling changeRoute');
+    props.changeRoute('shop');
+  })
 
 
   const handleZipChange = e => {
@@ -90,9 +92,12 @@ const NewSystemRec = (props, { ...rest }) => {
   }
 
   const fullOrReplaceComponent = (sysType, sysTon, fullOrReplace) => {
-    if (fullOrReplace === 'full') {
+    if (fullOrReplace === 'full' && sysType && sysTon) {
       return <RecommendedSystem sysType={sysType} sysTonnage={sysTon} fullOrReplace={(sysType === 'gas') ? 'gasSystems' : 'electricSystems'} />
-    } else return <RecommendedReplacements sysType={sysType} sysTonnage={sysTon} fullOrReplace={fullOrReplace} />
+    } else if (fullOrReplace === 'replacement' && sysType && sysTon) {
+      return <RecommendedReplacements sysType={sysType} sysTonnage={sysTon} fullOrReplace={fullOrReplace} />
+    }
+    return null;
   }
 
   const setScrollRef = useCallback(node => {
@@ -105,6 +110,8 @@ const NewSystemRec = (props, { ...rest }) => {
     }
   }, [])
 
+  console.log('🔍 NewSystemRec about to render, zipcode:', zipcode, 'validZipcodes.includes(zipcode):', validZipcodes.includes(zipcode));
+  
   return (
     <div className="NewSystemRec" ref={(e) => setScrollRef(e)}>
 
