@@ -1,0 +1,41 @@
+{
+  "files": {
+    "main.css": "/wholesale-hvac/static/css/main.2251636f.chunk.css",
+    "main.js": "/wholesale-hvac/static/js/main.d70db7c5.chunk.js",
+    "main.js.map": "/wholesale-hvac/static/js/main.d70db7c5.chunk.js.map",
+    "runtime-main.js": "/wholesale-hvac/static/js/runtime-main.59ae8526.js",
+    "runtime-main.js.map": "/wholesale-hvac/static/js/runtime-main.59ae8526.js.map",
+    "static/js/2.953acc1c.chunk.js": "/wholesale-hvac/static/js/2.953acc1c.chunk.js",
+    "static/js/2.953acc1c.chunk.js.map": "/wholesale-hvac/static/js/2.953acc1c.chunk.js.map",
+    "index.html": "/wholesale-hvac/index.html",
+    "precache-manifest.dc66f7be26cb331a5a0b32ea784c3656.js": "/wholesale-hvac/precache-manifest.dc66f7be26cb331a5a0b32ea784c3656.js",
+    "service-worker.js": "/wholesale-hvac/service-worker.js",
+    "static/css/main.2251636f.chunk.css.map": "/wholesale-hvac/static/css/main.2251636f.chunk.css.map",
+    "static/media/ACCondenser.jpg": "/wholesale-hvac/static/media/ACCondenser.bcafbdc2.jpg",
+    "static/media/ac-condenser.png": "/wholesale-hvac/static/media/ac-condenser.50c87abc.png",
+    "static/media/air-handler.png": "/wholesale-hvac/static/media/air-handler.cb865de7.png",
+    "static/media/bigFan.jpg": "/wholesale-hvac/static/media/bigFan.a73beba7.jpg",
+    "static/media/calendar.png": "/wholesale-hvac/static/media/calendar.62fa9600.png",
+    "static/media/ductClean.jpg": "/wholesale-hvac/static/media/ductClean.ee7443e2.jpg",
+    "static/media/ductwork.jpg": "/wholesale-hvac/static/media/ductwork.efe72c6a.jpg",
+    "static/media/evaporator-coil.png": "/wholesale-hvac/static/media/evaporator-coil.3e73366c.png",
+    "static/media/furnace_repairs.jpg": "/wholesale-hvac/static/media/furnace_repairs.3d8f9709.jpg",
+    "static/media/goodman-logo.png": "/wholesale-hvac/static/media/goodman-logo.8a7ad279.png",
+    "static/media/heat-pump.png": "/wholesale-hvac/static/media/heat-pump.dc9b044b.png",
+    "static/media/heating-unit-ceiling.jpg": "/wholesale-hvac/static/media/heating-unit-ceiling.9cf87e5e.jpg",
+    "static/media/hvac_fans.jpg": "/wholesale-hvac/static/media/hvac_fans.c0d9431d.jpg",
+    "static/media/living_room.jpg": "/wholesale-hvac/static/media/living_room.fd2e6a40.jpg",
+    "static/media/header.css": "/wholesale-hvac/static/media/logo-RR-cropped.1129a128.png",
+    "static/media/lowest-price-guarantee.png": "/wholesale-hvac/static/media/lowest-price-guarantee.53ddb201.png",
+    "static/media/manWithFan.jpg": "/wholesale-hvac/static/media/manWithFan.41bbe9e1.jpg",
+    "static/media/seal-of-transparency.png": "/wholesale-hvac/static/media/seal-of-transparency.f9a47c29.png",
+    "static/media/serviceGuy.jpg": "/wholesale-hvac/static/media/serviceGuy.ec0627ff.jpg",
+    "static/media/units.png": "/wholesale-hvac/static/media/units.6dbdbbaa.png"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.59ae8526.js",
+    "static/js/2.953acc1c.chunk.js",
+    "static/css/main.2251636f.chunk.css",
+    "static/js/main.d70db7c5.chunk.js"
+  ]
+}
