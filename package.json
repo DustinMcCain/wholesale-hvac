@@ -1,7 +1,7 @@
 {
   "name": "shop-react",
   "version": "0.1.0",
-  "homepage": "https://CommitToProfit.github.io/wholesale-hvac",
+  "homepage": "./",
   "private": true,
   "dependencies": {
     "eslint": "^6.6.0",
