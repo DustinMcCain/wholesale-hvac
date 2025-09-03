@@ -141,7 +141,7 @@ const NewSystemRec = (props, { ...rest }) => {
             
 
 
-<form onSubmit={handleZipSubmit} className={`step step1 ${(true) ? 'hide' : 'show'} active`}>
+<form onSubmit={handleZipSubmit} className={`step step1 ${(zipcode) ? 'hide' : 'show'} active`}>
 
               <fieldset className="fieldset">
                 <legend>Location:</legend>
@@ -153,7 +153,7 @@ const NewSystemRec = (props, { ...rest }) => {
 
             </form>
             <img src="https://img1.wsimg.com/isteam/ip/ec3d7ae1-84c5-494d-939d-ab7eac153ebf/ac-systems-parts.jpg/:/"
-              alt="Display of numerous AC units and accessories." className={`main-graphic ${(true) ? 'hide' : 'show'} active`} />
+              alt="Display of numerous AC units and accessories." className={`main-graphic ${(zipcode) ? 'hide' : 'show'} active`} />
 
 
             <form onChange={e => {
@@ -161,7 +161,7 @@ const NewSystemRec = (props, { ...rest }) => {
               handleStepChange(e, 1);
             }
             }
-              className={`step step2 ${true ? step2Show : ''} ${step2Active}`}>          <br />
+              className={`step step2 ${zipcode ? step2Show : ''} ${step2Active}`}>          <br />
 
 
               <fieldset className="fieldset">
@@ -260,7 +260,7 @@ const NewSystemRec = (props, { ...rest }) => {
 
               </fieldset>
             </form>
-            <div className={`medallion-graphic ${(true) ? 'show' : 'hide'} active`}>
+            <div className={`medallion-graphic ${(zipcode) ? 'show' : 'hide'} active`}>
                 <p>100% Transparent Online Pricing Guarantee</p>
                 <div>
                 <img src={sealOfTransparency} alt="Seal of Transparency"/>
