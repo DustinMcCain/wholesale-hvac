@@ -133,19 +133,25 @@ const NewHomePage = (props, { ...rest }) => {
             
 
 
-<form onSubmit={handleZipSubmit} className={`step step1 ${(validZipcodes.includes(zipcode)) ? 'hide' : 'show'} active`}>
+{/* TEMPORARILY DISABLED: Zip code restriction disabled to allow all zip codes. 
+    May be re-enabled in the future. Original logic: validZipcodes.includes(zipcode) */}
+<form onSubmit={handleZipSubmit} className={`step step1 ${(true) ? 'hide' : 'show'} active`}>
 
               <fieldset className="fieldset">
                 <legend>Location:</legend>
                 <p>What is the <strong>zip code</strong> where the unit will be installed:</p>
                 <input onChange={handleZipChange} value={zipcodeText} autoFocus type="text" name="zip-code" pattern="[0-9]*" inputMode="numeric" style={{ width: '60%' }} /><br />
                 <input type="submit" value="Submit" className="submit-button" />
-                <aside className={`aside1 ${'' === zipcode || !zipcode ? 'hide' : 'show'}`}>{'' === zipcode || !zipcode ? '' : !validZipcodes.includes(zipcode) ? `Sorry, we don't serve your area yet.` : `Great, we serve your area.`}</aside>
+                {/* TEMPORARILY DISABLED: Zip code validation message disabled to allow all zip codes.
+                    May be re-enabled in the future. Original logic: !validZipcodes.includes(zipcode) */}
+                <aside className={`aside1 ${'' === zipcode || !zipcode ? 'hide' : 'show'}`}>{'' === zipcode || !zipcode ? '' : false ? `Sorry, we don't serve your area yet.` : `Great, we serve your area.`}</aside>
               </fieldset>
 
             </form>
             <img src="https://img1.wsimg.com/isteam/ip/ec3d7ae1-84c5-494d-939d-ab7eac153ebf/ac-systems-parts.jpg/:/"
-              alt="Display of numerous AC units and accessories." className={`main-graphic ${(validZipcodes.includes(zipcode)) ? 'hide' : 'show'} active`} />
+              {/* TEMPORARILY DISABLED: Zip code restriction disabled to allow all zip codes.
+              May be re-enabled in the future. Original logic: validZipcodes.includes(zipcode) */}
+              alt="Display of numerous AC units and accessories." className={`main-graphic ${(true) ? 'hide' : 'show'} active`} />
 
 
             <form onChange={e => {
@@ -153,7 +159,9 @@ const NewHomePage = (props, { ...rest }) => {
               handleStepChange(e, 1);
             }
             }
-              className={`step step2 ${validZipcodes.includes(zipcode) ? step2Show : ''} ${step2Active}`}>          <br />
+              {/* TEMPORARILY DISABLED: Zip code restriction disabled to allow all zip codes.
+              May be re-enabled in the future. Original logic: validZipcodes.includes(zipcode) */}
+              className={`step step2 ${true ? step2Show : ''} ${step2Active}`}>          <br />
 
 
               <fieldset className="fieldset">
@@ -252,7 +260,9 @@ const NewHomePage = (props, { ...rest }) => {
 
               </fieldset>
             </form>
-            <div className={`medallion-graphic ${(validZipcodes.includes(zipcode)) ? 'show' : 'hide'} active`}>
+            {/* TEMPORARILY DISABLED: Zip code restriction disabled to allow all zip codes.
+            May be re-enabled in the future. Original logic: validZipcodes.includes(zipcode) */}
+            <div className={`medallion-graphic ${(true) ? 'show' : 'hide'} active`}>
                 <p>100% Transparent Online Pricing Guarantee</p>
                 <div>
                 <img src={sealOfTransparency} alt="Seal of Transparency"/>
