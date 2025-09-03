@@ -110,7 +110,7 @@ const NewSystemRec = (props, { ...rest }) => {
     }
   }, [])
 
-  console.log('🔍 NewSystemRec about to render, zipcode:', zipcode, 'validZipcodes.includes(zipcode):', validZipcodes.includes(zipcode));
+  // console.log('🔍 NewSystemRec about to render, zipcode:', zipcode, 'validZipcodes.includes(zipcode):', validZipcodes.includes(zipcode)); // TEMPORARILY DISABLED: validZipcodes not imported
   
   return (
     <div className="NewSystemRec" ref={(e) => setScrollRef(e)}>
