@@ -169,4 +169,14 @@ var zipcodes = ['30301', '30302', '30303', '30304', '30305', '30306', '30307', '
   
 ];
 
-export default zipcodes;
+// TEMPORARILY DISABLED: Zip code restrictions disabled to allow all zip codes
+// May be re-enabled in the future by uncommenting the line below and removing the override
+// export default zipcodes;
+
+// Override zipcodes array to include a custom includes method that always returns true
+const zipcodesWithOverride = {
+  ...zipcodes,
+  includes: () => true  // Always return true to disable zip code restrictions
+};
+
+export default zipcodesWithOverride;
