@@ -148,9 +148,9 @@ const NewHomePage = (props, { ...rest }) => {
               </fieldset>
 
             </form>
+            {/* TEMPORARILY DISABLED: Zip code restriction disabled to allow all zip codes.
+               May be re-enabled in the future. Original logic: validZipcodes.includes(zipcode) */}
             <img src="https://img1.wsimg.com/isteam/ip/ec3d7ae1-84c5-494d-939d-ab7eac153ebf/ac-systems-parts.jpg/:/"
-              {/* TEMPORARILY DISABLED: Zip code restriction disabled to allow all zip codes.
-              May be re-enabled in the future. Original logic: validZipcodes.includes(zipcode) */}
               alt="Display of numerous AC units and accessories." className={`main-graphic ${(true) ? 'hide' : 'show'} active`} />
 
 
@@ -160,7 +160,7 @@ const NewHomePage = (props, { ...rest }) => {
             }
             }
               {/* TEMPORARILY DISABLED: Zip code restriction disabled to allow all zip codes.
-              May be re-enabled in the future. Original logic: validZipcodes.includes(zipcode) */}
+                 May be re-enabled in the future. Original logic: validZipcodes.includes(zipcode) */}
               className={`step step2 ${true ? step2Show : ''} ${step2Active}`}>          <br />
 
 
