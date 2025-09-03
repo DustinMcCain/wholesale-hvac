@@ -4,7 +4,7 @@ import RecommendedReplacements from './RecommendedReplacements';
 
 import './styles/shop.css';
 
-import validZipcodes from './data/zipcodes';
+// import validZipcodes from './data/zipcodes'; // TEMPORARILY DISABLED: Not used since zip validation disabled
 import hintTexts from './data/hintTexts';
 
 import sealOfTransparency from './images/seal-of-transparency.png';

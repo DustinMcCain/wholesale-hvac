@@ -4,7 +4,7 @@ import RecommendedReplacements from './RecommendedReplacements';
 
 import './styles/shop.css';
 
-import validZipcodes from './data/zipcodes';
+// import validZipcodes from './data/zipcodes'; // TEMPORARILY DISABLED: Not used since zip validation disabled
 import hintTexts from './data/hintTexts';
 
 import sealOfTransparency from './images/seal-of-transparency.png';
@@ -110,7 +110,7 @@ const NewSystemRec = (props, { ...rest }) => {
     }
   }, [])
 
-  console.log('🔍 NewSystemRec about to render, zipcode:', zipcode, 'validZipcodes.includes(zipcode):', validZipcodes.includes(zipcode));
+  // console.log('🔍 NewSystemRec about to render, zipcode:', zipcode, 'validZipcodes.includes(zipcode):', validZipcodes.includes(zipcode)); // TEMPORARILY DISABLED: validZipcodes not imported
   
   return (
     <div className="NewSystemRec" ref={(e) => setScrollRef(e)}>
