@@ -64,43 +64,18 @@ const Header = () => {
 
 
 
-          <div className="payzer-button" style={{
+          <div className="hearth-financing-logo" style={{
             position: 'absolute',
             right: '2px',
             top: '108px',
             transform: 'scale(0.85)'
           }}>
 
-            <img style={{ outline: 'none', margin: '0 auto', display: 'block' }} alt=""
+            <img style={{ outline: 'none', margin: '0 auto', display: 'block' }} 
+              alt="Financing by Hearth"
+              src={require('./images/financing-by-hearth-logo.webp')}
+              width="250" height="100" />
 
-              src="https://www.payzer.com/images/jpp-button-medium.png"
-              useMap="#JPPMediumButtonMap" width="250" height="100" />
-
-            <p></p>
-
-            <map id="JPPMediumButtonMap" name="JPPMediumButtonMap">
-
-              <area style={{ outline: 'none' }} title="Make a Payment" coords="104,53,194,65"
-
-                alt="buttonmap1"
-
-                shape="rect"
-
-                target="_blank"
-
-                href="https://www.payzer.com/Payment/ExternalMake/businessId/9599" />
-
-              <area style={{ outline: 'none' }} title="Apply for Instant Financing"
-
-                alt="buttonmap1"
-
-                coords="104,74,243,86" shape="rect"
-
-                target="_blank"
-
-                href="https://www.payzer.com/Account/FinancingOptions/businessId/9599" />
-
-            </map>
             <span style={{
               fontSize: '15px',
               fontWeight: '500',
