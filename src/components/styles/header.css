@@ -254,7 +254,7 @@
   .hearth-financing-logo {
     top: 43px !important;
     transform: scale(0.47) !important;
-    right: -4rem !important;
+    right: 10px !important;
     transition: .45s;
   }
 
@@ -387,7 +387,7 @@
   .hearth-financing-logo {
     top: 83px !important;
     transform: scale(0.47) !important;
-    right: -63px !important;
+    right: 10px !important;
     transition: .45s;
   }
 }
