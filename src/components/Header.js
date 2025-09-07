@@ -66,7 +66,7 @@ const Header = () => {
 
           <div className="hearth-financing-logo" style={{
             position: 'absolute',
-            right: '2px',
+            right: '20px',
             top: '108px',
             transform: 'scale(0.85)'
           }}>
