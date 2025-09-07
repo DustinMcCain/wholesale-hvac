@@ -73,7 +73,7 @@ const Header = () => {
 
             <img style={{ outline: 'none', margin: '0 auto', display: 'block' }} 
               alt="Financing by Hearth"
-              src={require('./images/financing-by-hearth-logo-200x200.webp')}
+              src={require('./images/financing-by-hearth-logo-150x150.webp')}
               width="100" height="100" />
 
             {/* <span style={{
