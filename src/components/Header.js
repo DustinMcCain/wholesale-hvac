@@ -73,10 +73,10 @@ const Header = () => {
 
             <img style={{ outline: 'none', margin: '0 auto', display: 'block' }} 
               alt="Financing by Hearth"
-              src={require('./images/financing-by-hearth-logo.webp')}
-              width="250" height="100" />
+              src={require('./images/financing-by-hearth-logo-200x200.webp')}
+              width="100" height="100" />
 
-            <span style={{
+            {/* <span style={{
               fontSize: '15px',
               fontWeight: '500',
               textAlign: 'center',
@@ -87,7 +87,7 @@ const Header = () => {
               background: 'rgba(255,255,255,0.8)'
             }}>
               Serving Florida and Greater Atlanta
-             </span>
+             </span> */}
           </div>
 
     </div >
