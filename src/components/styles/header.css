@@ -94,7 +94,7 @@
 .logo {
   height: 93px;
   width: 201px;
-  background: url(../images/hvac-matchup-tool-logo-short.png) no-repeat;
+  background: url(../images/hvac-matchup-tool-logo.webp) no-repeat;
   background-size: contain;
   position: relative;
   top: -23px;
@@ -111,7 +111,7 @@
   top: 8px;
   height: 76px;
   width: 160px;
-  background: url(../images/hvac-matchup-tool-logo-short.png) no-repeat;
+  background: url(../images/hvac-matchup-tool-logo.webp) no-repeat;
   background-size: contain;
 }
 
@@ -285,7 +285,7 @@
 
     top: 8px;
     height: 60px;
-    background: url(../images/hvac-matchup-tool-logo-short.png) no-repeat;
+    background: url(../images/hvac-matchup-tool-logo.webp) no-repeat;
     background-size: contain;
   }
 
