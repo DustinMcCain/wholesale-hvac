@@ -14,7 +14,7 @@ const Footer = () => {
         </div>
         <div className="phone-link">
           <Icon name='phone' />
-          <span> <a href="tel:+19045744955">(904) 574-4955</a>&nbsp;&nbsp;</span>
+          <span> <a href="tel:+13802101441">(380) 210-1441</a>&nbsp;&nbsp;</span>
           {/* <span style={{ whiteSpace: 'nowrap' }}> <Icon name='phone' />GA <a href="tel:+14705814642">(470) 581-4642</a></span> */}
         </div>
 
