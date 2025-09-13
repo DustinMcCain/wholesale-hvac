@@ -121,7 +121,7 @@ export const gasSystems = {
         "15.2 SEER2 High Efficiency Cooling",
         "96% AFUE High Efficiency Gas Furnace",
         "R-32 Refrigerant (Eco-Friendly)",
-        "10 Year Parts & 10 Year Labor Warranty",
+        "",
       ],
       [
         "Entire Duct Cleaning & Sanitization ($1K Value)",

@@ -19,7 +19,7 @@ export const gasSystems = {
         "Entire Duct Cleaning & Sanitization ($1K Value)",
         "18 SEER Inverter Variable",
         "Variable speed Indoor Fan",
-        "10 Year Parts & 10 Year Labor Warranty",
+        "",
       ],
       [
         "Entire Duct Cleaning & Sanitization ($1K Value)",
@@ -58,7 +58,7 @@ export const gasSystems = {
         "Entire Duct Cleaning & Sanitization ($1K Value)",
         "18 SEER Inverter Variable",
         "Variable speed Indoor Fan",
-        "10 Year Parts & 10 Year Labor Warranty",
+        "",
       ],
       [
         "Entire Duct Cleaning & Sanitization ($1K Value)",
@@ -96,7 +96,7 @@ export const gasSystems = {
         "Entire Duct Cleaning & Sanitization($1K Value)",
         "18 SEER Inverter Variable",
         "Variable speed Indoor Fan",
-        "10 Year Parts & 10 Year Labor Warranty",
+        "",
       ],
       [
         "Entire Duct Cleaning & Sanitization ($1K Value)",
@@ -134,7 +134,7 @@ export const gasSystems = {
         "Entire Duct Cleaning & Sanitization ($1K Value)",
         "18 SEER Inverter Variable",
         "Variable speed Indoor Fan",
-        "10 Year Parts & 10 Year Labor Warranty",
+        "",
       ],
       [
         "Entire Duct Cleaning & Sanitization ($1K Value)",
@@ -173,7 +173,7 @@ export const gasSystems = {
         "Entire Duct Cleaning & Sanitization ($1K Value)",
         "18 SEER Inverter Variable",
         "Variable speed Indoor Fan",
-        "10 Year Parts & 10 Year Labor Warranty",
+        "",
       ],
       [
         "Entire Duct Cleaning & Sanitization ($1K Value)",
@@ -212,7 +212,7 @@ export const gasSystems = {
         "Entire Duct Cleaning & Sanitization ($1K Value)",
         "18 SEER Inverter Variable",
         "Variable speed Indoor Fan",
-        "10 Year Parts & 10 Year Labor Warranty",
+        "",
       ],
       [
         "Entire Duct Cleaning & Sanitization ($1K Value)",
@@ -251,7 +251,7 @@ export const gasSystems = {
         "Entire Duct Cleaning & Sanitization ($1K Value)",
         "18 SEER Inverter Variable",
         "Variable speed Indoor Fan",
-        "10 Year Parts & 10 Year Labor Warranty",
+        "",
       ],
       [
         "Entire Duct Cleaning & Sanitization ($1K Value)",

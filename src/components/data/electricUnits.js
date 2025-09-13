@@ -16,19 +16,19 @@ export const electricUnits = {
     ],
     levelFeatureLists: [
       [
-        "Free Duct Cleaning ($1K Value)",
+        "",
         "Variable Speed Compressor",
         "Variable speed Indoor Fan",
-        "10 Year Parts & 10 Year Labor Warranty",
+        "",
       ],
       [
-        "Free Duct Cleaning ($1K Value)",
+        "",
         "Two Stage Scroll Compressor",
         "80% AFUE Two Stage Furnace",
         "10 Year Parts / 1 Year Labor Warranty",
       ],
       [
-        "Free Duct Cleaning ($1K Value)",
+        "",
         "Single Stage Compressor",
         "80% AFUE Constant Torque Furnace",
         "10 Year Parts / 1 Year Labor Warranty",
@@ -55,19 +55,19 @@ export const electricUnits = {
     ],
     levelFeatureLists: [
       [
-        "Free Duct Cleaning ($1K Value)",
+        "",
         "Variable Speed Compressor",
         "Variable speed Indoor Fan",
-        "10 Year Parts & 10 Year Labor Warranty",
+        "",
       ],
       [
-        "Free Duct Cleaning ($1K Value)",
+        "",
         "Two Stage Scroll Compressor",
         "80% AFUE Two Stage Furnace",
         "10 Year Parts / 1 Year Labor Warranty",
       ],
       [
-        "Free Duct Cleaning ($1K Value)",
+        "",
         "Single Stage Compressor",
         "80% AFUE Constant Torque Furnace",
         "10 Year Parts / 1 Year Labor Warranty",
@@ -93,19 +93,19 @@ export const electricUnits = {
     ],
     levelFeatureLists: [
       [
-        "Free Duct Cleaning ($1K Value)",
+        "",
         "Variable Speed Compressor",
         "Variable speed Indoor Fan",
-        "10 Year Parts & 10 Year Labor Warranty",
+        "",
       ],
       [
-        "Free Duct Cleaning ($1K Value)",
+        "",
         "Two Stage Scroll Compressor",
         "80% AFUE Two Stage Furnace",
         "10 Year Parts / 1 Year Labor Warranty",
       ],
       [
-        "Free Duct Cleaning ($1K Value)",
+        "",
         "Single Stage Compressor",
         "80% AFUE Constant Torque Furnace",
         "10 Year Parts / 1 Year Labor Warranty",
@@ -131,19 +131,19 @@ export const electricUnits = {
     ],
     levelFeatureLists: [
       [
-        "Free Duct Cleaning ($1K Value)",
+        "",
         "Variable Speed Compressor",
         "Variable speed Indoor Fan",
-        "10 Year Parts & 10 Year Labor Warranty",
+        "",
       ],
       [
-        "Free Duct Cleaning ($1K Value)",
+        "",
         "Two Stage Scroll Compressor",
         "80% AFUE Two Stage Furnace",
         "10 Year Parts / 1 Year Labor Warranty",
       ],
       [
-        "Free Duct Cleaning ($1K Value)",
+        "",
         "Single Stage Compressor",
         "80% AFUE Constant Torque Furnace",
         "10 Year Parts / 1 Year Labor Warranty",
@@ -170,19 +170,19 @@ export const electricUnits = {
     ],
     levelFeatureLists: [
       [
-        "Free Duct Cleaning ($1K Value)",
+        "",
         "Variable Speed Compressor",
         "Variable speed Indoor Fan",
-        "10 Year Parts & 10 Year Labor Warranty",
+        "",
       ],
       [
-        "Free Duct Cleaning ($1K Value)",
+        "",
         "Two Stage Scroll Compressor",
         "80% AFUE Two Stage Furnace",
         "10 Year Parts / 1 Year Labor Warranty",
       ],
       [
-        "Free Duct Cleaning ($1K Value)",
+        "",
         "Single Stage Compressor",
         "80% AFUE Constant Torque Furnace",
         "10 Year Parts / 1 Year Labor Warranty",
@@ -209,19 +209,19 @@ export const electricUnits = {
     ],
     levelFeatureLists: [
       [
-        "Free Duct Cleaning ($1K Value)",
+        "",
         "Variable Speed Compressor",
         "Variable speed Indoor Fan",
-        "10 Year Parts & 10 Year Labor Warranty",
+        "",
       ],
       [
-        "Free Duct Cleaning ($1K Value)",
+        "",
         "Two Stage Scroll Compressor",
         "80% AFUE Two Stage Furnace",
         "10 Year Parts / 1 Year Labor Warranty",
       ],
       [
-        "Free Duct Cleaning ($1K Value)",
+        "",
         "Single Stage Compressor",
         "80% AFUE Constant Torque Furnace",
         "10 Year Parts / 1 Year Labor Warranty",
@@ -248,19 +248,19 @@ export const electricUnits = {
     ],
     levelFeatureLists: [
       [
-        "Free Duct Cleaning ($1K Value)",
+        "",
         "Variable Speed Compressor",
         "Variable speed Indoor Fan",
-        "10 Year Parts & 10 Year Labor Warranty",
+        "",
       ],
       [
-        "Free Duct Cleaning ($1K Value)",
+        "",
         "Two Stage Scroll Compressor",
         "80% AFUE Two Stage Furnace",
         "10 Year Parts / 1 Year Labor Warranty",
       ],
       [
-        "Free Duct Cleaning ($1K Value)",
+        "",
         "Single Stage Compressor",
         "80% AFUE Constant Torque Furnace",
         "10 Year Parts / 1 Year Labor Warranty",

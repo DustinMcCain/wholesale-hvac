@@ -17,19 +17,19 @@ export const electricSystems = {
     ],
     levelFeatureLists: [
       [
-        "Free Duct Cleaning ($1K Value)",
+        "",
         "15.2 SEER2 High Efficiency",
         "R-32 Refrigerant (Eco-Friendly)",
-        "10 Year Parts & 10 Year Labor Warranty",
+        "",
       ],
       [
-        "Free Duct Cleaning ($1K Value)", 
+        "", 
         "14.3 SEER2 Standard Efficiency",
         "R-32 Refrigerant (Eco-Friendly)",
         "10 Year Parts / 1 Year Labor Warranty",
       ],
       [
-        "Free Duct Cleaning ($1K Value)",
+        "",
         "13.4 SEER2 Regional Option",
         "R-32 Refrigerant (Eco-Friendly)", 
         "10 Year Parts / 1 Year Labor Warranty",
@@ -56,19 +56,19 @@ export const electricSystems = {
     ],
     levelFeatureLists: [
       [
-        "Free Duct Cleaning ($1K Value)",
+        "",
         "15.2 SEER2 Inverter Variable", 
         "Variable speed Indoor Fan",
-        "10 Year Parts & 10 Year Labor Warranty",
+        "",
       ],
       [
-        "Free Duct Cleaning ($1K Value)",
+        "",
         "14.3 SEER2 Two Stage Compressor",
         "Multi-Speed Air Handler - Multiposition",
         "10 Year Parts / 1 Year Labor Warranty", 
       ],
       [
-        "Free Duct Cleaning ($1K Value)",
+        "",
         "13.4 SEER2 Single Stage Compressor",
         "Multi-Speed Air Handler - Multiposition",
         "10 Year Parts / 1 Year Labor Warranty",
@@ -95,19 +95,19 @@ export const electricSystems = {
     ],
     levelFeatureLists: [
       [
-        "Free Duct Cleaning ($1K Value)",
+        "",
         "15.2 SEER2 High Efficiency",
         "R-32 Refrigerant (Eco-Friendly)",
-        "10 Year Parts & 10 Year Labor Warranty",
+        "",
       ],
       [
-        "Free Duct Cleaning ($1K Value)",
+        "",
         "14.3 SEER2 Standard Efficiency", 
         "R-32 Refrigerant (Eco-Friendly)",
         "10 Year Parts / 1 Year Labor Warranty",
       ],
       [
-        "Free Duct Cleaning ($1K Value)",
+        "",
         "13.4 SEER2 Regional Option",
         "R-32 Refrigerant (Eco-Friendly)",
         "10 Year Parts / 1 Year Labor Warranty",
@@ -134,19 +134,19 @@ export const electricSystems = {
     ],
     levelFeatureLists: [
       [
-        "Free Duct Cleaning ($1K Value)",
+        "",
         "15.2 SEER2 High Efficiency",
         "R-32 Refrigerant (Eco-Friendly)",
-        "10 Year Parts & 10 Year Labor Warranty",
+        "",
       ],
       [
-        "Free Duct Cleaning ($1K Value)",
+        "",
         "14.3 SEER2 Standard Efficiency",
         "R-32 Refrigerant (Eco-Friendly)",
         "10 Year Parts / 1 Year Labor Warranty",
       ],
       [
-        "Free Duct Cleaning ($1K Value)",
+        "",
         "13.4 SEER2 Regional Option", 
         "R-32 Refrigerant (Eco-Friendly)",
         "10 Year Parts / 1 Year Labor Warranty",
@@ -173,19 +173,19 @@ export const electricSystems = {
     ],
     levelFeatureLists: [
       [
-        "Free Duct Cleaning ($1K Value)",
+        "",
         "15.2 SEER2 High Efficiency",
         "R-32 Refrigerant (Eco-Friendly)",
-        "10 Year Parts & 10 Year Labor Warranty",
+        "",
       ],
       [
-        "Free Duct Cleaning ($1K Value)",
+        "",
         "14.3 SEER2 Standard Efficiency",
         "R-32 Refrigerant (Eco-Friendly)",
         "10 Year Parts / 1 Year Labor Warranty",
       ],
       [
-        "Free Duct Cleaning ($1K Value)",
+        "",
         "13.4 SEER2 Regional Option",
         "R-32 Refrigerant (Eco-Friendly)",
         "10 Year Parts / 1 Year Labor Warranty",
@@ -211,13 +211,13 @@ export const electricSystems = {
     ],
     levelFeatureLists: [
       [
-        "Free Duct Cleaning ($1K Value)",
+        "",
         "15.2 SEER2 High Efficiency",
         "R-32 Refrigerant (Eco-Friendly)", 
-        "10 Year Parts & 10 Year Labor Warranty",
+        "",
       ],
       [
-        "Free Duct Cleaning ($1K Value)",
+        "",
         "14.3 SEER2 Standard Efficiency",
         "R-32 Refrigerant (Eco-Friendly)",
         "10 Year Parts / 1 Year Labor Warranty",
@@ -243,19 +243,19 @@ export const electricSystems = {
     ],
     levelFeatureLists: [
       [
-        "Free Duct Cleaning ($1K Value)",
+        "",
         "16.2 SEER2 Premium Efficiency",
         "R-32 Refrigerant (Eco-Friendly)",
-        "10 Year Parts & 10 Year Labor Warranty",
+        "",
       ],
       [
-        "Free Duct Cleaning ($1K Value)",
+        "",
         "14.3 SEER2 Standard Efficiency",
         "R-32 Refrigerant (Eco-Friendly)",
         "10 Year Parts / 1 Year Labor Warranty",
       ],
       [
-        "Free Duct Cleaning ($1K Value)",
+        "",
         "13.4 SEER2 Regional Option",
         "R-32 Refrigerant (Eco-Friendly)",
         "10 Year Parts / 1 Year Labor Warranty",
