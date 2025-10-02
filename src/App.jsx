@@ -163,17 +163,24 @@ const HVACSizingCalculator = () => {
 
   const states = ['Alabama', 'Alaska', 'Arizona', 'Arkansas', 'California', 'Colorado', 'Connecticut', 'Delaware', 'Florida', 'Georgia', 'Hawaii', 'Idaho', 'Illinois', 'Indiana', 'Iowa', 'Kansas', 'Kentucky', 'Louisiana', 'Maine', 'Maryland', 'Massachusetts', 'Michigan', 'Minnesota', 'Mississippi', 'Missouri', 'Montana', 'Nebraska', 'Nevada', 'New Hampshire', 'New Jersey', 'New Mexico', 'New York', 'North Carolina', 'North Dakota', 'Ohio', 'Oklahoma', 'Oregon', 'Pennsylvania', 'Rhode Island', 'South Carolina', 'South Dakota', 'Tennessee', 'Texas', 'Utah', 'Vermont', 'Virginia', 'Washington', 'West Virginia', 'Wisconsin', 'Wyoming'];
 
-  const calculateTonnage = (sqft) => {
+const thresholds = [
+    [1.75, '1.5'],
+    [2.25, '2.0'],
+    [2.75, '2.5'],
+    [3.25, '3.0'],
+    [3.75, '3.5'],
+    [4.5,  '4.0'],
+]
+
+const calculateTonnage = (sqft) => {
+    if (!sqft) return;
+
     const btus = sqft * 25;
     const tons = btus / 12000;
-    if (tons <= 1.75) return '1.5';
-    if (tons <= 2.25) return '2.0';
-    if (tons <= 2.75) return '2.5';
-    if (tons <= 3.25) return '3.0';
-    if (tons <= 3.75) return '3.5';
-    if (tons <= 4.5) return '4.0';
-    return '5.0';
-  };
+
+    const found = thresholds.find(([limit]) => tons <= limit);
+    return found ? found[1] : "5.0";
+}
 
   const handleCalculate = () => {
     let tonnage = currentSize || calculateTonnage(parseInt(squareFeet));
