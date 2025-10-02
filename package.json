@@ -1,63 +1,31 @@
 {
-  "name": "shop-react",
-  "version": "0.1.0",
-  "homepage": "./",
+  "name": "hvac-sizing-site",
   "private": true,
-  "dependencies": {
-    "eslint": "^6.6.0",
-    "google-map-react": "^1.1.5",
-    "history": "^5.0.0",
-    "konva": "^4.0.17",
-    "query-string": "^6.9.0",
-    "react": "^16.10.2",
-    "react-dom": "^16.10.2",
-    "react-ga": "^3.1.2",
-    "react-gesture-gallery": "^1.1.0",
-    "react-gesture-responder": "^2.1.0",
-    "react-helmet": "^6.1.0",
-    "react-native": "^0.61.4",
-    "react-router-dom": "^5.1.2",
-    "react-scripts": "3.2.0",
-    "semantic-ui-css": "^2.4.1",
-    "semantic-ui-react": "^0.88.1",
-    "typescript": "*"
-  },
+  "version": "0.0.0",
+  "type": "module",
   "scripts": {
-    "start": "cross-env NODE_OPTIONS=--openssl-legacy-provider react-scripts start",
-    "build": "cross-env NODE_OPTIONS=--openssl-legacy-provider react-scripts build",
-    "postbuild": "echo 'skipping react-snap'",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject",
-    "predeploy": "npm run build",
-    "deploy": "gh-pages -d build"
+    "dev": "vite",
+    "build": "vite build && mkdir -p build && mv dist/* build/",
+    "lint": "eslint .",
+    "preview": "vite preview"
   },
-  "eslintConfig": {
-    "extends": "react-app",
-    "plugins": [
-      "react-hooks"
-    ],
-    "rules": {
-      "react-hooks/rules-of-hooks": "error",
-      "react-hooks/exhaustive-deps": "warn"
-    }
-  },
-  "browserslist": {
-    "production": [
-      ">0.2%",
-      "not dead",
-      "not op_mini all"
-    ],
-    "development": [
-      "last 1 chrome version",
-      "last 1 firefox version",
-      "last 1 safari version"
-    ]
+  "dependencies": {
+    "lucide-react": "^0.544.0",
+    "react": "^19.1.1",
+    "react-dom": "^19.1.1"
   },
   "devDependencies": {
-    "cross-env": "^7.0.3",
-    "eslint-plugin-react-hooks": "^2.2.0",
-    "gh-pages": "^6.3.0",
-    "react-snap": "^1.23.0"
-  },
-  "packageManager": "yarn@1.22.19+sha512.ff4579ab459bb25aa7c0ff75b62acebe576f6084b36aa842971cf250a5d8c6cd3bc9420b22ce63c7f93a0857bc6ef29291db39c3e7a23aab5adfd5a4dd6c5d71"
+    "@eslint/js": "^9.36.0",
+    "@types/react": "^19.1.13",
+    "@types/react-dom": "^19.1.9",
+    "@vitejs/plugin-react": "^5.0.3",
+    "autoprefixer": "^10.4.21",
+    "eslint": "^9.36.0",
+    "eslint-plugin-react-hooks": "^5.2.0",
+    "eslint-plugin-react-refresh": "^0.4.20",
+    "globals": "^16.4.0",
+    "postcss": "^8.5.6",
+    "tailwindcss": "^3.4.17",
+    "vite": "^7.1.7"
+  }
 }
