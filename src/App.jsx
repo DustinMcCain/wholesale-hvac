@@ -314,9 +314,9 @@ const calculateTonnage = (sqft) => {
       <div className="p-4 md:p-8">
       <div className="max-w-6xl mx-auto">
         <div className="text-center mb-8">
-          <h1 className="text-4xl md:text-5xl font-bold text-blue-900 mb-2">HVAC System Sizing Calculator</h1>
-          <p className="text-lg text-blue-700">Find the perfect system for your home</p>
-        </div>
+  <h1 className="text-4xl md:text-5xl font-bold text-gray-900 mb-2 border-b-4 border-[#E9791C] inline-block pb-2">Smart HVAC System Selector</h1>
+  <p className="text-lg text-gray-700 mt-4"><strong>NO HVAC KNOWLEDGE REQUIRED</strong> - Select the Right System for Your Home or Property</p>
+</div>
 
         {step < 5 && (
           <div className="bg-white rounded-lg shadow-md p-4 mb-6">
@@ -423,6 +423,12 @@ const calculateTonnage = (sqft) => {
               <h2 className="text-2xl font-bold text-gray-800">Home Size</h2>
             </div>
             <div className="mb-6">
+              <label className="block text-lg font-semibold mb-3">Enter your home square footage</label>
+              <input type="number" value={squareFeet} onChange={(e) => { setSquareFeet(e.target.value); if (e.target.value) setCurrentSize(''); }} placeholder="e.g., 1200" className="w-full p-4 border-2 border-gray-300 rounded-lg text-lg focus:border-blue-500 focus:outline-none" />
+              <p className="mt-2 text-sm text-gray-600">We will calculate the recommended system size based on 25 BTUs per square foot</p>
+            </div>
+            <div className="text-center my-4 text-gray-500 font-semibold">OR</div>
+            <div className="mb-6">
               <label className="block text-lg font-semibold mb-3">Know your current system size?</label>
               <select value={currentSize} onChange={(e) => { setCurrentSize(e.target.value); if (e.target.value) setSquareFeet(''); }} className="w-full p-4 border-2 border-gray-300 rounded-lg text-lg focus:border-blue-500 focus:outline-none">
                 <option value="">Select tonnage...</option>
@@ -434,12 +440,6 @@ const calculateTonnage = (sqft) => {
                 <option value="4.0">4.0 Ton</option>
                 <option value="5.0">5.0 Ton</option>
               </select>
-            </div>
-            <div className="text-center my-4 text-gray-500 font-semibold">OR</div>
-            <div className="mb-6">
-              <label className="block text-lg font-semibold mb-3">Enter your home square footage</label>
-              <input type="number" value={squareFeet} onChange={(e) => { setSquareFeet(e.target.value); if (e.target.value) setCurrentSize(''); }} placeholder="e.g., 1200" className="w-full p-4 border-2 border-gray-300 rounded-lg text-lg focus:border-blue-500 focus:outline-none" />
-              <p className="mt-2 text-sm text-gray-600">We will calculate the recommended system size based on 25 BTUs per square foot</p>
             </div>
             <div className="flex gap-3 mt-6">
               <button onClick={() => {
