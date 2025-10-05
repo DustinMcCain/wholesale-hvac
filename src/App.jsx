@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Home, Thermometer, MapPin, Calculator, ShoppingCart, Phone, Flame } from 'lucide-react';
+import { Home, Thermometer, MapPin, Calculator, ShoppingCart, Phone, Flame, HelpCircle, X } from 'lucide-react';
 
 const HVACSizingCalculator = () => {
   const [step, setStep] = useState(1);
@@ -10,6 +10,11 @@ const HVACSizingCalculator = () => {
   const [squareFeet, setSquareFeet] = useState('');
   const [currentSize, setCurrentSize] = useState('');
   const [results, setResults] = useState(null);
+  const [showDiagramModal, setShowDiagramModal] = useState(false);
+
+  // Image paths - you'll need to update these to match your actual deployment
+  const upflowImage = '/src/assets/system-examples/AC-FURNACE-COIL-VERTICAL-BASEMENT.png';
+  const horizontalImage = '/src/assets/system-examples/AC-FURNACE-COIL-HORIZONTAL-ATTIC.png';
 
   const productUrls = {
     ac: {
@@ -163,24 +168,22 @@ const HVACSizingCalculator = () => {
 
   const states = ['Alabama', 'Alaska', 'Arizona', 'Arkansas', 'California', 'Colorado', 'Connecticut', 'Delaware', 'Florida', 'Georgia', 'Hawaii', 'Idaho', 'Illinois', 'Indiana', 'Iowa', 'Kansas', 'Kentucky', 'Louisiana', 'Maine', 'Maryland', 'Massachusetts', 'Michigan', 'Minnesota', 'Mississippi', 'Missouri', 'Montana', 'Nebraska', 'Nevada', 'New Hampshire', 'New Jersey', 'New Mexico', 'New York', 'North Carolina', 'North Dakota', 'Ohio', 'Oklahoma', 'Oregon', 'Pennsylvania', 'Rhode Island', 'South Carolina', 'South Dakota', 'Tennessee', 'Texas', 'Utah', 'Vermont', 'Virginia', 'Washington', 'West Virginia', 'Wisconsin', 'Wyoming'];
 
-const thresholds = [
+  const thresholds = [
     [1.75, '1.5'],
     [2.25, '2.0'],
     [2.75, '2.5'],
     [3.25, '3.0'],
     [3.75, '3.5'],
     [4.5,  '4.0'],
-]
+  ];
 
-const calculateTonnage = (sqft) => {
+  const calculateTonnage = (sqft) => {
     if (!sqft) return;
-
     const btus = sqft * 25;
     const tons = btus / 12000;
-
     const found = thresholds.find(([limit]) => tons <= limit);
     return found ? found[1] : "5.0";
-}
+  };
 
   const handleCalculate = () => {
     let tonnage = currentSize || calculateTonnage(parseInt(squareFeet));
@@ -229,6 +232,49 @@ const calculateTonnage = (sqft) => {
     } else if (heatingType === 'gas') {
       return productUrls.furnace?.[flowType]?.[tier]?.[tonnage];
     }
+  };
+
+  const DiagramModal = () => {
+    if (!showDiagramModal) return null;
+    
+    return (
+      <div className="fixed inset-0 bg-black bg-opacity-50 z-50 flex items-center justify-center p-4" onClick={() => setShowDiagramModal(false)}>
+        <div className="bg-white rounded-xl shadow-2xl max-w-4xl w-full max-h-[90vh] overflow-y-auto" onClick={(e) => e.stopPropagation()}>
+          <div className="sticky top-0 bg-white border-b p-4 flex justify-between items-center">
+            <h3 className="text-2xl font-bold text-gray-800">System Flow Type Guide</h3>
+            <button onClick={() => setShowDiagramModal(false)} className="p-2 hover:bg-gray-100 rounded-full transition">
+              <X className="w-6 h-6" />
+            </button>
+          </div>
+          
+          <div className="p-6 space-y-6">
+            <div className="border-2 border-blue-200 rounded-lg p-4 bg-blue-50">
+              <h4 className="text-xl font-bold text-gray-800 mb-3">Vertical Upflow (Most Common)</h4>
+              <p className="text-gray-700 mb-4">Air flows upward from bottom to top. Typically installed in basements or closets.</p>
+              <div className="bg-white p-2 rounded">
+                <img src={upflowImage} alt="Upflow System Diagram" className="w-full h-auto max-w-md mx-auto" />
+              </div>
+            </div>
+
+            <div className="border-2 border-green-200 rounded-lg p-4 bg-green-50">
+              <h4 className="text-xl font-bold text-gray-800 mb-3">Horizontal</h4>
+              <p className="text-gray-700 mb-4">Air flows horizontally through the system. Common in attic or crawlspace installations.</p>
+              <div className="bg-white p-2 rounded">
+                <img src={horizontalImage} alt="Horizontal System Diagram" className="w-full h-auto max-w-md mx-auto" />
+              </div>
+            </div>
+
+            <div className="border-2 border-purple-200 rounded-lg p-4 bg-purple-50">
+              <h4 className="text-xl font-bold text-gray-800 mb-3">Downflow</h4>
+              <p className="text-gray-700 mb-4">Air flows downward from top to bottom. Less common, sometimes used with homes on slabs.</p>
+              <div className="bg-white p-2 rounded text-gray-500 italic text-center py-8">
+                Diagram coming soon
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    );
   };
 
   const SystemCard = ({ system, tier, tierName, tierBg }) => {
@@ -298,6 +344,7 @@ const calculateTonnage = (sqft) => {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-blue-50 to-blue-100">
+      <DiagramModal />
       <div className="bg-white shadow-sm">
         <div className="max-w-6xl mx-auto py-4 px-4">
           <div className="flex justify-center">
@@ -313,186 +360,196 @@ const calculateTonnage = (sqft) => {
       </div>
 
       <div className="p-4 md:p-8">
-      <div className="max-w-6xl mx-auto">
-        <div className="text-center mb-8">
-  <h1 className="text-4xl md:text-5xl font-bold text-gray-900 mb-2 border-b-4 border-[#E9791C] inline-block pb-2">Smart HVAC System Selector</h1>
-  <p className="text-lg text-gray-700 mt-4"><strong>NO HVAC KNOWLEDGE REQUIRED</strong> - Select the Right System for Your Home or Property</p>
-</div>
-
-        {step < 5 && (
-          <div className="bg-white rounded-lg shadow-md p-4 mb-6">
-            <div className="flex items-center justify-between max-w-xl mx-auto">
-              {[1, 2, 3, 4].map((s) => (
-                <React.Fragment key={s}>
-                  <div className={`flex items-center justify-center w-10 h-10 rounded-full ${step >= s ? 'bg-blue-600 text-white' : 'bg-gray-300 text-gray-600'} font-semibold`}>{s}</div>
-                  {s < 4 && <div className={`flex-1 h-1 mx-2 ${step > s ? 'bg-blue-600' : 'bg-gray-300'}`} />}
-                </React.Fragment>
-              ))}
-            </div>
+        <div className="max-w-6xl mx-auto">
+          <div className="text-center mb-8">
+            <h1 className="text-4xl md:text-5xl font-bold text-gray-900 mb-2 inline-block pb-2" style={{ borderBottom: '4px solid #E9791C' }}>Smart HVAC System Selector</h1>
+            <p className="text-lg text-gray-700 mt-4"><strong>NO HVAC KNOWLEDGE REQUIRED</strong> - Select the Right System for Your Home or Property</p>
           </div>
-        )}
 
-        {step === 1 && (
-          <div className="bg-white rounded-xl shadow-lg p-8 max-w-2xl mx-auto">
-            <div className="flex items-center mb-6">
-              <MapPin className="w-8 h-8 text-blue-600 mr-3" />
-              <h2 className="text-2xl font-bold text-gray-800">Select Your State</h2>
-            </div>
-            <select value={state} onChange={(e) => setState(e.target.value)} className="w-full p-4 border-2 border-gray-300 rounded-lg text-lg focus:border-blue-500 focus:outline-none">
-              <option value="">Choose your state...</option>
-              {states.map((s) => (<option key={s} value={s}>{s}</option>))}
-            </select>
-            {state === 'California' && (<p className="mt-4 text-sm text-blue-600 bg-blue-50 p-3 rounded">California requires minimum 14.3 SEER2 rating</p>)}
-            <button onClick={() => setStep(2)} disabled={!state} className="w-full mt-6 py-4 bg-blue-600 text-white rounded-lg font-semibold text-lg hover:bg-blue-700 disabled:bg-gray-300 disabled:cursor-not-allowed transition">Continue</button>
-          </div>
-        )}
-
-        {step === 2 && (
-          <div className="bg-white rounded-xl shadow-lg p-8 max-w-2xl mx-auto">
-            <div className="flex items-center mb-6">
-              <Thermometer className="w-8 h-8 text-blue-600 mr-3" />
-              <h2 className="text-2xl font-bold text-gray-800">Cooling Only or Cooling + Heating?</h2>
-            </div>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-              <button onClick={() => {setSystemType('coolingOnly'); setStep(4);}} className={`p-6 border-2 rounded-lg text-left transition ${systemType === 'coolingOnly' ? 'border-blue-600 bg-blue-50' : 'border-gray-300 hover:border-blue-400'}`}>
-                <h3 className="text-xl font-bold mb-2">Cooling Only</h3>
-                <p className="text-gray-600">Air conditioner with separate heating source</p>
-              </button>
-              <button onClick={() => {setSystemType('coolingHeating'); setStep(3);}} className={`p-6 border-2 rounded-lg text-left transition ${systemType === 'coolingHeating' ? 'border-blue-600 bg-blue-50' : 'border-gray-300 hover:border-blue-400'}`}>
-                <h3 className="text-xl font-bold mb-2">Cooling + Heating</h3>
-                <p className="text-gray-600">Combined system for year-round comfort</p>
-              </button>
-            </div>
-            <div className="flex gap-3 mt-6">
-              <button onClick={() => setStep(1)} className="flex-1 py-4 border-2 border-gray-300 text-gray-700 rounded-lg font-semibold text-lg hover:bg-gray-50 transition">Back</button>
-            </div>
-          </div>
-        )}
-
-        {step === 3 && (
-          <div className="bg-white rounded-xl shadow-lg p-8 max-w-2xl mx-auto">
-            <div className="flex items-center mb-6">
-              <Flame className="w-8 h-8 text-orange-600 mr-3" />
-              <h2 className="text-2xl font-bold text-gray-800">Select Heat Source</h2>
-            </div>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-              <button onClick={() => {setHeatingType('electric'); setStep(4);}} className={`p-6 border-2 rounded-lg text-left transition ${heatingType === 'electric' ? 'border-blue-600 bg-blue-50' : 'border-gray-300 hover:border-blue-400'}`}>
-                <h3 className="text-xl font-bold mb-2">Electric Heat Pump</h3>
-                <p className="text-gray-600">All-in-one heating and cooling</p>
-              </button>
-              <button onClick={() => {setHeatingType('gas'); setStep(3.5);}} className={`p-6 border-2 rounded-lg text-left transition ${heatingType === 'gas' ? 'border-blue-600 bg-blue-50' : 'border-gray-300 hover:border-blue-400'}`}>
-                <h3 className="text-xl font-bold mb-2">Gas Furnace</h3>
-                <p className="text-gray-600">AC with gas furnace heating</p>
-              </button>
-            </div>
-            <div className="flex gap-3 mt-6">
-              <button onClick={() => setStep(2)} className="flex-1 py-4 border-2 border-gray-300 text-gray-700 rounded-lg font-semibold text-lg hover:bg-gray-50 transition">Back</button>
-            </div>
-          </div>
-        )}
-
-        {step === 3.5 && (
-          <div className="bg-white rounded-xl shadow-lg p-8 max-w-2xl mx-auto">
-            <div className="flex items-center mb-6">
-              <Home className="w-8 h-8 text-blue-600 mr-3" />
-              <h2 className="text-2xl font-bold text-gray-800">Select Flow Type</h2>
-            </div>
-            <div className="grid grid-cols-1 gap-4">
-              <button onClick={() => {setFlowType('upflow'); setStep(4);}} className={`p-6 border-2 rounded-lg text-left transition ${flowType === 'upflow' ? 'border-blue-600 bg-blue-50' : 'border-gray-300 hover:border-blue-400'}`}>
-                <h3 className="text-xl font-bold mb-2">Vertical UpFlow</h3>
-                <p className="text-gray-600">Air flows upward through the system (most common)</p>
-              </button>
-              <button onClick={() => {setFlowType('horizontal'); setStep(4);}} className={`p-6 border-2 rounded-lg text-left transition ${flowType === 'horizontal' ? 'border-blue-600 bg-blue-50' : 'border-gray-300 hover:border-blue-400'}`}>
-                <h3 className="text-xl font-bold mb-2">Horizontal</h3>
-                <p className="text-gray-600">Air flows horizontally (attic or crawlspace installations)</p>
-              </button>
-              <button onClick={() => {setFlowType('downflow'); setStep(4);}} className={`p-6 border-2 rounded-lg text-left transition ${flowType === 'downflow' ? 'border-blue-600 bg-blue-50' : 'border-gray-300 hover:border-blue-400'}`}>
-                <h3 className="text-xl font-bold mb-2">DownFlow</h3>
-                <p className="text-gray-600">Air flows downward through the system</p>
-              </button>
-            </div>
-            <div className="flex gap-3 mt-6">
-              <button onClick={() => setStep(3)} className="flex-1 py-4 border-2 border-gray-300 text-gray-700 rounded-lg font-semibold text-lg hover:bg-gray-50 transition">Back</button>
-            </div>
-          </div>
-        )}
-
-        {step === 4 && (
-          <div className="bg-white rounded-xl shadow-lg p-8 max-w-2xl mx-auto">
-            <div className="flex items-center mb-6">
-              <Home className="w-8 h-8 text-blue-600 mr-3" />
-              <h2 className="text-2xl font-bold text-gray-800">Home Size</h2>
-            </div>
-            <div className="mb-6">
-              <label className="block text-lg font-semibold mb-3">Enter your home square footage</label>
-              <input type="number" value={squareFeet} onChange={(e) => { setSquareFeet(e.target.value); if (e.target.value) setCurrentSize(''); }} placeholder="e.g., 1200" className="w-full p-4 border-2 border-gray-300 rounded-lg text-lg focus:border-blue-500 focus:outline-none" />
-              <p className="mt-2 text-sm text-gray-600">We will calculate the recommended system size based on 25 BTUs per square foot</p>
-            </div>
-            <div className="text-center my-4 text-gray-500 font-semibold">OR</div>
-            <div className="mb-6">
-              <label className="block text-lg font-semibold mb-3">Know your current system size?</label>
-              <select value={currentSize} onChange={(e) => { setCurrentSize(e.target.value); if (e.target.value) setSquareFeet(''); }} className="w-full p-4 border-2 border-gray-300 rounded-lg text-lg focus:border-blue-500 focus:outline-none">
-                <option value="">Select tonnage...</option>
-                <option value="1.5">1.5 Ton</option>
-                <option value="2.0">2.0 Ton</option>
-                <option value="2.5">2.5 Ton</option>
-                <option value="3.0">3.0 Ton</option>
-                <option value="3.5">3.5 Ton</option>
-                <option value="4.0">4.0 Ton</option>
-                <option value="5.0">5.0 Ton</option>
-              </select>
-            </div>
-            <div className="flex gap-3 mt-6">
-              <button onClick={() => {
-                if (systemType === 'coolingOnly') setStep(2);
-                else if (heatingType === 'gas') setStep(3.5);
-                else setStep(3);
-              }} className="flex-1 py-4 border-2 border-gray-300 text-gray-700 rounded-lg font-semibold text-lg hover:bg-gray-50 transition">Back</button>
-              <button onClick={handleCalculate} disabled={!currentSize && !squareFeet} className="flex-1 py-4 bg-blue-600 text-white rounded-lg font-semibold text-lg hover:bg-blue-700 disabled:bg-gray-300 disabled:cursor-not-allowed transition">
-                <Calculator className="w-5 h-5 inline mr-2" />
-                Calculate
-              </button>
-            </div>
-          </div>
-        )}
-
-        {step === 5 && results && (
-          <div className="space-y-6">
-            <div className="bg-white rounded-xl shadow-lg p-6 text-center">
-              <h2 className="text-3xl font-bold text-gray-800 mb-2">
-                Recommended: {results.tonnage} Ton {
-                  results.systemType === 'coolingOnly' ? 'Air Conditioner' : 
-                  results.heatingType === 'electric' ? 'Heat Pump' : 
-                  `Gas Furnace System (${results.flowType === 'upflow' ? 'Vertical UpFlow' : results.flowType === 'horizontal' ? 'Horizontal' : 'DownFlow'})`
-                }
-              </h2>
-              <p className="text-gray-600">Based on your home in {results.state}</p>
-            </div>
-
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-              {results.silver && <SystemCard system={results.silver} tier="silver" tierName="Silver" tierBg="bg-gray-400" />}
-              {results.gold && <SystemCard system={results.gold} tier="gold" tierName="Gold" tierBg="bg-yellow-500" />}
-              {results.platinum && <SystemCard system={results.platinum} tier="platinum" tierName="Platinum" tierBg="bg-gradient-to-r from-gray-700 to-gray-500" />}
-            </div>
-
-            {results.silver === null && (
-              <div className="bg-yellow-50 border-l-4 border-yellow-400 p-4 text-sm">
-                <p className="text-yellow-800"><strong>Note:</strong> Silver tier systems are not available in California due to minimum efficiency requirements.</p>
+          {step < 5 && (
+            <div className="bg-white rounded-lg shadow-md p-4 mb-6">
+              <div className="flex items-center justify-between max-w-xl mx-auto">
+                {[1, 2, 3, 4].map((s) => (
+                  <React.Fragment key={s}>
+                    <div className={`flex items-center justify-center w-10 h-10 rounded-full ${step >= s ? 'bg-blue-600 text-white' : 'bg-gray-300 text-gray-600'} font-semibold`}>{s}</div>
+                    {s < 4 && <div className={`flex-1 h-1 mx-2 ${step > s ? 'bg-blue-600' : 'bg-gray-300'}`} />}
+                  </React.Fragment>
+                ))}
               </div>
-            )}
-
-            <div className="bg-white rounded-xl shadow-lg p-6">
-              <button onClick={resetCalculator} className="w-full py-4 bg-gray-600 text-white rounded-lg font-semibold text-lg hover:bg-gray-700 transition">Start New Calculation</button>
             </div>
+          )}
 
-            <div className="bg-blue-50 border-l-4 border-blue-400 p-6 rounded">
-              <h3 className="font-bold text-blue-900 mb-2">Ready to Purchase?</h3>
-              <p className="text-blue-800 mb-3">Click the <strong className="text-green-600">View Pricing & Buy Now</strong> buttons above to see current pricing and purchase systems directly online, or use the <strong>Call for Pricing</strong> button to contact us with the part numbers.</p>
-              <p className="text-sm text-blue-700">Visit <a href="https://wholesalehvacdirect.com" className="underline font-semibold">wholesalehvacdirect.com</a> for more information.</p>
+          {step === 1 && (
+            <div className="bg-white rounded-xl shadow-lg p-8 max-w-2xl mx-auto">
+              <div className="flex items-center mb-6">
+                <MapPin className="w-8 h-8 text-blue-600 mr-3" />
+                <h2 className="text-2xl font-bold text-gray-800">Select Your State</h2>
+              </div>
+              <select value={state} onChange={(e) => setState(e.target.value)} className="w-full p-4 border-2 border-gray-300 rounded-lg text-lg focus:border-blue-500 focus:outline-none">
+                <option value="">Choose your state...</option>
+                {states.map((s) => (<option key={s} value={s}>{s}</option>))}
+              </select>
+              {state === 'California' && (<p className="mt-4 text-sm text-blue-600 bg-blue-50 p-3 rounded">California requires minimum 14.3 SEER2 rating</p>)}
+              <button onClick={() => setStep(2)} disabled={!state} className="w-full mt-6 py-4 bg-blue-600 text-white rounded-lg font-semibold text-lg hover:bg-blue-700 disabled:bg-gray-300 disabled:cursor-not-allowed transition">Continue</button>
             </div>
-          </div>
-        )}
-      </div>
+          )}
+
+          {step === 2 && (
+            <div className="bg-white rounded-xl shadow-lg p-8 max-w-2xl mx-auto">
+              <div className="flex items-center mb-6">
+                <Thermometer className="w-8 h-8 text-blue-600 mr-3" />
+                <h2 className="text-2xl font-bold text-gray-800">Cooling Only or Cooling + Heating?</h2>
+              </div>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <button onClick={() => {setSystemType('coolingOnly'); setStep(4);}} className={`p-6 border-2 rounded-lg text-left transition ${systemType === 'coolingOnly' ? 'border-blue-600 bg-blue-50' : 'border-gray-300 hover:border-blue-400'}`}>
+                  <h3 className="text-xl font-bold mb-2">Cooling Only</h3>
+                  <p className="text-gray-600">Air conditioner with separate heating source</p>
+                </button>
+                <button onClick={() => {setSystemType('coolingHeating'); setStep(3);}} className={`p-6 border-2 rounded-lg text-left transition ${systemType === 'coolingHeating' ? 'border-blue-600 bg-blue-50' : 'border-gray-300 hover:border-blue-400'}`}>
+                  <h3 className="text-xl font-bold mb-2">Cooling + Heating</h3>
+                  <p className="text-gray-600">Combined system for year-round comfort</p>
+                </button>
+              </div>
+              <div className="flex gap-3 mt-6">
+                <button onClick={() => setStep(1)} className="flex-1 py-4 border-2 border-gray-300 text-gray-700 rounded-lg font-semibold text-lg hover:bg-gray-50 transition">Back</button>
+              </div>
+            </div>
+          )}
+
+          {step === 3 && (
+            <div className="bg-white rounded-xl shadow-lg p-8 max-w-2xl mx-auto">
+              <div className="flex items-center mb-6">
+                <Flame className="w-8 h-8 text-orange-600 mr-3" />
+                <h2 className="text-2xl font-bold text-gray-800">Select Heat Source</h2>
+              </div>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <button onClick={() => {setHeatingType('electric'); setStep(4);}} className={`p-6 border-2 rounded-lg text-left transition ${heatingType === 'electric' ? 'border-blue-600 bg-blue-50' : 'border-gray-300 hover:border-blue-400'}`}>
+                  <h3 className="text-xl font-bold mb-2">Electric Heat Pump</h3>
+                  <p className="text-gray-600">All-in-one heating and cooling</p>
+                </button>
+                <button onClick={() => {setHeatingType('gas'); setStep(3.5);}} className={`p-6 border-2 rounded-lg text-left transition ${heatingType === 'gas' ? 'border-blue-600 bg-blue-50' : 'border-gray-300 hover:border-blue-400'}`}>
+                  <h3 className="text-xl font-bold mb-2">Gas Furnace</h3>
+                  <p className="text-gray-600">AC with gas furnace heating</p>
+                </button>
+              </div>
+              <div className="flex gap-3 mt-6">
+                <button onClick={() => setStep(2)} className="flex-1 py-4 border-2 border-gray-300 text-gray-700 rounded-lg font-semibold text-lg hover:bg-gray-50 transition">Back</button>
+              </div>
+            </div>
+          )}
+
+          {step === 3.5 && (
+            <div className="bg-white rounded-xl shadow-lg p-8 max-w-2xl mx-auto">
+              <div className="flex items-center justify-between mb-6">
+                <div className="flex items-center">
+                  <Home className="w-8 h-8 text-blue-600 mr-3" />
+                  <h2 className="text-2xl font-bold text-gray-800">Select Flow Type</h2>
+                </div>
+                <button 
+                  onClick={() => setShowDiagramModal(true)}
+                  className="flex items-center gap-2 px-4 py-2 bg-blue-100 text-blue-700 rounded-lg hover:bg-blue-200 transition font-semibold text-sm"
+                >
+                  <HelpCircle className="w-5 h-5" />
+                  View Diagrams
+                </button>
+              </div>
+              <p className="text-gray-600 mb-6">Not sure which you have? Click "View Diagrams" to see examples of each type.</p>
+              <div className="grid grid-cols-1 gap-4">
+                <button onClick={() => {setFlowType('upflow'); setStep(4);}} className={`p-6 border-2 rounded-lg text-left transition ${flowType === 'upflow' ? 'border-blue-600 bg-blue-50' : 'border-gray-300 hover:border-blue-400'}`}>
+                  <h3 className="text-xl font-bold mb-2">Vertical Upflow</h3>
+                  <p className="text-gray-600">Air flows upward through the system (most common)</p>
+                </button>
+                <button onClick={() => {setFlowType('horizontal'); setStep(4);}} className={`p-6 border-2 rounded-lg text-left transition ${flowType === 'horizontal' ? 'border-blue-600 bg-blue-50' : 'border-gray-300 hover:border-blue-400'}`}>
+                  <h3 className="text-xl font-bold mb-2">Horizontal</h3>
+                  <p className="text-gray-600">Air flows horizontally (attic or crawlspace installations)</p>
+                </button>
+                <button onClick={() => {setFlowType('downflow'); setStep(4);}} className={`p-6 border-2 rounded-lg text-left transition ${flowType === 'downflow' ? 'border-blue-600 bg-blue-50' : 'border-gray-300 hover:border-blue-400'}`}>
+                  <h3 className="text-xl font-bold mb-2">Downflow</h3>
+                  <p className="text-gray-600">Air flows downward through the system</p>
+                </button>
+              </div>
+              <div className="flex gap-3 mt-6">
+                <button onClick={() => setStep(3)} className="flex-1 py-4 border-2 border-gray-300 text-gray-700 rounded-lg font-semibold text-lg hover:bg-gray-50 transition">Back</button>
+              </div>
+            </div>
+          )}
+
+          {step === 4 && (
+            <div className="bg-white rounded-xl shadow-lg p-8 max-w-2xl mx-auto">
+              <div className="flex items-center mb-6">
+                <Home className="w-8 h-8 text-blue-600 mr-3" />
+                <h2 className="text-2xl font-bold text-gray-800">Home Size</h2>
+              </div>
+              <div className="mb-6">
+                <label className="block text-lg font-semibold mb-3">Enter your home square footage</label>
+                <input type="number" value={squareFeet} onChange={(e) => { setSquareFeet(e.target.value); if (e.target.value) setCurrentSize(''); }} placeholder="e.g., 1200" className="w-full p-4 border-2 border-gray-300 rounded-lg text-lg focus:border-blue-500 focus:outline-none" />
+                <p className="mt-2 text-sm text-gray-600">We will calculate the recommended system size based on 25 BTUs per square foot</p>
+              </div>
+              <div className="text-center my-4 text-gray-500 font-semibold">OR</div>
+              <div className="mb-6">
+                <label className="block text-lg font-semibold mb-3">Know your current system size?</label>
+                <select value={currentSize} onChange={(e) => { setCurrentSize(e.target.value); if (e.target.value) setSquareFeet(''); }} className="w-full p-4 border-2 border-gray-300 rounded-lg text-lg focus:border-blue-500 focus:outline-none">
+                  <option value="">Select tonnage...</option>
+                  <option value="1.5">1.5 Ton</option>
+                  <option value="2.0">2.0 Ton</option>
+                  <option value="2.5">2.5 Ton</option>
+                  <option value="3.0">3.0 Ton</option>
+                  <option value="3.5">3.5 Ton</option>
+                  <option value="4.0">4.0 Ton</option>
+                  <option value="5.0">5.0 Ton</option>
+                </select>
+              </div>
+              <div className="flex gap-3 mt-6">
+                <button onClick={() => {
+                  if (systemType === 'coolingOnly') setStep(2);
+                  else if (heatingType === 'gas') setStep(3.5);
+                  else setStep(3);
+                }} className="flex-1 py-4 border-2 border-gray-300 text-gray-700 rounded-lg font-semibold text-lg hover:bg-gray-50 transition">Back</button>
+                <button onClick={handleCalculate} disabled={!currentSize && !squareFeet} className="flex-1 py-4 bg-blue-600 text-white rounded-lg font-semibold text-lg hover:bg-blue-700 disabled:bg-gray-300 disabled:cursor-not-allowed transition">
+                  <Calculator className="w-5 h-5 inline mr-2" />
+                  Calculate
+                </button>
+              </div>
+            </div>
+          )}
+
+          {step === 5 && results && (
+            <div className="space-y-6">
+              <div className="bg-white rounded-xl shadow-lg p-6 text-center">
+                <h2 className="text-3xl font-bold text-gray-800 mb-2">
+                  Recommended: {results.tonnage} Ton {
+                    results.systemType === 'coolingOnly' ? 'Air Conditioner' : 
+                    results.heatingType === 'electric' ? 'Heat Pump' : 
+                    `Gas Furnace System (${results.flowType === 'upflow' ? 'Vertical UpFlow' : results.flowType === 'horizontal' ? 'Horizontal' : 'DownFlow'})`
+                  }
+                </h2>
+                <p className="text-gray-600">Based on your home in {results.state}</p>
+              </div>
+
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+                {results.silver && <SystemCard system={results.silver} tier="silver" tierName="Silver" tierBg="bg-gray-400" />}
+                {results.gold && <SystemCard system={results.gold} tier="gold" tierName="Gold" tierBg="bg-yellow-500" />}
+                {results.platinum && <SystemCard system={results.platinum} tier="platinum" tierName="Platinum" tierBg="bg-gradient-to-r from-gray-700 to-gray-500" />}
+              </div>
+
+              {results.silver === null && (
+                <div className="bg-yellow-50 border-l-4 border-yellow-400 p-4 text-sm">
+                  <p className="text-yellow-800"><strong>Note:</strong> Silver tier systems are not available in California due to minimum efficiency requirements.</p>
+                </div>
+              )}
+
+              <div className="bg-white rounded-xl shadow-lg p-6">
+                <button onClick={resetCalculator} className="w-full py-4 bg-gray-600 text-white rounded-lg font-semibold text-lg hover:bg-gray-700 transition">Start New Calculation</button>
+              </div>
+
+              <div className="bg-blue-50 border-l-4 border-blue-400 p-6 rounded">
+                <h3 className="font-bold text-blue-900 mb-2">Ready to Purchase?</h3>
+                <p className="text-blue-800 mb-3">Click the <strong className="text-green-600">View Pricing & Buy Now</strong> buttons above to see current pricing and purchase systems directly online, or use the <strong>Call for Pricing</strong> button to contact us with the part numbers.</p>
+                <p className="text-sm text-blue-700">Visit <a href="https://wholesalehvacdirect.com" className="underline font-semibold">wholesalehvacdirect.com</a> for more information.</p>
+              </div>
+            </div>
+          )}
+        </div>
       </div>
     </div>
   );
