@@ -12,9 +12,9 @@ const HVACSizingCalculator = () => {
   const [results, setResults] = useState(null);
   const [showDiagramModal, setShowDiagramModal] = useState(false);
 
-  // Image paths - you'll need to update these to match your actual deployment
-  const upflowImage = '/src/assets/system-examples/AC-FURNACE-COIL-VERTICAL-BASEMENT.png';
-  const horizontalImage = '/src/assets/system-examples/AC-FURNACE-COIL-HORIZONTAL-ATTIC.png';
+  // Images are in the public folder, so they're referenced with absolute paths
+  const upflowImage = '/system-examples/AC-FURNACE-COIL-VERTICAL-BASEMENT.png';
+  const horizontalImage = '/system-examples/AC-FURNACE-COIL-HORIZONTAL-ATTIC.png';
 
   const productUrls = {
     ac: {
