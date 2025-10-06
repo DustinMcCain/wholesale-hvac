@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Home, Thermometer, MapPin, Calculator, ShoppingCart, Phone, Flame, HelpCircle, X } from 'lucide-react';
+import { Home, Thermometer, MapPin, Calculator, ShoppingCart, Phone, Flame } from 'lucide-react';
 
 const HVACSizingCalculator = () => {
   const [step, setStep] = useState(1);
@@ -10,11 +10,10 @@ const HVACSizingCalculator = () => {
   const [squareFeet, setSquareFeet] = useState('');
   const [currentSize, setCurrentSize] = useState('');
   const [results, setResults] = useState(null);
-  const [showDiagramModal, setShowDiagramModal] = useState(false);
 
-  // Image paths - you'll need to update these to match your actual deployment
-  const upflowImage = '/src/assets/system-examples/AC-FURNACE-COIL-VERTICAL-BASEMENT.png';
-  const horizontalImage = '/src/assets/system-examples/AC-FURNACE-COIL-HORIZONTAL-ATTIC.png';
+  // Images are in the public folder
+  const upflowImage = '/system-examples/AC-FURNACE-COIL-VERTICAL-BASEMENT.png';
+  const horizontalImage = '/system-examples/AC-FURNACE-COIL-HORIZONTAL-ATTIC.png';
 
   const productUrls = {
     ac: {
@@ -234,49 +233,6 @@ const HVACSizingCalculator = () => {
     }
   };
 
-  const DiagramModal = () => {
-    if (!showDiagramModal) return null;
-    
-    return (
-      <div className="fixed inset-0 bg-black bg-opacity-50 z-50 flex items-center justify-center p-4" onClick={() => setShowDiagramModal(false)}>
-        <div className="bg-white rounded-xl shadow-2xl max-w-4xl w-full max-h-[90vh] overflow-y-auto" onClick={(e) => e.stopPropagation()}>
-          <div className="sticky top-0 bg-white border-b p-4 flex justify-between items-center">
-            <h3 className="text-2xl font-bold text-gray-800">System Flow Type Guide</h3>
-            <button onClick={() => setShowDiagramModal(false)} className="p-2 hover:bg-gray-100 rounded-full transition">
-              <X className="w-6 h-6" />
-            </button>
-          </div>
-          
-          <div className="p-6 space-y-6">
-            <div className="border-2 border-blue-200 rounded-lg p-4 bg-blue-50">
-              <h4 className="text-xl font-bold text-gray-800 mb-3">Vertical Upflow (Most Common)</h4>
-              <p className="text-gray-700 mb-4">Air flows upward from bottom to top. Typically installed in basements or closets.</p>
-              <div className="bg-white p-2 rounded">
-                <img src={upflowImage} alt="Upflow System Diagram" className="w-full h-auto max-w-md mx-auto" />
-              </div>
-            </div>
-
-            <div className="border-2 border-green-200 rounded-lg p-4 bg-green-50">
-              <h4 className="text-xl font-bold text-gray-800 mb-3">Horizontal</h4>
-              <p className="text-gray-700 mb-4">Air flows horizontally through the system. Common in attic or crawlspace installations.</p>
-              <div className="bg-white p-2 rounded">
-                <img src={horizontalImage} alt="Horizontal System Diagram" className="w-full h-auto max-w-md mx-auto" />
-              </div>
-            </div>
-
-            <div className="border-2 border-purple-200 rounded-lg p-4 bg-purple-50">
-              <h4 className="text-xl font-bold text-gray-800 mb-3">Downflow</h4>
-              <p className="text-gray-700 mb-4">Air flows downward from top to bottom. Less common, sometimes used with homes on slabs.</p>
-              <div className="bg-white p-2 rounded text-gray-500 italic text-center py-8">
-                Diagram coming soon
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    );
-  };
-
   const SystemCard = ({ system, tier, tierName, tierBg }) => {
     if (!system) return null;
     const productUrl = getProductUrl(tier, system.tonnage);
@@ -343,7 +299,6 @@ const HVACSizingCalculator = () => {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-blue-50 to-blue-100">
-      <DiagramModal />
       <div className="bg-white shadow-sm">
         <div className="max-w-6xl mx-auto py-4 px-4">
           <div className="flex justify-center">
@@ -438,35 +393,39 @@ const HVACSizingCalculator = () => {
           )}
 
           {step === 3.5 && (
-            <div className="bg-white rounded-xl shadow-lg p-8 max-w-2xl mx-auto">
-              <div className="flex items-center justify-between mb-6">
-                <div className="flex items-center">
-                  <Home className="w-8 h-8 text-blue-600 mr-3" />
-                  <h2 className="text-2xl font-bold text-gray-800">Select Flow Type</h2>
-                </div>
-                <button 
-                  onClick={() => setShowDiagramModal(true)}
-                  className="flex items-center gap-2 px-4 py-2 bg-blue-100 text-blue-700 rounded-lg hover:bg-blue-200 transition font-semibold text-sm"
-                >
-                  <HelpCircle className="w-5 h-5" />
-                  View Diagrams
+            <div className="bg-white rounded-xl shadow-lg p-8 max-w-4xl mx-auto">
+              <div className="flex items-center mb-6">
+                <Home className="w-8 h-8 text-blue-600 mr-3" />
+                <h2 className="text-2xl font-bold text-gray-800">Select Flow Type</h2>
+              </div>
+              <p className="text-gray-600 mb-6 text-center">Select the configuration that matches your system</p>
+              
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <button onClick={() => {setFlowType('upflow'); setStep(4);}} className={`p-4 border-2 rounded-lg transition ${flowType === 'upflow' ? 'border-blue-600 bg-blue-50' : 'border-gray-300 hover:border-blue-400'}`}>
+                  <div className="bg-white rounded-lg p-3 mb-4">
+                    <img src={upflowImage} alt="Vertical Upflow System" className="w-full h-auto rounded" />
+                  </div>
+                  <h3 className="text-lg font-bold mb-2">Vertical Upflow</h3>
+                  <p className="text-sm text-gray-600">Air flows upward (most common)</p>
+                </button>
+                
+                <button onClick={() => {setFlowType('horizontal'); setStep(4);}} className={`p-4 border-2 rounded-lg transition ${flowType === 'horizontal' ? 'border-blue-600 bg-blue-50' : 'border-gray-300 hover:border-blue-400'}`}>
+                  <div className="bg-white rounded-lg p-3 mb-4">
+                    <img src={horizontalImage} alt="Horizontal System" className="w-full h-auto rounded" />
+                  </div>
+                  <h3 className="text-lg font-bold mb-2">Horizontal</h3>
+                  <p className="text-sm text-gray-600">Air flows horizontally (attic/crawlspace)</p>
+                </button>
+                
+                <button onClick={() => {setFlowType('downflow'); setStep(4);}} className={`p-4 border-2 rounded-lg transition ${flowType === 'downflow' ? 'border-blue-600 bg-blue-50' : 'border-gray-300 hover:border-blue-400'}`}>
+                  <div className="bg-white rounded-lg p-3 mb-4 flex items-center justify-center h-48">
+                    <p className="text-gray-400 italic text-sm">Diagram coming soon</p>
+                  </div>
+                  <h3 className="text-lg font-bold mb-2">Downflow</h3>
+                  <p className="text-sm text-gray-600">Air flows downward</p>
                 </button>
               </div>
-              <p className="text-gray-600 mb-6">Not sure which you have? Click "View Diagrams" to see examples of each type.</p>
-              <div className="grid grid-cols-1 gap-4">
-                <button onClick={() => {setFlowType('upflow'); setStep(4);}} className={`p-6 border-2 rounded-lg text-left transition ${flowType === 'upflow' ? 'border-blue-600 bg-blue-50' : 'border-gray-300 hover:border-blue-400'}`}>
-                  <h3 className="text-xl font-bold mb-2">Vertical Upflow</h3>
-                  <p className="text-gray-600">Air flows upward through the system (most common)</p>
-                </button>
-                <button onClick={() => {setFlowType('horizontal'); setStep(4);}} className={`p-6 border-2 rounded-lg text-left transition ${flowType === 'horizontal' ? 'border-blue-600 bg-blue-50' : 'border-gray-300 hover:border-blue-400'}`}>
-                  <h3 className="text-xl font-bold mb-2">Horizontal</h3>
-                  <p className="text-gray-600">Air flows horizontally (attic or crawlspace installations)</p>
-                </button>
-                <button onClick={() => {setFlowType('downflow'); setStep(4);}} className={`p-6 border-2 rounded-lg text-left transition ${flowType === 'downflow' ? 'border-blue-600 bg-blue-50' : 'border-gray-300 hover:border-blue-400'}`}>
-                  <h3 className="text-xl font-bold mb-2">Downflow</h3>
-                  <p className="text-gray-600">Air flows downward through the system</p>
-                </button>
-              </div>
+              
               <div className="flex gap-3 mt-6">
                 <button onClick={() => setStep(3)} className="flex-1 py-4 border-2 border-gray-300 text-gray-700 rounded-lg font-semibold text-lg hover:bg-gray-50 transition">Back</button>
               </div>
