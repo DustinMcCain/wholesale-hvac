@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Home, Thermometer, MapPin, Calculator, ShoppingCart, Phone, Flame } from 'lucide-react';
+import { Home, Thermometer, MapPin, Calculator, ShoppingCart, Phone, Flame, Snowflake } from 'lucide-react';
 
 const HVACSizingCalculator = () => {
   const [step, setStep] = useState(1);
@@ -352,16 +352,54 @@ const HVACSizingCalculator = () => {
             <div className="bg-white rounded-xl shadow-lg p-8 max-w-2xl mx-auto">
               <div className="flex items-center mb-6">
                 <Thermometer className="w-8 h-8 text-blue-600 mr-3" />
-                <h2 className="text-2xl font-bold text-gray-800">Cooling Only or Cooling + Heating?</h2>
+                <h2 className="text-2xl font-bold text-gray-800">Cooling Only or Heating + Cooling?</h2>
               </div>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                <button onClick={() => {setSystemType('coolingOnly'); setStep(4);}} className={`p-6 border-2 rounded-lg text-left transition ${systemType === 'coolingOnly' ? 'border-blue-600 bg-blue-50' : 'border-gray-300 hover:border-blue-400'}`}>
-                  <h3 className="text-xl font-bold mb-2">Cooling Only</h3>
-                  <p className="text-gray-600">Air conditioner with separate heating source</p>
+                <button 
+                  onClick={() => {setSystemType('coolingOnly'); setStep(4);}} 
+                  className={`relative p-6 border-2 rounded-lg text-left transition-all duration-300 overflow-hidden ${
+                    systemType === 'coolingOnly' 
+                      ? 'border-blue-600 shadow-lg transform scale-105 ring-2 ring-blue-400' 
+                      : 'border-gray-300 hover:border-blue-400 hover:shadow-md hover:scale-102'
+                  }`}
+                >
+                  <div className={`absolute inset-0 bg-gradient-to-br from-blue-400 to-blue-600 transition-opacity duration-300 ${
+                    systemType === 'coolingOnly' ? 'opacity-10' : 'opacity-0'
+                  }`}></div>
+                  <div className="relative z-10">
+                    <div className="flex items-center mb-3">
+                      <Snowflake className={`w-8 h-8 mr-2 transition-all duration-300 ${
+                        systemType === 'coolingOnly' ? 'text-blue-600 drop-shadow-lg' : 'text-blue-500'
+                      }`} />
+                      <h3 className="text-xl font-bold">Cooling Only</h3>
+                    </div>
+                    <p className="text-gray-600">Air conditioner with separate heating source</p>
+                  </div>
                 </button>
-                <button onClick={() => {setSystemType('coolingHeating'); setStep(3);}} className={`p-6 border-2 rounded-lg text-left transition ${systemType === 'coolingHeating' ? 'border-blue-600 bg-blue-50' : 'border-gray-300 hover:border-blue-400'}`}>
-                  <h3 className="text-xl font-bold mb-2">Cooling + Heating</h3>
-                  <p className="text-gray-600">Combined system for year-round comfort</p>
+
+                <button 
+                  onClick={() => {setSystemType('coolingHeating'); setStep(3);}} 
+                  className={`relative p-6 border-2 rounded-lg text-left transition-all duration-300 overflow-hidden ${
+                    systemType === 'coolingHeating' 
+                      ? 'border-purple-600 shadow-lg transform scale-105 ring-2 ring-purple-400' 
+                      : 'border-gray-300 hover:border-purple-400 hover:shadow-md hover:scale-102'
+                  }`}
+                >
+                  <div className={`absolute inset-0 bg-gradient-to-r from-red-500 via-purple-500 to-blue-500 transition-opacity duration-300 ${
+                    systemType === 'coolingHeating' ? 'opacity-10' : 'opacity-0'
+                  }`}></div>
+                  <div className="relative z-10">
+                    <div className="flex items-center mb-3">
+                      <Flame className={`w-8 h-8 mr-1 transition-all duration-300 ${
+                        systemType === 'coolingHeating' ? 'text-red-600 drop-shadow-lg' : 'text-orange-500'
+                      }`} />
+                      <Snowflake className={`w-8 h-8 transition-all duration-300 ${
+                        systemType === 'coolingHeating' ? 'text-blue-600 drop-shadow-lg' : 'text-blue-500'
+                      }`} />
+                    </div>
+                    <h3 className="text-xl font-bold">Heating + Cooling</h3>
+                    <p className="text-gray-600">Combined system for year-round comfort</p>
+                  </div>
                 </button>
               </div>
               <div className="flex gap-3 mt-6">
