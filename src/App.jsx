@@ -12,8 +12,9 @@ const HVACSizingCalculator = () => {
   const [results, setResults] = useState(null);
 
   // Images are in the public folder
-  const upflowImage = '/system-examples/AC-FURNACE-COIL-VERTICAL-BASEMENT.png';
-  const horizontalImage = '/system-examples/AC-FURNACE-COIL-HORIZONTAL-ATTIC.png';
+  const upflowImage = '/horizontal-in-crawlspace-upflow.png';
+  const horizontalImage = '/vertical-in-main-floor-horizontal.png';
+  const downflowImage = '/horizontal-in-attic-downflow.png';
   const electricHeatPumpImage = '/electric-heat-pump.png';
   const gasFurnaceImage = '/gas-furnace.png';
   const coolingOnlyImage = '/cooling-only.png';
@@ -437,33 +438,33 @@ const HVACSizingCalculator = () => {
             <div className="bg-white rounded-xl shadow-lg p-8 max-w-4xl mx-auto">
               <div className="flex items-center mb-6">
                 <Home className="w-8 h-8 text-blue-600 mr-3" />
-                <h2 className="text-2xl font-bold text-gray-800">Select Flow Type</h2>
+                <h2 className="text-2xl font-bold text-gray-800">Furnace Placement</h2>
               </div>
-              <p className="text-gray-600 mb-6 text-center">Select the configuration that matches your system</p>
+              <p className="text-gray-600 mb-6 text-center">Where is your furnace located?</p>
               
               <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
                 <button onClick={() => {setFlowType('upflow'); setStep(4);}} className={`p-4 border-2 rounded-lg transition ${flowType === 'upflow' ? 'border-blue-600 bg-blue-50' : 'border-gray-300 hover:border-blue-400'}`}>
                   <div className="bg-white rounded-lg p-3 mb-4">
-                    <img src={upflowImage} alt="Upflow System" className="w-full h-auto rounded" />
+                    <img src={upflowImage} alt="Basement/Crawlspace System" className="w-full h-auto rounded" />
                   </div>
-                  <h3 className="text-lg font-bold mb-2">Upflow</h3>
-                  <p className="text-sm text-gray-600">Air flows upward (most common)</p>
+                  <h3 className="text-lg font-bold mb-2">Basement/Crawlspace (Upflow)</h3>
+                  <p className="text-sm text-gray-600">Furnace located below living space</p>
                 </button>
                 
                 <button onClick={() => {setFlowType('horizontal'); setStep(4);}} className={`p-4 border-2 rounded-lg transition ${flowType === 'horizontal' ? 'border-blue-600 bg-blue-50' : 'border-gray-300 hover:border-blue-400'}`}>
                   <div className="bg-white rounded-lg p-3 mb-4">
-                    <img src={horizontalImage} alt="Horizontal System" className="w-full h-auto rounded" />
+                    <img src={horizontalImage} alt="Main Floor System" className="w-full h-auto rounded" />
                   </div>
-                  <h3 className="text-lg font-bold mb-2">Horizontal</h3>
-                  <p className="text-sm text-gray-600">Air flows horizontally (attic/crawlspace)</p>
+                  <h3 className="text-lg font-bold mb-2">Main Floor</h3>
+                  <p className="text-sm text-gray-600">Furnace on same level as living space</p>
                 </button>
                 
                 <button onClick={() => {setFlowType('downflow'); setStep(4);}} className={`p-4 border-2 rounded-lg transition ${flowType === 'downflow' ? 'border-blue-600 bg-blue-50' : 'border-gray-300 hover:border-blue-400'}`}>
-                  <div className="bg-white rounded-lg p-3 mb-4 flex items-center justify-center h-48">
-                    <p className="text-gray-400 italic text-sm">Diagram coming soon</p>
+                  <div className="bg-white rounded-lg p-3 mb-4">
+                    <img src={downflowImage} alt="Attic System" className="w-full h-auto rounded" />
                   </div>
-                  <h3 className="text-lg font-bold mb-2">Downflow</h3>
-                  <p className="text-sm text-gray-600">Air flows downward</p>
+                  <h3 className="text-lg font-bold mb-2">Attic</h3>
+                  <p className="text-sm text-gray-600">Furnace located above living space</p>
                 </button>
               </div>
               
