@@ -14,8 +14,8 @@ const HVACSizingCalculator = () => {
   // Images are in the public folder
   const upflowImage = '/system-examples/AC-FURNACE-COIL-VERTICAL-BASEMENT.png';
   const horizontalImage = '/system-examples/AC-FURNACE-COIL-HORIZONTAL-ATTIC.png';
-  const electricHeatPumpImage = '/system-examples/electric-heat-pump.png';
-  const gasFurnaceImage = '/system-examples/gas-furnace.png';
+  const electricHeatPumpImage = '/electric-heat-pump.png';
+  const gasFurnaceImage = '/gas-furnace.png';
   const coolingOnlyImage = '/cooling-only.png';
   const heatingAndCoolingImage = '/heating-and-cooling.png';
 
