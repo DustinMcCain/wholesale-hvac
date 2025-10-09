@@ -14,6 +14,10 @@ const HVACSizingCalculator = () => {
   // Images are in the public folder
   const upflowImage = '/system-examples/AC-FURNACE-COIL-VERTICAL-BASEMENT.png';
   const horizontalImage = '/system-examples/AC-FURNACE-COIL-HORIZONTAL-ATTIC.png';
+  const electricHeatPumpImage = '/system-examples/electric-heat-pump.png';
+  const gasFurnaceImage = '/system-examples/gas-furnace.png';
+  const coolingOnlyImage = '/cooling-only.png';
+  const heatingAndCoolingImage = '/heating-and-cooling.png';
 
   const productUrls = {
     ac: {
@@ -349,15 +353,15 @@ const HVACSizingCalculator = () => {
           )}
 
           {step === 2 && (
-            <div className="bg-white rounded-xl shadow-lg p-8 max-w-2xl mx-auto">
+            <div className="bg-white rounded-xl shadow-lg p-8 max-w-4xl mx-auto">
               <div className="flex items-center mb-6">
                 <Thermometer className="w-8 h-8 text-blue-600 mr-3" />
                 <h2 className="text-2xl font-bold text-gray-800">Cooling Only or Heating + Cooling?</h2>
               </div>
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <button 
                   onClick={() => {setSystemType('coolingOnly'); setStep(4);}} 
-                  className={`relative p-6 border-2 rounded-lg text-left transition-all duration-300 overflow-hidden ${
+                  className={`relative p-4 border-2 rounded-lg transition-all duration-300 overflow-hidden ${
                     systemType === 'coolingOnly' 
                       ? 'border-blue-600 shadow-lg transform scale-105 ring-2 ring-blue-400' 
                       : 'border-gray-300 hover:border-blue-400 hover:shadow-md hover:scale-102'
@@ -367,19 +371,17 @@ const HVACSizingCalculator = () => {
                     systemType === 'coolingOnly' ? 'opacity-10' : 'opacity-0'
                   }`}></div>
                   <div className="relative z-10">
-                    <div className="flex items-center mb-3">
-                      <Snowflake className={`w-8 h-8 mr-2 transition-all duration-300 ${
-                        systemType === 'coolingOnly' ? 'text-blue-600 drop-shadow-lg' : 'text-blue-500'
-                      }`} />
-                      <h3 className="text-xl font-bold">Cooling Only</h3>
+                    <div className="bg-white rounded-lg p-3 mb-4">
+                      <img src={coolingOnlyImage} alt="Cooling Only System" className="w-full h-auto rounded" />
                     </div>
-                    <p className="text-gray-600">Air conditioner with separate heating source</p>
+                    <h3 className="text-lg font-bold mb-2">Cooling Only</h3>
+                    <p className="text-sm text-gray-600">Air conditioner with separate heating source</p>
                   </div>
                 </button>
 
                 <button 
                   onClick={() => {setSystemType('coolingHeating'); setStep(3);}} 
-                  className={`relative p-6 border-2 rounded-lg text-left transition-all duration-300 overflow-hidden ${
+                  className={`relative p-4 border-2 rounded-lg transition-all duration-300 overflow-hidden ${
                     systemType === 'coolingHeating' 
                       ? 'border-purple-600 shadow-lg transform scale-105 ring-2 ring-purple-400' 
                       : 'border-gray-300 hover:border-purple-400 hover:shadow-md hover:scale-102'
@@ -389,16 +391,11 @@ const HVACSizingCalculator = () => {
                     systemType === 'coolingHeating' ? 'opacity-10' : 'opacity-0'
                   }`}></div>
                   <div className="relative z-10">
-                    <div className="flex items-center mb-3">
-                      <Flame className={`w-8 h-8 mr-1 transition-all duration-300 ${
-                        systemType === 'coolingHeating' ? 'text-red-600 drop-shadow-lg' : 'text-orange-500'
-                      }`} />
-                      <Snowflake className={`w-8 h-8 transition-all duration-300 ${
-                        systemType === 'coolingHeating' ? 'text-blue-600 drop-shadow-lg' : 'text-blue-500'
-                      }`} />
+                    <div className="bg-white rounded-lg p-3 mb-4">
+                      <img src={heatingAndCoolingImage} alt="Heating and Cooling System" className="w-full h-auto rounded" />
                     </div>
-                    <h3 className="text-xl font-bold">Heating + Cooling</h3>
-                    <p className="text-gray-600">Combined system for year-round comfort</p>
+                    <h3 className="text-lg font-bold mb-2">Heating + Cooling</h3>
+                    <p className="text-sm text-gray-600">Combined system for year-round comfort</p>
                   </div>
                 </button>
               </div>
@@ -409,19 +406,25 @@ const HVACSizingCalculator = () => {
           )}
 
           {step === 3 && (
-            <div className="bg-white rounded-xl shadow-lg p-8 max-w-2xl mx-auto">
+            <div className="bg-white rounded-xl shadow-lg p-8 max-w-4xl mx-auto">
               <div className="flex items-center mb-6">
                 <Flame className="w-8 h-8 text-orange-600 mr-3" />
                 <h2 className="text-2xl font-bold text-gray-800">Select Heat Source</h2>
               </div>
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                <button onClick={() => {setHeatingType('electric'); setStep(4);}} className={`p-6 border-2 rounded-lg text-left transition ${heatingType === 'electric' ? 'border-blue-600 bg-blue-50' : 'border-gray-300 hover:border-blue-400'}`}>
-                  <h3 className="text-xl font-bold mb-2">Electric Heat Pump</h3>
-                  <p className="text-gray-600">All-in-one heating and cooling</p>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <button onClick={() => {setHeatingType('electric'); setStep(4);}} className={`p-4 border-2 rounded-lg transition ${heatingType === 'electric' ? 'border-blue-600 bg-blue-50' : 'border-gray-300 hover:border-blue-400'}`}>
+                  <div className="bg-white rounded-lg p-3 mb-4">
+                    <img src={electricHeatPumpImage} alt="Electric Heat Pump" className="w-full h-auto rounded" />
+                  </div>
+                  <h3 className="text-lg font-bold mb-2">Electric Heat Pump</h3>
+                  <p className="text-sm text-gray-600">All-in-one heating and cooling</p>
                 </button>
-                <button onClick={() => {setHeatingType('gas'); setStep(3.5);}} className={`p-6 border-2 rounded-lg text-left transition ${heatingType === 'gas' ? 'border-blue-600 bg-blue-50' : 'border-gray-300 hover:border-blue-400'}`}>
-                  <h3 className="text-xl font-bold mb-2">Gas Furnace</h3>
-                  <p className="text-gray-600">AC with gas furnace heating</p>
+                <button onClick={() => {setHeatingType('gas'); setStep(3.5);}} className={`p-4 border-2 rounded-lg transition ${heatingType === 'gas' ? 'border-blue-600 bg-blue-50' : 'border-gray-300 hover:border-blue-400'}`}>
+                  <div className="bg-white rounded-lg p-3 mb-4">
+                    <img src={gasFurnaceImage} alt="Gas Furnace" className="w-full h-auto rounded" />
+                  </div>
+                  <h3 className="text-lg font-bold mb-2">Gas Furnace</h3>
+                  <p className="text-sm text-gray-600">AC with gas furnace heating</p>
                 </button>
               </div>
               <div className="flex gap-3 mt-6">
@@ -441,9 +444,9 @@ const HVACSizingCalculator = () => {
               <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
                 <button onClick={() => {setFlowType('upflow'); setStep(4);}} className={`p-4 border-2 rounded-lg transition ${flowType === 'upflow' ? 'border-blue-600 bg-blue-50' : 'border-gray-300 hover:border-blue-400'}`}>
                   <div className="bg-white rounded-lg p-3 mb-4">
-                    <img src={upflowImage} alt="Vertical Upflow System" className="w-full h-auto rounded" />
+                    <img src={upflowImage} alt="Upflow System" className="w-full h-auto rounded" />
                   </div>
-                  <h3 className="text-lg font-bold mb-2">Vertical Upflow</h3>
+                  <h3 className="text-lg font-bold mb-2">Upflow</h3>
                   <p className="text-sm text-gray-600">Air flows upward (most common)</p>
                 </button>
                 
