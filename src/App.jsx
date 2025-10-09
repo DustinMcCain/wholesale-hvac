@@ -292,10 +292,10 @@ const HVACSizingCalculator = () => {
                 View Pricing & Buy Now
               </a>
             ) : (
-              <div className="block w-full text-center py-3 bg-blue-600 text-white rounded-lg font-semibold">
+              <a href="tel:3802101441" className="block w-full text-center py-3 bg-blue-600 text-white rounded-lg font-semibold hover:bg-blue-700 transition">
                 <Phone className="w-5 h-5 inline mr-2" />
                 Call for Pricing
-              </div>
+              </a>
             )}
           </div>
         </div>
