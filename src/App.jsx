@@ -307,13 +307,21 @@ const HVACSizingCalculator = () => {
     <div className="min-h-screen bg-gradient-to-br from-blue-50 to-blue-100">
       <div className="bg-white shadow-sm">
         <div className="max-w-6xl mx-auto py-4 px-4">
-          <div className="flex justify-center">
+          <div className="flex justify-between items-center">
             <a href="https://wholesalehvacdirect.com" target="_blank" rel="noopener noreferrer">
               <img 
                 src="https://wholesalehvacdirect.com/wp-content/uploads/2025/01/image.webp" 
                 alt="Wholesale HVAC Direct" 
                 className="h-16 md:h-20 object-contain hover:opacity-80 transition"
               />
+            </a>
+            <a 
+              href="tel:3802101441" 
+              className="flex items-center gap-2 bg-blue-600 text-white px-4 py-2 md:px-6 md:py-3 rounded-lg font-semibold hover:bg-blue-700 transition shadow-md"
+            >
+              <Phone className="w-5 h-5" />
+              <span className="hidden sm:inline">(380) 210-1441</span>
+              <span className="sm:hidden">Call</span>
             </a>
           </div>
         </div>
