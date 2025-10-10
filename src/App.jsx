@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Home, Thermometer, MapPin, Calculator, ShoppingCart, Phone, Flame, Snowflake } from 'lucide-react';
+import { Home, Thermometer, MapPin, Calculator, ShoppingCart, Phone, Flame, Snowflake, Info } from 'lucide-react';
 
 const HVACSizingCalculator = () => {
   const [step, setStep] = useState(1);
@@ -10,6 +10,7 @@ const HVACSizingCalculator = () => {
   const [squareFeet, setSquareFeet] = useState('');
   const [currentSize, setCurrentSize] = useState('');
   const [results, setResults] = useState(null);
+  const [showTooltip, setShowTooltip] = useState(false);
 
   // Images are in the public folder
   const upflowImage = '/horizontal-in-crawlspace-upflow.png';
@@ -19,6 +20,8 @@ const HVACSizingCalculator = () => {
   const gasFurnaceImage = '/gas-furnace.png';
   const coolingOnlyImage = '/cooling-only.png';
   const heatingAndCoolingImage = '/heating-and-cooling.png';
+  const electricBillImage = '/electric-bill-image.png';
+  const gasBillImage = '/gas-bill-image.png';
 
   const productUrls = {
     ac: {
@@ -364,48 +367,69 @@ const HVACSizingCalculator = () => {
 
           {step === 2 && (
             <div className="bg-white rounded-xl shadow-lg p-8 max-w-4xl mx-auto">
-              <div className="flex items-center mb-6">
+              <div className="flex items-center justify-center mb-6">
                 <Thermometer className="w-8 h-8 text-blue-600 mr-3" />
-                <h2 className="text-2xl font-bold text-gray-800">Cooling Only or Heating + Cooling?</h2>
+                <h2 className="text-2xl font-bold text-gray-800">Do you have an electric or gas bill for your HVAC needs?</h2>
+                <div className="relative ml-2">
+                  <Info 
+                    className="w-5 h-5 text-gray-400 cursor-help" 
+                    onMouseEnter={() => setShowTooltip(true)}
+                    onMouseLeave={() => setShowTooltip(false)}
+                  />
+                  {showTooltip && (
+                    <div className="absolute left-full ml-2 top-1/2 -translate-y-1/2 w-64 bg-gray-900 text-white text-sm p-3 rounded-lg shadow-xl z-10">
+                      <div className="absolute right-full top-1/2 -translate-y-1/2 border-8 border-transparent border-r-gray-900"></div>
+                      If you pay a gas bill for your furnace, click Gas. If you ONLY have an electric bill, click Electric.
+                    </div>
+                  )}
+                </div>
               </div>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <button 
-                  onClick={() => {setSystemType('coolingOnly'); setStep(4);}} 
+                  onClick={() => {
+                    setSystemType('coolingHeating');
+                    setHeatingType('electric');
+                    setStep(4);
+                  }} 
                   className={`relative p-4 border-2 rounded-lg transition-all duration-300 overflow-hidden ${
-                    systemType === 'coolingOnly' 
+                    heatingType === 'electric' 
                       ? 'border-blue-600 shadow-lg transform scale-105 ring-2 ring-blue-400' 
                       : 'border-gray-300 hover:border-blue-400 hover:shadow-md hover:scale-102'
                   }`}
                 >
                   <div className={`absolute inset-0 bg-gradient-to-br from-blue-400 to-blue-600 transition-opacity duration-300 ${
-                    systemType === 'coolingOnly' ? 'opacity-10' : 'opacity-0'
+                    heatingType === 'electric' ? 'opacity-10' : 'opacity-0'
                   }`}></div>
                   <div className="relative z-10">
                     <div className="bg-white rounded-lg p-3 mb-4">
-                      <img src={coolingOnlyImage} alt="Cooling Only System" className="w-full h-auto rounded" />
+                      <img src={electricBillImage} alt="Electric Bill" className="w-full h-auto rounded" />
                     </div>
-                    <h3 className="text-lg font-bold mb-2">Cooling Only</h3>
-                    <p className="text-sm text-gray-600">Air conditioner with separate heating source</p>
+                    <h3 className="text-lg font-bold mb-2">Electric</h3>
+                    <p className="text-sm text-gray-600">Heat pump system - all electric</p>
                   </div>
                 </button>
 
                 <button 
-                  onClick={() => {setSystemType('coolingHeating'); setStep(3);}} 
+                  onClick={() => {
+                    setSystemType('coolingHeating');
+                    setHeatingType('gas');
+                    setStep(3.5);
+                  }} 
                   className={`relative p-4 border-2 rounded-lg transition-all duration-300 overflow-hidden ${
-                    systemType === 'coolingHeating' 
-                      ? 'border-purple-600 shadow-lg transform scale-105 ring-2 ring-purple-400' 
-                      : 'border-gray-300 hover:border-purple-400 hover:shadow-md hover:scale-102'
+                    heatingType === 'gas' 
+                      ? 'border-orange-600 shadow-lg transform scale-105 ring-2 ring-orange-400' 
+                      : 'border-gray-300 hover:border-orange-400 hover:shadow-md hover:scale-102'
                   }`}
                 >
-                  <div className={`absolute inset-0 bg-gradient-to-r from-red-500 via-purple-500 to-blue-500 transition-opacity duration-300 ${
-                    systemType === 'coolingHeating' ? 'opacity-10' : 'opacity-0'
+                  <div className={`absolute inset-0 bg-gradient-to-br from-orange-400 to-red-500 transition-opacity duration-300 ${
+                    heatingType === 'gas' ? 'opacity-10' : 'opacity-0'
                   }`}></div>
                   <div className="relative z-10">
                     <div className="bg-white rounded-lg p-3 mb-4">
-                      <img src={heatingAndCoolingImage} alt="Heating and Cooling System" className="w-full h-auto rounded" />
+                      <img src={gasBillImage} alt="Gas Bill" className="w-full h-auto rounded" />
                     </div>
-                    <h3 className="text-lg font-bold mb-2">Heating + Cooling</h3>
-                    <p className="text-sm text-gray-600">Combined system for year-round comfort</p>
+                    <h3 className="text-lg font-bold mb-2">Gas</h3>
+                    <p className="text-sm text-gray-600">Gas furnace with AC system</p>
                   </div>
                 </button>
               </div>
@@ -478,7 +502,7 @@ const HVACSizingCalculator = () => {
               </div>
               
               <div className="flex gap-3 mt-6">
-                <button onClick={() => setStep(3)} className="flex-1 py-4 border-2 border-gray-300 text-gray-700 rounded-lg font-semibold text-lg hover:bg-gray-50 transition">Back</button>
+                <button onClick={() => setStep(2)} className="flex-1 py-4 border-2 border-gray-300 text-gray-700 rounded-lg font-semibold text-lg hover:bg-gray-50 transition">Back</button>
               </div>
             </div>
           )}
@@ -510,9 +534,8 @@ const HVACSizingCalculator = () => {
               </div>
               <div className="flex gap-3 mt-6">
                 <button onClick={() => {
-                  if (systemType === 'coolingOnly') setStep(2);
-                  else if (heatingType === 'gas') setStep(3.5);
-                  else setStep(3);
+                  if (heatingType === 'gas') setStep(3.5);
+                  else setStep(2);
                 }} className="flex-1 py-4 border-2 border-gray-300 text-gray-700 rounded-lg font-semibold text-lg hover:bg-gray-50 transition">Back</button>
                 <button onClick={handleCalculate} disabled={!currentSize && !squareFeet} className="flex-1 py-4 bg-blue-600 text-white rounded-lg font-semibold text-lg hover:bg-blue-700 disabled:bg-gray-300 disabled:cursor-not-allowed transition">
                   <Calculator className="w-5 h-5 inline mr-2" />
