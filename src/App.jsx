@@ -27,6 +27,14 @@ const HVACSizingCalculator = () => {
   const verticalAtticDownflow = '/vertical-position-furnace-installed-in-attic-flow-is-downflow.png';
   const verticalBasementUpflow = '/vertical-position-furnace-installed-in-basement-flow-is-upflow.png';
   const verticalMainFloorHorizontal = '/vertical-position-furnace-installed-on-main-floor-flow-is-horizontal-flow.png';
+  
+  // Air handler placement images (for electric)
+  const ahHorizontalAtticDownflow = '/horizontal-position-air-handler-installed-in-attic-flow-is-downflow.png';
+  const ahHorizontalBasementUpflow = '/horizontal-position-air-handler-installed-in-basement-flow-is-upflow.png';
+  const ahHorizontalCrawlspaceUpflow = '/horizontal-position-air-handler-installed-in-crawlspace-flow-is-upflow.png';
+  const ahVerticalAtticDownflow = '/vertical-position-air-handler-installed-in-attic-flow-is-downflow.png';
+  const ahVerticalBasementUpflow = '/vertical-position-air-handler-installed-in-basement-flow-is-upflow.png';
+  const ahVerticalMainFloorHorizontal = '/vertical-position-air-handler-installed-on-main-floor-flow-is-horizontal-flow.png';
 
   const productUrls = {
     ac: {
@@ -347,8 +355,12 @@ const HVACSizingCalculator = () => {
               <div className="flex items-center justify-between max-w-xl mx-auto">
                 {[1, 2, 3, 4].map((s) => (
                   <React.Fragment key={s}>
-                    <div className={`flex items-center justify-center w-10 h-10 rounded-full ${step >= s ? 'bg-blue-600 text-white' : 'bg-gray-300 text-gray-600'} font-semibold`}>{s}</div>
-                    {s < 4 && <div className={`flex-1 h-1 mx-2 ${step > s ? 'bg-blue-600' : 'bg-gray-300'}`} />}
+                    <div className={`flex items-center justify-center w-10 h-10 rounded-full ${
+                      step >= s || (s === 3 && step === 3.5) ? 'bg-blue-600 text-white' : 'bg-gray-300 text-gray-600'
+                    } font-semibold`}>{s}</div>
+                    {s < 4 && <div className={`flex-1 h-1 mx-2 ${
+                      step > s || (s === 3 && step === 3.5) ? 'bg-blue-600' : 'bg-gray-300'
+                    }`} />}
                   </React.Fragment>
                 ))}
               </div>
@@ -394,7 +406,7 @@ const HVACSizingCalculator = () => {
                   onClick={() => {
                     setSystemType('coolingHeating');
                     setHeatingType('electric');
-                    setStep(4);
+                    setStep(3);
                   }} 
                   className={`relative p-4 border-2 rounded-lg transition-all duration-300 overflow-hidden ${
                     heatingType === 'electric' 
@@ -445,27 +457,63 @@ const HVACSizingCalculator = () => {
           )}
 
           {step === 3 && (
-            <div className="bg-white rounded-xl shadow-lg p-8 max-w-4xl mx-auto">
+            <div className="bg-white rounded-xl shadow-lg p-8 max-w-6xl mx-auto">
               <div className="flex items-center mb-6">
-                <Flame className="w-8 h-8 text-orange-600 mr-3" />
-                <h2 className="text-2xl font-bold text-gray-800">Select Heat Source</h2>
+                <Home className="w-8 h-8 text-blue-600 mr-3" />
+                <h2 className="text-2xl font-bold text-gray-800">Air Handler Position & Placement</h2>
               </div>
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                <button onClick={() => {setHeatingType('electric'); setStep(4);}} className={`p-4 border-2 rounded-lg transition ${heatingType === 'electric' ? 'border-blue-600 bg-blue-50' : 'border-gray-300 hover:border-blue-400'}`}>
+              <p className="text-gray-600 mb-6 text-center">Select the position and location of your air handler</p>
+              
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <button onClick={() => setStep(4)} className="p-4 border-2 rounded-lg transition border-gray-300 hover:border-blue-400">
                   <div className="bg-white rounded-lg p-3 mb-4">
-                    <img src={electricHeatPumpImage} alt="Electric Heat Pump" className="w-full h-auto rounded" />
+                    <img src={ahHorizontalBasementUpflow} alt="Horizontal - Basement" className="w-full h-auto rounded" />
                   </div>
-                  <h3 className="text-lg font-bold mb-2">Electric Heat Pump</h3>
-                  <p className="text-sm text-gray-600">All-in-one heating and cooling</p>
+                  <h3 className="text-lg font-bold mb-2">Horizontal - Basement</h3>
+                  <p className="text-sm text-gray-600">Multi-position air handler</p>
                 </button>
-                <button onClick={() => {setHeatingType('gas'); setStep(3.5);}} className={`p-4 border-2 rounded-lg transition ${heatingType === 'gas' ? 'border-blue-600 bg-blue-50' : 'border-gray-300 hover:border-blue-400'}`}>
+                
+                <button onClick={() => setStep(4)} className="p-4 border-2 rounded-lg transition border-gray-300 hover:border-blue-400">
                   <div className="bg-white rounded-lg p-3 mb-4">
-                    <img src={gasFurnaceImage} alt="Gas Furnace" className="w-full h-auto rounded" />
+                    <img src={ahHorizontalCrawlspaceUpflow} alt="Horizontal - Crawlspace" className="w-full h-auto rounded" />
                   </div>
-                  <h3 className="text-lg font-bold mb-2">Gas Furnace</h3>
-                  <p className="text-sm text-gray-600">AC with gas furnace heating</p>
+                  <h3 className="text-lg font-bold mb-2">Horizontal - Crawlspace</h3>
+                  <p className="text-sm text-gray-600">Multi-position air handler</p>
+                </button>
+                
+                <button onClick={() => setStep(4)} className="p-4 border-2 rounded-lg transition border-gray-300 hover:border-blue-400">
+                  <div className="bg-white rounded-lg p-3 mb-4">
+                    <img src={ahHorizontalAtticDownflow} alt="Horizontal - Attic" className="w-full h-auto rounded" />
+                  </div>
+                  <h3 className="text-lg font-bold mb-2">Horizontal - Attic</h3>
+                  <p className="text-sm text-gray-600">Multi-position air handler</p>
+                </button>
+                
+                <button onClick={() => setStep(4)} className="p-4 border-2 rounded-lg transition border-gray-300 hover:border-blue-400">
+                  <div className="bg-white rounded-lg p-3 mb-4">
+                    <img src={ahVerticalBasementUpflow} alt="Vertical - Basement" className="w-full h-auto rounded" />
+                  </div>
+                  <h3 className="text-lg font-bold mb-2">Vertical - Basement</h3>
+                  <p className="text-sm text-gray-600">Multi-position air handler</p>
+                </button>
+                
+                <button onClick={() => setStep(4)} className="p-4 border-2 rounded-lg transition border-gray-300 hover:border-blue-400">
+                  <div className="bg-white rounded-lg p-3 mb-4">
+                    <img src={ahVerticalMainFloorHorizontal} alt="Vertical - Main Floor" className="w-full h-auto rounded" />
+                  </div>
+                  <h3 className="text-lg font-bold mb-2">Vertical - Main Floor</h3>
+                  <p className="text-sm text-gray-600">Multi-position air handler</p>
+                </button>
+                
+                <button onClick={() => setStep(4)} className="p-4 border-2 rounded-lg transition border-gray-300 hover:border-blue-400">
+                  <div className="bg-white rounded-lg p-3 mb-4">
+                    <img src={ahVerticalAtticDownflow} alt="Vertical - Attic" className="w-full h-auto rounded" />
+                  </div>
+                  <h3 className="text-lg font-bold mb-2">Vertical - Attic</h3>
+                  <p className="text-sm text-gray-600">Multi-position air handler</p>
                 </button>
               </div>
+              
               <div className="flex gap-3 mt-6">
                 <button onClick={() => setStep(2)} className="flex-1 py-4 border-2 border-gray-300 text-gray-700 rounded-lg font-semibold text-lg hover:bg-gray-50 transition">Back</button>
               </div>
@@ -564,6 +612,7 @@ const HVACSizingCalculator = () => {
               <div className="flex gap-3 mt-6">
                 <button onClick={() => {
                   if (heatingType === 'gas') setStep(3.5);
+                  else if (heatingType === 'electric') setStep(3);
                   else setStep(2);
                 }} className="flex-1 py-4 border-2 border-gray-300 text-gray-700 rounded-lg font-semibold text-lg hover:bg-gray-50 transition">Back</button>
                 <button onClick={handleCalculate} disabled={!currentSize && !squareFeet} className="flex-1 py-4 bg-blue-600 text-white rounded-lg font-semibold text-lg hover:bg-blue-700 disabled:bg-gray-300 disabled:cursor-not-allowed transition">
