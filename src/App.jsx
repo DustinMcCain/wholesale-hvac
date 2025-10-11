@@ -421,7 +421,7 @@ const HVACSizingCalculator = () => {
                       <img src={electricBillImage} alt="Electric Bill" className="w-full h-auto rounded" />
                     </div>
                     <h3 className="text-lg font-bold mb-2">Electric</h3>
-                    <p className="text-sm text-gray-600">Heat pump system - all electric</p>
+                    <p className="text-sm text-gray-600">All electric</p>
                   </div>
                 </button>
 
