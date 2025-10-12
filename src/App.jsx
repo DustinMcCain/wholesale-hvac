@@ -265,7 +265,7 @@ const HVACSizingCalculator = () => {
       }
       
       const data = await response.json();
-      console.log(`Fetched price from ${url}:`, data.price);
+      console.log(`Fetched price from ${url}:`, data);
       return data.price;
     } catch (error) {
       console.error(`Error fetching price from ${url}:`, error);
