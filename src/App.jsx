@@ -254,11 +254,31 @@ const HVACSizingCalculator = () => {
     }
   };
 
+  const fetchPrice = async (url) => {
+    if (!url) return null;
+    
+    try {
+      const response = await fetch(`/.netlify/functions/fetch-price?url=${encodeURIComponent(url)}`);
+      
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+      }
+      
+      const data = await response.json();
+      console.log(`Fetched price from ${url}:`, data.price);
+      return data.price;
+    } catch (error) {
+      console.error(`Error fetching price from ${url}:`, error);
+      return null;
+    }
+  };
+
   const SystemCard = ({ system, tier, tierName, tierBg }) => {
     if (!system) return null;
     const productUrl = getProductUrl(tier, system.tonnage);
     const isFurnace = heatingType === 'gas';
-    
+    const wooCommercePrice = fetchPrice(productUrl);
+  
     return (
       <div className="bg-white rounded-xl shadow-lg overflow-hidden">
         <div className={`${tierBg} text-white p-4`}>
