@@ -266,7 +266,7 @@ const HVACSizingCalculator = () => {
       const currencyFormatter = new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' });
       const data = await response.json();
       console.log(`Fetched price from ${url}:`, data);
-      const price = currencyFormatter(data.price);
+      const price = currencyFormatter.format(data.price);
       console.log(`Formatted price:`, price);
       return price;
     } catch (error) {
