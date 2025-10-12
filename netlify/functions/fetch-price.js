@@ -20,7 +20,6 @@ exports.handler = async (event, context) => {
   }
 
   try {
-    console.log('========================================');
     console.log('Fetching price from:', url);
     
     const response = await fetch(url);
@@ -30,22 +29,9 @@ exports.handler = async (event, context) => {
     }
     
     const html = await response.text();
-    
-    // Find and log all price-related HTML sections
-    const priceRegex = /woocommerce-Price-amount[\s\S]{0,200}/gi;
-    const priceMatches = html.match(priceRegex);
-    
-    console.log('Found price sections:', priceMatches ? priceMatches.length : 0);
-    if (priceMatches) {
-      priceMatches.forEach((match, i) => {
-        console.log(`Price section ${i + 1}:`, match);
-      });
-    }
-    
     const price = extractPrice(html);
 
-    console.log('Final extracted price:', price);
-    console.log('========================================');
+    console.log('Extracted price:', price);
 
     return {
       statusCode: 200,
@@ -53,8 +39,7 @@ exports.handler = async (event, context) => {
       body: JSON.stringify({ 
         price,
         url,
-        timestamp: new Date().toISOString(),
-        debugInfo: priceMatches ? priceMatches.slice(0, 3) : null // Include in response
+        timestamp: new Date().toISOString()
       }),
     };
   } catch (error) {
@@ -74,35 +59,54 @@ exports.handler = async (event, context) => {
 function extractPrice(html) {
   console.log('Starting price extraction...');
   
-  // Try to find ANY occurrence of woocommerce-Price-currencySymbol followed by numbers
-  const simplestPattern = /woocommerce-Price-currencySymbol[^>]*>.*?\$([\d,]+\.?\d*)/i;
-  const simpleMatch = html.match(simplestPattern);
+  // Pattern 1: Match HTML entity dollar sign (&#036; or &#36;) followed by price
+  // This matches: <span class="woocommerce-Price-currencySymbol">&#036;</span>3,727.00</span>
+  const pattern1 = /woocommerce-Price-amount amount"><span class="woocommerce-Price-currencySymbol">&#0?36;<\/span>([\d,]+\.?\d*)<\/span>/i;
+  const match1 = html.match(pattern1);
   
-  if (simpleMatch) {
-    console.log('Simple pattern matched:', simpleMatch[0]);
-    const price = parseFloat(simpleMatch[1].replace(/,/g, ''));
+  if (match1 && match1[1]) {
+    console.log('✓ Pattern 1 matched (HTML entity $):', match1[1]);
+    const price = parseFloat(match1[1].replace(/,/g, ''));
     if (!isNaN(price) && price >= 100 && price <= 50000) {
-      console.log('✓ Valid price from simple pattern:', price);
       return price;
     }
   }
   
-  // Try to find dollar sign followed by numbers anywhere
-  const dollarPattern = /\$\s*([\d,]+\.\d{2})/g;
-  const dollarMatches = html.match(dollarPattern);
+  // Pattern 2: With <bdi> tag (for related products)
+  // This matches: <bdi><span class="woocommerce-Price-currencySymbol">&#36;</span>4,189.00</bdi>
+  const pattern2 = /woocommerce-Price-amount amount"><bdi><span class="woocommerce-Price-currencySymbol">&#0?36;<\/span>([\d,]+\.?\d*)<\/bdi>/i;
+  const match2 = html.match(pattern2);
   
-  if (dollarMatches) {
-    console.log('Found dollar amounts:', dollarMatches.slice(0, 5));
-    
-    // Get the first reasonable HVAC price
-    for (const match of dollarMatches) {
-      const priceStr = match.replace('$', '').replace(/,/g, '').trim();
-      const price = parseFloat(priceStr);
-      
-      if (!isNaN(price) && price >= 1000 && price <= 50000) {
-        console.log('✓ Valid price from dollar pattern:', price);
-        return price;
-      }
+  if (match2 && match2[1]) {
+    console.log('✓ Pattern 2 matched (with bdi):', match2[1]);
+    const price = parseFloat(match2[1].replace(/,/g, ''));
+    if (!isNaN(price) && price >= 100 && price <= 50000) {
+      return price;
+    }
+  }
+  
+  // Pattern 3: Look in JSON data (seen in section 4)
+  // "original_product_price":3727
+  const pattern3 = /"original_product_price":([\d,]+\.?\d*)/i;
+  const match3 = html.match(pattern3);
+  
+  if (match3 && match3[1]) {
+    console.log('✓ Pattern 3 matched (JSON data):', match3[1]);
+    const price = parseFloat(match3[1].replace(/,/g, ''));
+    if (!isNaN(price) && price >= 100 && price <= 50000) {
+      return price;
+    }
+  }
+  
+  // Pattern 4: Literal $ symbol (fallback)
+  const pattern4 = /woocommerce-Price-currencySymbol">\$<\/span>([\d,]+\.?\d*)/i;
+  const match4 = html.match(pattern4);
+  
+  if (match4 && match4[1]) {
+    console.log('✓ Pattern 4 matched (literal $):', match4[1]);
+    const price = parseFloat(match4[1].replace(/,/g, ''));
+    if (!isNaN(price) && price >= 100 && price <= 50000) {
+      return price;
     }
   }
   
