@@ -1,21 +1,14 @@
 exports.handler = async (event, context) => {
-  // Enable CORS so your React app can call this function
   const headers = {
     'Access-Control-Allow-Origin': '*',
     'Access-Control-Allow-Headers': 'Content-Type',
     'Access-Control-Allow-Methods': 'GET, POST, OPTIONS',
   };
 
-  // Handle preflight requests (browser checks)
   if (event.httpMethod === 'OPTIONS') {
-    return {
-      statusCode: 200,
-      headers,
-      body: '',
-    };
+    return { statusCode: 200, headers, body: '' };
   }
 
-  // Get the URL from the query parameters
   const { url } = event.queryStringParameters || {};
 
   if (!url) {
@@ -29,7 +22,6 @@ exports.handler = async (event, context) => {
   try {
     console.log('Fetching price from:', url);
     
-    // Fetch the product page
     const response = await fetch(url);
     
     if (!response.ok) {
@@ -37,8 +29,6 @@ exports.handler = async (event, context) => {
     }
     
     const html = await response.text();
-
-    // Extract price from HTML
     const price = extractPrice(html);
 
     console.log('Extracted price:', price);
@@ -67,37 +57,46 @@ exports.handler = async (event, context) => {
 };
 
 function extractPrice(html) {
-  // Multiple patterns to find prices in WooCommerce HTML
+  // Remove excessive whitespace but keep structure
+  const cleanHtml = html.replace(/\s+/g, ' ');
+  
+  // Pattern for your specific HTML structure:
+  // <span class="woocommerce-Price-amount amount"><span class="woocommerce-Price-currencySymbol">$</span>4,131.00</span>
   const pricePatterns = [
-    // Pattern 1: <bdi>$1,234.56</bdi>
-    /<bdi>\$?([\d,]+\.?\d*)<\/bdi>/i,
+    // Pattern 1: Your exact structure
+    /<span class="woocommerce-Price-amount amount"><span class="woocommerce-Price-currencySymbol">\$<\/span>([\d,]+\.?\d*)<\/span>/i,
     
-    // Pattern 2: <span class="woocommerce-Price-amount amount"><bdi>$1,234.56</bdi></span>
-    /<span[^>]*class="[^"]*woocommerce-Price-amount[^"]*"[^>]*>.*?<bdi>\$?([\d,]+\.?\d*)<\/bdi>/i,
+    // Pattern 2: More flexible version
+    /<span[^>]*class="[^"]*woocommerce-Price-amount[^"]*"[^>]*><span[^>]*class="[^"]*woocommerce-Price-currencySymbol[^"]*"[^>]*>\$<\/span>([\d,]+\.?\d*)<\/span>/i,
     
-    // Pattern 3: In <ins> tags (sale prices)
-    /<ins>.*?<span[^>]*class="[^"]*woocommerce-Price-amount[^"]*"[^>]*>.*?<bdi>\$?([\d,]+\.?\d*)<\/bdi>/i,
+    // Pattern 3: Even more flexible
+    /woocommerce-Price-amount[^>]*>.*?woocommerce-Price-currencySymbol[^>]*>\$<\/span>\s*([\d,]+\.?\d*)/i,
     
-    // Pattern 4: Direct in span with class
-    /<span[^>]*class="[^"]*amount[^"]*"[^>]*>\$?([\d,]+\.?\d*)<\/span>/i,
+    // Pattern 4: Just currency symbol followed by price
+    /<span[^>]*woocommerce-Price-currencySymbol[^>]*>\$<\/span>\s*([\d,]+\.?\d*)/i,
     
-    // Pattern 5: Any price-like number with dollar sign
-    /\$\s*([\d,]+\.?\d*)/,
+    // Pattern 5: Fallback - any dollar amount
+    /\$([\d,]+\.?\d*)/,
   ];
 
-  for (const pattern of pricePatterns) {
-    const match = html.match(pattern);
+  for (let i = 0; i < pricePatterns.length; i++) {
+    const pattern = pricePatterns[i];
+    const match = cleanHtml.match(pattern);
+    
     if (match && match[1]) {
+      console.log(`Match found with pattern ${i + 1}:`, match[1]);
+      
       // Remove commas and convert to number
       const numericPrice = parseFloat(match[1].replace(/,/g, ''));
       
-      // Validate it's a reasonable price (between $100 and $50,000)
+      // Validate it's a reasonable HVAC price (between $100 and $50,000)
       if (!isNaN(numericPrice) && numericPrice >= 100 && numericPrice <= 50000) {
+        console.log('Valid price found:', numericPrice);
         return numericPrice;
       }
     }
   }
 
-  console.log('No price found in HTML');
+  console.log('No valid price found');
   return null;
 }
