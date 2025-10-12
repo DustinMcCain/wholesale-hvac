@@ -20,6 +20,7 @@ exports.handler = async (event, context) => {
   }
 
   try {
+    console.log('========================================');
     console.log('Fetching price from:', url);
     
     const response = await fetch(url);
@@ -29,9 +30,22 @@ exports.handler = async (event, context) => {
     }
     
     const html = await response.text();
+    
+    // Find and log all price-related HTML sections
+    const priceRegex = /woocommerce-Price-amount[\s\S]{0,200}/gi;
+    const priceMatches = html.match(priceRegex);
+    
+    console.log('Found price sections:', priceMatches ? priceMatches.length : 0);
+    if (priceMatches) {
+      priceMatches.forEach((match, i) => {
+        console.log(`Price section ${i + 1}:`, match);
+      });
+    }
+    
     const price = extractPrice(html);
 
-    console.log('Extracted price:', price);
+    console.log('Final extracted price:', price);
+    console.log('========================================');
 
     return {
       statusCode: 200,
@@ -39,7 +53,8 @@ exports.handler = async (event, context) => {
       body: JSON.stringify({ 
         price,
         url,
-        timestamp: new Date().toISOString()
+        timestamp: new Date().toISOString(),
+        debugInfo: priceMatches ? priceMatches.slice(0, 3) : null // Include in response
       }),
     };
   } catch (error) {
@@ -57,46 +72,40 @@ exports.handler = async (event, context) => {
 };
 
 function extractPrice(html) {
-  // Remove excessive whitespace but keep structure
-  const cleanHtml = html.replace(/\s+/g, ' ');
+  console.log('Starting price extraction...');
   
-  // Pattern for your specific HTML structure:
-  // <span class="woocommerce-Price-amount amount"><span class="woocommerce-Price-currencySymbol">$</span>4,131.00</span>
-  const pricePatterns = [
-    // Pattern 1: Your exact structure
-    /<span class="woocommerce-Price-amount amount"><span class="woocommerce-Price-currencySymbol">\$<\/span>([\d,]+\.?\d*)<\/span>/i,
+  // Try to find ANY occurrence of woocommerce-Price-currencySymbol followed by numbers
+  const simplestPattern = /woocommerce-Price-currencySymbol[^>]*>.*?\$([\d,]+\.?\d*)/i;
+  const simpleMatch = html.match(simplestPattern);
+  
+  if (simpleMatch) {
+    console.log('Simple pattern matched:', simpleMatch[0]);
+    const price = parseFloat(simpleMatch[1].replace(/,/g, ''));
+    if (!isNaN(price) && price >= 100 && price <= 50000) {
+      console.log('✓ Valid price from simple pattern:', price);
+      return price;
+    }
+  }
+  
+  // Try to find dollar sign followed by numbers anywhere
+  const dollarPattern = /\$\s*([\d,]+\.\d{2})/g;
+  const dollarMatches = html.match(dollarPattern);
+  
+  if (dollarMatches) {
+    console.log('Found dollar amounts:', dollarMatches.slice(0, 5));
     
-    // Pattern 2: More flexible version
-    /<span[^>]*class="[^"]*woocommerce-Price-amount[^"]*"[^>]*><span[^>]*class="[^"]*woocommerce-Price-currencySymbol[^"]*"[^>]*>\$<\/span>([\d,]+\.?\d*)<\/span>/i,
-    
-    // Pattern 3: Even more flexible
-    /woocommerce-Price-amount[^>]*>.*?woocommerce-Price-currencySymbol[^>]*>\$<\/span>\s*([\d,]+\.?\d*)/i,
-    
-    // Pattern 4: Just currency symbol followed by price
-    /<span[^>]*woocommerce-Price-currencySymbol[^>]*>\$<\/span>\s*([\d,]+\.?\d*)/i,
-    
-    // Pattern 5: Fallback - any dollar amount
-    /\$([\d,]+\.?\d*)/,
-  ];
-
-  for (let i = 0; i < pricePatterns.length; i++) {
-    const pattern = pricePatterns[i];
-    const match = cleanHtml.match(pattern);
-    
-    if (match && match[1]) {
-      console.log(`Match found with pattern ${i + 1}:`, match[1]);
+    // Get the first reasonable HVAC price
+    for (const match of dollarMatches) {
+      const priceStr = match.replace('$', '').replace(/,/g, '').trim();
+      const price = parseFloat(priceStr);
       
-      // Remove commas and convert to number
-      const numericPrice = parseFloat(match[1].replace(/,/g, ''));
-      
-      // Validate it's a reasonable HVAC price (between $100 and $50,000)
-      if (!isNaN(numericPrice) && numericPrice >= 100 && numericPrice <= 50000) {
-        console.log('Valid price found:', numericPrice);
-        return numericPrice;
+      if (!isNaN(price) && price >= 1000 && price <= 50000) {
+        console.log('✓ Valid price from dollar pattern:', price);
+        return price;
       }
     }
   }
-
-  console.log('No valid price found');
+  
+  console.log('✗ No valid price found');
   return null;
 }
