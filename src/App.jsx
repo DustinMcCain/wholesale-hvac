@@ -11,6 +11,8 @@ const HVACSizingCalculator = () => {
   const [currentSize, setCurrentSize] = useState('');
   const [results, setResults] = useState(null);
   const [showTooltip, setShowTooltip] = useState(false);
+  const [prices, setPrices] = useState({});
+  const [loadingPrices, setLoadingPrices] = useState(false);
 
   // Images are in the public folder
   const electricHeatPumpImage = '/electric-heat-pump.png';
@@ -205,6 +207,63 @@ const HVACSizingCalculator = () => {
     return found ? found[1] : "5.0";
   };
 
+  const getProductUrl = (tier, tonnage, resultData = results) => {
+    if (!resultData) return null;
+    
+    if (resultData.systemType === 'coolingOnly') {
+      return productUrls.ac?.[tier]?.[tonnage];
+    } else if (resultData.heatingType === 'electric') {
+      return productUrls.heatpump?.[tier]?.[tonnage];
+    } else if (resultData.heatingType === 'gas') {
+      return productUrls.furnace?.[resultData.flowType]?.[tier]?.[tonnage];
+    }
+    return null;
+  };
+
+  // Function to fetch price from Netlify function
+  const fetchPrice = async (url) => {
+    if (!url) return null;
+    
+    try {
+      const response = await fetch(`/.netlify/functions/fetch-price?url=${encodeURIComponent(url)}`);
+      
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+      }
+      
+      const data = await response.json();
+      return data.price;
+    } catch (error) {
+      console.error(`Error fetching price from ${url}:`, error);
+      return null;
+    }
+  };
+
+  // Function to fetch all prices for current results
+  const fetchAllPrices = async (resultData) => {
+    setLoadingPrices(true);
+    const newPrices = {};
+    
+    const tierTonnagePairs = [
+      ['silver', resultData.silver?.tonnage],
+      ['gold', resultData.gold?.tonnage],
+      ['platinum', resultData.platinum?.tonnage]
+    ];
+    
+    for (const [tier, tonnage] of tierTonnagePairs) {
+      if (tonnage) {
+        const url = getProductUrl(tier, tonnage, resultData);
+        if (url) {
+          const price = await fetchPrice(url);
+          newPrices[`${tier}-${tonnage}`] = price;
+        }
+      }
+    }
+    
+    setPrices(newPrices);
+    setLoadingPrices(false);
+  };
+
   const handleCalculate = () => {
     let tonnage = currentSize || calculateTonnage(parseInt(squareFeet));
     const isCalifornia = state === 'California';
@@ -229,8 +288,12 @@ const HVACSizingCalculator = () => {
       if (isCalifornia && silver?.seer === '13.4') silver = null;
     }
 
-    setResults({ tonnage, silver, gold, platinum, systemType, heatingType, flowType, state });
+    const resultData = { tonnage, silver, gold, platinum, systemType, heatingType, flowType, state };
+    setResults(resultData);
     setStep(5);
+    
+    // Fetch prices after setting results
+    fetchAllPrices(resultData);
   };
 
   const resetCalculator = () => {
@@ -242,52 +305,21 @@ const HVACSizingCalculator = () => {
     setSquareFeet('');
     setCurrentSize('');
     setResults(null);
-  };
-
-  const getProductUrl = (tier, tonnage) => {
-    if (systemType === 'coolingOnly') {
-      return productUrls.ac?.[tier]?.[tonnage];
-    } else if (heatingType === 'electric') {
-      return productUrls.heatpump?.[tier]?.[tonnage];
-    } else if (heatingType === 'gas') {
-      return productUrls.furnace?.[flowType]?.[tier]?.[tonnage];
-    }
-  };
-
-  const fetchPrice = async (url) => {
-    if (!url) return null;
-    
-    try {
-      const response = await fetch(`/.netlify/functions/fetch-price?url=${encodeURIComponent(url)}`);
-      
-      if (!response.ok) {
-        throw new Error(`HTTP error! status: ${response.status}`);
-      }
-      const currencyFormatter = new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' });
-      const data = await response.json();
-      console.log(`Fetched price from ${url}:`, data);
-      const price = currencyFormatter.format(data.price);
-      console.log(`Formatted price:`, price);
-      return price;
-    } catch (error) {
-      console.error(`Error fetching price from ${url}:`, error);
-      return null;
-    }
+    setPrices({});
+    setLoadingPrices(false);
   };
 
   const SystemCard = ({ system, tier, tierName, tierBg }) => {
     if (!system) return null;
     const productUrl = getProductUrl(tier, system.tonnage);
     const isFurnace = heatingType === 'gas';
-    const wooCommercePrice = fetchPrice(productUrl);
-  
+    const priceKey = `${tier}-${system.tonnage}`;
+    const price = prices[priceKey];
+    
     return (
       <div className="bg-white rounded-xl shadow-lg overflow-hidden">
         <div className={`${tierBg} text-white p-4`}>
           <h3 className="text-2xl font-bold">{tierName}</h3>
-          {/* Below line modified to handle silver tier description per story OURS-32
-          Per Dustin: ALL Silver 13.4 SEER2 Rating Options being the lower energy efficiency should say
-          "Lowest Cost Guaranteed, Best Recommended, Most Popular" instead of "Increased Efficiency, Competitive Price".*/}
           <p className="text-sm">
             {tier === 'silver' && system.seer === '13.4' 
               ? 'Lowest Cost Guaranteed, Best Recommended, Most Popular'
@@ -296,10 +328,27 @@ const HVACSizingCalculator = () => {
               : tier === 'gold' 
               ? 'Higher Energy Efficient Choice' 
               : 'Increased Efficiency, Competitive Price'}
-              {/* Silver units that are 14.3 SEER2 Rating keep the original description, "Increased Efficiency, Competitive Price".  */}
           </p>
         </div>
         <div className="p-6">
+          {/* Price Display */}
+          {loadingPrices ? (
+            <div className="mb-6 p-4 bg-blue-50 rounded-lg text-center">
+              <div className="animate-pulse text-blue-600 font-semibold">Loading price...</div>
+            </div>
+          ) : price ? (
+            <div className="mb-6 p-4 bg-green-50 rounded-lg border-2 border-green-200">
+              <div className="text-sm text-gray-600 mb-1">Online Price</div>
+              <div className="text-4xl font-bold text-green-600">${price.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</div>
+              <div className="text-xs text-gray-500 mt-1">Price shown is from online store</div>
+            </div>
+          ) : (
+            <div className="mb-6 p-4 bg-gray-50 rounded-lg border-2 border-gray-200">
+              <div className="text-sm text-gray-600 mb-1">Pricing</div>
+              <div className="text-lg font-semibold text-gray-700">Call for Quote</div>
+            </div>
+          )}
+          
           <div className="mb-6">
             <div className="text-sm text-gray-600 mb-1">SEER2 Rating</div>
             <div className="text-3xl font-bold text-blue-600">{system.seer}</div>
