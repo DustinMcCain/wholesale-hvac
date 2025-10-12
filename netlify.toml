@@ -1,0 +1,15 @@
+[build]
+  # Adjust this command to match your build script
+  command = "npm run build"
+  # Adjust this to match your build output folder
+  publish = "build"
+  functions = "netlify/functions"
+
+[functions]
+  # Set timeout to 26 seconds (max for free tier)
+  node_bundler = "esbuild"
+
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200
