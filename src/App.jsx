@@ -263,7 +263,19 @@ const HVACSizingCalculator = () => {
       <div className="bg-white rounded-xl shadow-lg overflow-hidden">
         <div className={`${tierBg} text-white p-4`}>
           <h3 className="text-2xl font-bold">{tierName}</h3>
-          <p className="text-sm">{tier === 'platinum' ? 'Highest Efficiency, Total Comfort' : tier === 'gold' ? 'Higher Energy Efficient Choice' : 'Increased Efficiency, Competitive Price'}</p>
+          {/* Below line modified to handle silver tier description per story OURS-32
+          Per Dustin: ALL Silver 13.4 SEER2 Rating Options being the lower energy efficiency should say
+          "Lowest Cost Guaranteed, Best Recommended, Most Popular" instead of "Increased Efficiency, Competitive Price".*/}
+          <p className="text-sm">
+            {tier === 'silver' && system.seer === '13.4' 
+              ? 'Lowest Cost Guaranteed, Best Recommended, Most Popular'
+              : tier === 'platinum' 
+              ? 'Highest Efficiency, Total Comfort' 
+              : tier === 'gold' 
+              ? 'Higher Energy Efficient Choice' 
+              : 'Increased Efficiency, Competitive Price'}
+              {/* Silver units that are 14.3 SEER2 Rating keep the original description, "Increased Efficiency, Competitive Price".  */}
+          </p>
         </div>
         <div className="p-6">
           <div className="mb-6">
