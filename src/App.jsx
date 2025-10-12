@@ -263,10 +263,13 @@ const HVACSizingCalculator = () => {
       if (!response.ok) {
         throw new Error(`HTTP error! status: ${response.status}`);
       }
-      
+      const currencyFormatter = new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' });
       const data = await response.json();
       console.log(`Fetched price from ${url}:`, data);
-      return data.price;
+      let price = formatCurrency(data.price);
+      price = currencyFormatter(price);
+      console.log(`Formatted price:`, price);
+      return price;
     } catch (error) {
       console.error(`Error fetching price from ${url}:`, error);
       return null;
