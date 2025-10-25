@@ -39,165 +39,257 @@ const HVACSizingCalculator = () => {
   const ahVerticalMainFloorHorizontal = '/vertical-position-air-handler-installed-on-main-floor-flow-is-horizontal-flow.png';
 
   const productUrls = {
-    ac: {
-      silver: { '1.5': 'https://wholesalehvacdirect.com/product/1-5-ton-13-4-seer2-goodman-r32-air-conditioner-split-system-multi-positional/', '2.0': 'https://wholesalehvacdirect.com/product/goodman-2-ton-13-4-seer2-r32-cooling-only-system-glxs3bn2410-ahve24bp0301/', '2.5': 'https://wholesalehvacdirect.com/product/goodman-2-5-ton-cooling-air-conditioner-air-handler-system-13-8-seer2-r-32-glxs3bn3010-amst30bu1300/', '3.0': 'https://wholesalehvacdirect.com/product/goodman-3-0-ton-cooling-air-conditioner-air-handler-system-13-4-seer2-r-32-glxs3bn3610-amst36cu1300/', '3.5': 'https://wholesalehvacdirect.com/product/goodman-3-5-ton-13-4-seer2-air-conditioner-only-system-replaces-gsxn3n4210-and-gsx130421-glxs3bn4210-glxs3bn4210-amst42cu1300/', '4.0': 'https://wholesalehvacdirect.com/product/4-0-ton-14-3-seer2-goodman-straight-cool-air-conditioner-air-handler-split-system-r-32-glxs4ba4810amst48cu1300/', '5.0': 'https://wholesalehvacdirect.com/product/goodman-5-0-ton-cooling-air-conditioner-air-handler-system-13-8-seer2-r-32-glxs3bn6010-amst60du1300/' },
-      gold: { '1.5': 'https://wholesalehvacdirect.com/product/1-5-ton-14-3-seer2-goodman-straight-cool-air-conditioner-air-handler-split-system-r-32-glxs4ba1810amst24bu1300/', '2.0': 'https://wholesalehvacdirect.com/product/2-0-ton-14-3-seer2-goodman-straight-cool-air-conditioner-air-handler-split-system-r-32-glxs4ba2410amst24bu1300/', '2.5': 'https://wholesalehvacdirect.com/product/2-5-ton-14-3-seer2-goodman-straight-cool-air-conditioner-air-handler-split-system-r-32-glxs4ba3010amst30bu1300/', '3.0': 'https://wholesalehvacdirect.com/product/goodman-3-0-ton-cooling-air-conditioner-air-handler-system-14-5-seer2-r-32-glxs4ba3610-amst36cu1300/', '3.5': 'https://wholesalehvacdirect.com/product/3-5-ton-14-3-seer2-goodman-straight-cool-air-conditioner-air-handler-split-system-r-32-glxs4ba4210amst42cu1300/', '4.0': 'https://wholesalehvacdirect.com/product/4-0-ton-14-3-seer2-goodman-straight-cool-air-conditioner-air-handler-split-system-r-32-glxs4ba4810amst48cu1300/', '5.0': 'https://wholesalehvacdirect.com/product/5-0-ton-14-3-seer2-goodman-straight-cool-air-conditioner-air-handler-split-system-r-32-glxs4ba6010amst60du1300/' },
-      platinum: { '3.5': 'https://wholesalehvacdirect.com/product/goodman-3-5-ton-13-4-seer2-air-conditioner-only-system-replaces-gsxn3n4210-and-gsx130421-glxs3bn4210-glxs3bn4210-amst42cu1300/' }
+  ac: {
+    silver: {
+      '1.5': 'https://wholesalehvacdirect.com/product/goodman-1-5-ton-cooling-air-conditioner-air-handler-system-14-0-seer2-r-32-glxs3bn1810-amst24bu1300/',
+      '2.0': 'https://wholesalehvacdirect.com/product/goodman-2-ton-cooling-air-conditioner-air-handler-system-14-0-seer2-r-32-glxs3bn2410-ahve24bp0301/',
+      '2.5': 'https://wholesalehvacdirect.com/product/goodman-2-5-ton-cooling-air-conditioner-air-handler-system-13-8-seer2-r-32-glxs3bn3010-amst30bu1300/',
+      '3.0': 'https://wholesalehvacdirect.com/product/goodman-3-0-ton-cooling-air-conditioner-air-handler-system-13-4-seer2-r-32-glxs3bn3610-amst36cu1300/',
+      '3.5': 'https://wholesalehvacdirect.com/product/goodman-3-5-ton-cooling-air-conditioner-air-handler-system-13-5-seer2-r-32-glxs3bn4210-amst42cu1300/',
+      '4.0': 'https://wholesalehvacdirect.com/product/goodman-4-ton-cooling-air-conditioner-air-handler-system-14-0-seer2-r-32-glxs4ba4810-amst48cu1300/',
+      '5.0': 'https://wholesalehvacdirect.com/product/goodman-5-ton-cooling-air-conditioner-air-handler-system-14-0-seer2-r-32-glxs3bn6010amst60du1300/'
     },
-    heatpump: {
-      silver: { '1.5': 'https://wholesalehvacdirect.com/product/goodman-1-5-ton-cooling-18k-btu-hr-heating-heat-pump-air-handler-system-15-2-seer2-7-5-hspf2-r-32-glzs4ba1810-amst24bu1300/', '2.0': 'https://wholesalehvacdirect.com/product/goodman-2-ton-14-3-seer2-heat-pump-system-ac-and-heat-glzs4ba2410-amst24bu1300-glzs4ba2410-amst24bu1300/', '2.5': 'https://wholesalehvacdirect.com/product/goodman-2-5-ton-14-5-seer2-heat-pump-system-ac-and-heat-glzs4ba3010-amst30bu1300/', '3.0': 'https://wholesalehvacdirect.com/product/goodman-glzs4b-split-heat-pump-14-3-seer2-single-stage-3-ton-with-amst-multi-position-air-handler-nine-speed-ecm-motor-2-5-ton-21-1-8-in-cabinet-txv-expansion-valve-glzs4ba3610-amst36cu1300/', '3.5': 'https://wholesalehvacdirect.com/product/goodman-3-5-ton-cooling-42k-btu-hr-heating-heat-pump-air-handler-system-15-2-seer2-7-8-hspf2-r-32-glzs4ba4210-amst42cu1300/', '4.0': 'https://wholesalehvacdirect.com/product/goodman-4-0-ton-cooling-48k-btu-hr-heating-heat-pump-air-handler-system-15-2-seer2-7-8-hspf2-r-32-glzs4ba4810-amst48cu1300/', '5.0': 'https://wholesalehvacdirect.com/product/goodman-5-ton-14-3-seer2-heat-pump-system-ac-and-heat-r-32-glzs4ba6010-amst60du1300/' },
-      gold: { '1.5': 'https://wholesalehvacdirect.com/product/goodman-1-5-ton-cooling-18k-btu-hr-heating-heat-pump-air-handler-system-15-2-seer2-7-5-hspf2-r-32-glzs4ba1810-amst24bu1300/', '2.0': 'https://wholesalehvacdirect.com/product/goodman-2-ton-14-3-seer2-heat-pump-system-ac-and-heat-glzs4ba2410-amst24bu1300-glzs4ba2410-amst24bu1300/', '2.5': 'https://wholesalehvacdirect.com/product/goodman-2-5-ton-14-5-seer2-heat-pump-system-ac-and-heat-glzs4ba3010-amst30bu1300/', '3.0': 'https://wholesalehvacdirect.com/product/goodman-glzs4b-split-heat-pump-14-3-seer2-single-stage-3-ton-with-amst-multi-position-air-handler-nine-speed-ecm-motor-2-5-ton-21-1-8-in-cabinet-txv-expansion-valve-glzs4ba3610-amst36cu1300/', '3.5': 'https://wholesalehvacdirect.com/product/goodman-3-5-ton-cooling-42k-btu-hr-heating-heat-pump-air-handler-system-15-2-seer2-7-8-hspf2-r-32-glzs4ba4210-amst42cu1300-2/', '4.0': 'https://wholesalehvacdirect.com/product/goodman-4-0-ton-cooling-48k-btu-hr-heating-heat-pump-air-handler-system-15-2-seer2-7-8-hspf2-r-32-glzs4ba4810-amst48cu1300-2/', '5.0': 'https://wholesalehvacdirect.com/product/goodman-5-ton-14-3-seer2-heat-pump-system-ac-and-heat-r-32-glzs4ba6010-amst60du1300/' },
-      platinum: { '1.5': 'https://wholesalehvacdirect.com/product/goodman-r-32-115v-ahve-ducted-multi-position-air-handler-variable-speed-ecm-motor-2-ton-17-5-in-cabinet-with-eev-expansion-comfortnet-compatible-ahve24bp0300/', '2.5': 'https://wholesalehvacdirect.com/product/goodman-2-5-ton-15-2-seer2-heat-pump-system-glzs5ba3010-condenser-ahve36cp0300-air-handler-glzs5ba3010-ahve36cp0300/', '3.5': 'https://wholesalehvacdirect.com/product/goodman-3-5-ton-15-2-seer2-heat-pump-system-glzs5ba4210-condenser-ahve42cp0300-air-handler-glzs5ba4210-ahve42cp0300/', '4.0': 'https://wholesalehvacdirect.com/product/goodman-4-ton-15-2-seer2-heat-pump-system-glzs5ba4810-condenser-ahve48cp1300-air-handler-glzs5ba4810-ahve48cp1300/', '5.0': 'https://wholesalehvacdirect.com/product/goodman-5-ton-15-2-seer2-heat-pump-system-glzs5ba6010-condenser-ahve60dp1300-air-handler-glzs5ba6010-ahve60dp1300/' }
+    gold: {
+      '1.5': 'https://wholesalehvacdirect.com/product/1-5-ton-14-3-seer2-goodman-straight-cool-air-conditioner-air-handler-split-system-r-32-glxs4ba1810amst24bu1300/',
+      '2.0': 'https://wholesalehvacdirect.com/product/2-0-ton-14-3-seer2-goodman-straight-cool-air-conditioner-air-handler-split-system-r-32-glxs4ba2410amst24bu1300/',
+      '2.5': 'https://wholesalehvacdirect.com/product/2-5-ton-14-3-seer2-goodman-straight-cool-air-conditioner-air-handler-split-system-r-32-glxs4ba3010amst30bu1300/',
+      '3.0': 'https://wholesalehvacdirect.com/product/goodman-3-ton-cooling-air-conditioner-air-handler-system-14-3-seer2-r-32-glxs4ba3610-amst36cu1300/',
+      '3.5': 'https://wholesalehvacdirect.com/product/goodman-3-5-ton-cooling-air-conditioner-air-handler-system-14-3-seer2-r-32-glxs4ba4210-amst42cu1300/',
+      '4.0': 'https://wholesalehvacdirect.com/product/goodman-5-ton-cooling-air-conditioner-air-handler-system-14-3-seer2-r-32-glxs4ba4810-amst48cu1300/',
+      '5.0': 'https://wholesalehvacdirect.com/product/goodman-5-ton-cooling-air-conditioner-air-handler-system-14-3-seer2-r-32-glxs4ba6010-amst60du1300/'
     },
-    furnace: {
-      upflow: {
-        silver: { '2.0': 'https://wholesalehvacdirect.com/product/2-ton-13-4-seer2-80-afue-60000-btu-goodman-low-nox-gas-furnace-and-r32-air-conditioner-system-upflow/', '2.5': 'https://wholesalehvacdirect.com/product/goodman-2-5-ton-13-4-seer2-80-afue-60000-btu-goodman-low-nox-gas-furnace-and-r32-air-conditioner-system-upflow-glxs3bn3010gr9s800603axcapfa3022a3/', '3.0': 'https://wholesalehvacdirect.com/product/goodman-3-ton-13-4-seer2-80-afue-60000-btu-goodman-low-nox-gas-furnace-and-r32-air-conditioner-system-upflow-glxs3bn3610gr9s800603bxcapfa3626b3/' },
-        gold: {}
+    platinum: {
+      '1.5': 'https://wholesalehvacdirect.com/product/goodman-1-5-ton-15-2-seer2-heat-pump-system-glxs5ba1810-condenser-ahve24bp0300-air-handler-glxs5ba1810-ahve24bp0300/',
+      '2.5': 'https://wholesalehvacdirect.com/product/goodman-2-5-ton-15-2-seer2-heat-pump-system-glxs5ba3010-condenser-ahve36cp0300-air-handler-glxs5ba3010-ahve36cp0300/',
+      '3.5': 'https://wholesalehvacdirect.com/product/goodman-3-5-ton-13-4-seer2-air-conditioner-only-system-replaces-gsxn3n4210-and-gsx130421-glxs3bn4210-glxs3bn4210-amst42cu1300/',
+      '4.0': 'https://wholesalehvacdirect.com/product/goodman-4-ton-15-2-seer2-heat-pump-system-glxs5ba4810-condenser-ahve48cp1300-air-handler-glxs5ba4810-ahve48cp1300/',
+      '5.0': 'https://wholesalehvacdirect.com/product/goodman-5-0-ton-cooling-air-conditioner-air-handler-system-15-2-seer2-r-32-glxs5ba6010ahve60dp1300/'
+    }
+  },
+  heatpump: {
+    silver: {
+      '1.5': 'https://wholesalehvacdirect.com/product/goodman-1-5-ton-cooling-18k-btu-hr-heating-heat-pump-air-handler-system-15-2-seer2-7-5-hspf2-r-32-glzs4ba1810-amst24bu1300-copy/',
+      '2.0': 'https://wholesalehvacdirect.com/product/goodman-1-5-ton-cooling-18k-btu-hr-heating-heat-pump-air-handler-system-15-2-seer2-7-5-hspf2-r-32-glzs4ba1810-amst24bu1300/',
+      '2.5': 'https://wholesalehvacdirect.com/product/goodman-2-5-ton-cooling-18k-btu-hr-heating-heat-pump-air-handler-system-14-3-seer2-7-5-hspf2-r-32-glzs4ba3010amst30bu1300/?preview_id=51877&preview_nonce=bda1a50d0d&_thumbnail_id=51242&preview=true',
+      '3.0': 'https://wholesalehvacdirect.com/product/goodman-3-ton-cooling-36k-btu-hr-heating-heat-pump-air-handler-system-14-3-seer2-r-32-glzs4ba3610-amst36cu1300/',
+      '3.5': 'https://wholesalehvacdirect.com/product/goodman-3-5-ton-cooling-42k-btu-hr-heating-heat-pump-air-handler-system-15-2-seer2-7-8-hspf2-r-32-glzs4ba4210-amst42cu1300/',
+      '4.0': 'https://wholesalehvacdirect.com/product/goodman-4-0-ton-cooling-48k-btu-hr-heating-heat-pump-air-handler-system-15-2-seer2-7-8-hspf2-r-32-glzs4ba4810-amst48cu1300/',
+      '5.0': 'https://wholesalehvacdirect.com/product/goodman-5-ton-cooling-60k-btu-hr-heating-heat-pump-air-handler-system-14-3-seer2-r-32-glzs4ba6010amst60du1300/'
+    },
+    gold: {
+      '1.5': 'https://wholesalehvacdirect.com/product/goodman-1-5-ton-cooling-18k-btu-hr-heating-heat-pump-air-handler-system-15-2-seer2-7-5-hspf2-r-32-glzs4ba1810-amst24bu1300/',
+      '2.0': 'https://wholesalehvacdirect.com/product/goodman-2-ton-14-3-seer2-heat-pump-system-ac-and-heat-glzs4ba2410-amst24bu1300-glzs4ba2410-amst24bu1300/',
+      '2.5': 'https://wholesalehvacdirect.com/product/goodman-2-5-ton-cooling-30k-btu-hr-heating-heat-pump-air-handler-system-14-5-seer2-7-8-hspf2-r-32-glzs4ba3010-amst30bu1300/',
+      '3.0': 'https://wholesalehvacdirect.com/product/goodman-3-0-ton-cooling-36k-btu-hr-heating-heat-pump-air-handler-system-15-0-seer2-7-5-hspf2-r-32-glzs4ba3610-amst36cu1300/',
+      '3.5': 'https://wholesalehvacdirect.com/product/goodman-3-5-ton-cooling-42k-btu-hr-heating-heat-pump-air-handler-system-15-2-seer2-7-8-hspf2-r-32-glzs4ba4210-amst42cu1300-2/',
+      '4.0': 'https://wholesalehvacdirect.com/product/goodman-4-0-ton-cooling-48k-btu-hr-heating-heat-pump-air-handler-system-15-2-seer2-7-8-hspf2-r-32-glzs4ba4810-amst48cu1300-2/',
+      '5.0': 'https://wholesalehvacdirect.com/product/goodman-5-ton-14-3-seer2-heat-pump-system-ac-and-heat-r-32-glzs4ba6010-amst60du1300/'
+    },
+    platinum: {
+      '1.5': 'https://wholesalehvacdirect.com/product/goodman-ahve24bp0300-2-ton-variable-speed-air-handler-ahve24bp0300/',
+      '2.5': 'https://wholesalehvacdirect.com/product/goodman-2-5-ton-15-2-seer2-heat-pump-system-glzs5ba3010-condenser-ahve36cp0300-air-handler-glzs5ba3010-ahve36cp0300/',
+      '3.5': 'https://wholesalehvacdirect.com/product/goodman-3-5-ton-15-2-seer2-heat-pump-system-glzs5ba4210-condenser-ahve42cp0300-air-handler-glzs5ba4210-ahve42cp0300/',
+      '4.0': 'https://wholesalehvacdirect.com/product/goodman-4-ton-15-2-seer2-heat-pump-system-glzs5ba4810-condenser-ahve48cp1300-air-handler-glzs5ba4810-ahve48cp1300/',
+      '5.0': 'https://wholesalehvacdirect.com/product/goodman-5-ton-15-2-seer2-heat-pump-system-glzs5ba6010-condenser-ahve60dp1300-air-handler-glzs5ba6010-ahve60dp1300/'
+    }
+  },
+  furnace: {
+    upflow: {
+      silver: {
+        '1.5': 'https://wholesalehvacdirect.com/product/goodman-1-5-ton-13-4-seer2-ac-only-condenser-80-afue-80k-btu-17-5-wide-furnace-with-matched-coil-thermostat-and-disconnect-vertical-upflow-glxs4ba3610-capfa1714a6-gr9s800403ax/',
+        '2.0': 'https://wholesalehvacdirect.com/product/2-ton-13-4-seer2-80-afue-60000-btu-goodman-low-nox-gas-furnace-and-r32-air-conditioner-system-upflow/',
+        '2.5': 'https://wholesalehvacdirect.com/product/goodman-2-5-ton-13-4-seer2-80-afue-60000-btu-goodman-low-nox-gas-furnace-and-r32-air-conditioner-system-upflow-glxs3bn3010gr9s800603axcapfa3022a3/',
+        '3.0': 'https://wholesalehvacdirect.com/product/goodman-3-ton-13-4-seer2-80-afue-60000-btu-goodman-low-nox-gas-furnace-and-r32-air-conditioner-system-upflow-glxs3bn3610gr9s800603bxcapfa3626b3/',
+        '3.5': 'https://wholesalehvacdirect.com/product/goodman-3-5-ton-14-3-seer2-ac-only-condenser-80-afue-80k-btu-17-5-wide-furnace-with-matched-coil-thermostat-and-disconnect-glxs3bn4210gr9s800803bxcapfa4226b3/',
+        '4.0': 'https://wholesalehvacdirect.com/product/goodman-4-ton-13-4-seer2-ac-only-condenser-80-afue-80k-btu-17-5-wide-furnace-with-matched-coil-thermostat-and-disconnect-vertical-upflow-glxs3bn4810gr9s800804cxcapfa6030c3/',
+        '5.0': 'https://wholesalehvacdirect.com/product/goodman-5-ton-13-4-seer2-ac-only-condenser-80-afue-100k-btu-17-5-wide-furnace-with-matched-coil-thermostat-and-disconnect-upflow-glxs3bn6010gr9s801005cxcapfa6030c3/'
       },
-      horizontal: {
-        silver: { '1.5': 'https://wholesalehvacdirect.com/product/goodman-1-5-ton-13-4-seer2-80-afue-40000-btu-goodman-low-nox-gas-furnace-and-r32-air-conditioner-system-horizontal-glxs3bn1810gr9s800403axchpta1822a3/', '2.0': 'https://wholesalehvacdirect.com/product/goodman-2-ton-13-4-seer2-80-afue-40000-btu-goodman-low-nox-gas-furnace-and-r32-air-conditioner-system-horizontal-glxs3bn2410gr9s800403axchpta1822a4/', '2.5': 'https://wholesalehvacdirect.com/product/godman-2-5-ton-13-4-seer2-80-afue-60000-btu-low-nox-gas-furnace-and-r32-air-conditioner-system-horizontal-glxs3bn3010gr9s800603bxchpta3026b3/', '3.0': 'https://wholesalehvacdirect.com/product/goodman-3-ton-13-4-seer2-80-afue-60000-btu-gas-furnace-and-r32-air-conditioner-system-horizontal-glxs3bn3610gr9s800804cxchpta3630b3/', '3.5': 'https://wholesalehvacdirect.com/product/goodman-3-5-ton-13-4-seer2-80-afue-60000-btu-gas-furnace-and-r32-air-conditioner-system-horizontal-glxs3bn4210gr9s800804cxchpta4230c3/', '4.0': 'https://wholesalehvacdirect.com/product/goodman-4-ton-cooling-80000-btu-hr-heating-air-conditioner-multi-speed-furnace-system-13-4-seer2-80-afue-horizontal-r-32-glxs3bn4810gr9s801205dnchpta6030d3/' },
-        gold: { '1.5': 'https://wholesalehvacdirect.com/product/goodman-1-5-ton-15-2-seer2-96-afue-40000-btu-ultra-low-nox-gas-furnace-and-r32-air-conditioner-system-horizontal-glxs4ba1810gr9s920403anchpta1822a3/', '2.0': 'https://wholesalehvacdirect.com/product/goodman-2-ton-14-3-seer2-96-afue-40000-btu-ultra-low-nox-gas-furnace-and-r32-air-conditioner-system-horizontal-glxs4ba2410gr9s920403anchpta1822a4/', '2.5': 'https://wholesalehvacdirect.com/product/goodman-2-5-ton-14-3-seer2-92-afue-60000-btu-gas-furnace-and-r32-air-conditioner-system-horizontal-glxs4ba3010gr9s920603bnchpta3026b3/', '3.0': 'https://wholesalehvacdirect.com/product/goodman-3-ton-14-3-seer2-92-afue-60000-btu-gas-furnace-and-r32-air-conditioner-system-horizontal-glxs4ba3610gr9s920603bnchpta3630b3/', '3.5': 'https://wholesalehvacdirect.com/product/goodman-3-5-ton-14-3-seer2-92-afue-100000-btu-gas-furnace-and-air-conditioner-system-horizontal-r32-glxs4ba4210gr9s921004cnchpta4230c3/', '4.0': 'https://wholesalehvacdirect.com/product/4-ton-14-3seer2-92-afue-120000-btu-goodman-gas-furnace-and-air-conditioner-system-r-32-horizontal-glxs4ba4810gr9s921205dnchpta6030d3/' }
+      gold: {
+        '1.5': 'https://wholesalehvacdirect.com/product/goodman-1-5-ton-14-3-seer2-92-afue-40000-btu-goodman-gas-furnace-and-r32-air-conditioner-system-upflow-glxs4ba1810gr9s920403ancapfa1714a6/',
+        '2.0': 'https://wholesalehvacdirect.com/product/goodman-2-ton-14-3-seer2-92-afue-40000-btu-goodman-gas-furnace-and-r32-air-conditioner-system-upflow-glxs4ba2410gr9s920403ancapfa2422a3/',
+        '2.5': 'https://wholesalehvacdirect.com/product/goodman-2-5-ton-14-3-seer2-92-afue-60000-btu-goodman-gas-furnace-and-air-conditioner-system-upflow-r32-glxs4ba3010gr9s920603bncapfa3022b3/',
+        '3.0': 'https://wholesalehvacdirect.com/product/goodman-3-ton-14-3-seer2-92-afue-60000-btu-goodman-gas-furnace-and-air-conditioner-system-upflow-r32-glxs4ba3610gr9s920603bncapfa3626b3/',
+        '3.5': 'https://wholesalehvacdirect.com/product/goodman-3-5-ton-14-3-seer2-92-afue-80000-btu-goodman-gas-furnace-and-air-conditioner-system-upflow-r32-glxs4ba4210gr9s920803bncapfa4226b3/',
+        '4.0': 'https://wholesalehvacdirect.com/product/4-ton-14-3-seer2-92-afue-100000-btu-goodman-gas-furnace-and-r32-air-conditioner-system-upflow-glxs4ba4810gr9s921004cncapfa6030c3/',
+        '5.0': 'https://wholesalehvacdirect.com/product/5-ton-14-3-seer2-92-afue-120000-btu-goodman-gas-furnace-and-r32-air-conditioner-system-upflow-glxs4ba6010-capfa6030c3-gr9s921205dn/'
+      }
+    },
+    horizontal: {
+      silver: {
+        '1.5': 'https://wholesalehvacdirect.com/product/goodman-1-5-ton-cooling-40000-btu-hr-heating-air-conditioner-multi-speed-furnace-system-13-4-seer2-80-afue-horizontal-r-32-glxs3bn1810gr9s800403axchpta1822a3/',
+        '2.0': 'https://wholesalehvacdirect.com/product/goodman-2-ton-cooling-40000-btu-hr-heating-air-conditioner-multi-speed-furnace-system-13-4-seer2-80-afue-horizontal-r-32-glxs3bn2410gr9s800403axchpta1822a4/',
+        '2.5': 'https://wholesalehvacdirect.com/product/goodman-2-5-ton-cooling-60000-btu-hr-heating-air-conditioner-multi-speed-furnace-system-13-4-seer2-80-afue-horizontal-r-32-glxs3bn3010gr9s800603bxchpta3026b3/?preview_id=51897&preview_nonce=da877cc1a0&_thumbnail_id=49460&preview=true',
+        '3.0': 'https://wholesalehvacdirect.com/?post_type=product&p=51894&preview=true',
+        '3.5': 'https://wholesalehvacdirect.com/product/goodman-3-5-ton-cooling-80000-btu-hr-heating-air-conditioner-multi-speed-furnace-system-13-4-seer2-80-afue-horizontal-r-32-glxs3bn4210-gr9s800804cxchpta4230c3/',
+        '4.0': 'https://wholesalehvacdirect.com/product/goodman-4-ton-cooling-80000-btu-hr-heating-air-conditioner-multi-speed-furnace-system-13-4-seer2-80-afue-horizontal-r-32-glxs3bn4810gr9s801205dnchpta6030d3/',
+        '5.0': 'https://wholesalehvacdirect.com/product/goodman-5-ton-cooling-120000-btu-hr-heating-air-conditioner-multi-speed-furnace-system-13-4-seer2-80-afue-horizontal-r-32-glxs3bn6010gr9s801205dnchpta6030d3/'
       },
-      downflow: {
-        silver: { '1.5': 'https://wholesalehvacdirect.com/product/goodman-1-5-ton-13-4-seer2-80-afue-40000-btu-low-nox-gas-furnace-and-r32-air-conditioner-system-downflow-glxs3bn1810gc9s800403axcapfa1818c3/', '2.0': 'https://wholesalehvacdirect.com/product/goodman-2-ton-13-4-seer2-80-afue-40000-btu-low-nox-gas-furnace-and-r32-air-conditioner-system-downflow-glxs3bn2410gc9s800403axcapfa2422a3/', '2.5': 'https://wholesalehvacdirect.com/product/goodman-2-5-ton-13-4-seer2-80-afue-80000-btu-low-nox-gas-furnace-and-r32-air-conditioner-system-downflow-glxs3bn3010gc9s800804bxcapfa3022b3/', '3.0': 'https://wholesalehvacdirect.com/product/goodman-3-ton-13-4-seer2-80-afue-80000-btu-low-nox-gas-furnace-and-r32-air-conditioner-system-downflow-glxs3bn3610gc9s800804bxcapfa3626b3/', '3.5': 'https://wholesalehvacdirect.com/product/goodman-3-5-ton-13-4-seer2-80-afue-80000-btu-low-nox-gas-furnace-and-r32-air-conditioner-system-downflow-glxs3bn4210gc9s800805cxcapfa4226c3/', '4.0': 'https://wholesalehvacdirect.com/product/goodman-3-5-ton-13-4-seer2-80-afue-80000-btu-low-nox-gas-furnace-and-r32-air-conditioner-system-downflow-glxs3bn4810gc9s801005cxcapfa6030c3/', '5.0': 'https://wholesalehvacdirect.com/product/goodman-5-ton-13-4-seer2-80-afue-120000-btu-low-nox-gas-furnace-and-r32-air-conditioner-system-downflow-glxs3bn6010gm9c801205dncapfa6030d3/' },
-        gold: {}
+      gold: {
+        '1.5': 'https://wholesalehvacdirect.com/product/goodman-1-5-ton-cooling-40000-btu-hr-heating-air-conditioner-multi-speed-furnace-system-14-3-seer2-80-afue-horizontal-r-32-glxs4ba1810gr9s920403anchpta1822a3/',
+        '2.0': 'https://wholesalehvacdirect.com/product/goodman-2-ton-cooling-40000-btu-hr-heating-air-conditioner-multi-speed-furnace-system-14-3-seer2-80-afue-horizontal-r-32-glxs4ba2410-gr9s920403an-chpta1822a4/',
+        '2.5': 'https://wholesalehvacdirect.com/product/goodman-2-5-ton-cooling-60000-btu-hr-heating-air-conditioner-multi-speed-furnace-system-14-3-seer2-80-afue-horizontal-r-32-glxs4ba3010gr9s920603bnchpta3026b3/',
+        '3.0': 'https://wholesalehvacdirect.com/product/goodman-3-ton-cooling-60000-btu-hr-heating-air-conditioner-multi-speed-furnace-system-14-3-seer2-80-afue-horizontal-r-32-glxs4ba3610-gr9s920603bn-chpta3630b3/',
+        '3.5': 'https://wholesalehvacdirect.com/product/goodman-3-5-ton-cooling-100000-btu-hr-heating-air-conditioner-multi-speed-furnace-system-14-3-seer2-92-afue-horizontal-r-32-glxs4ba4210-gr9s921004cn-chpta4230c3/',
+        '4.0': 'https://wholesalehvacdirect.com/product/goodman-4-ton-cooling-120000-btu-hr-heating-air-conditioner-multi-speed-furnace-system-14-3-seer2-92-afue-horizontal-r-32-glxs4ba4810-gr9s921205dn-chpta6030d3/',
+        '5.0': 'https://wholesalehvacdirect.com/product/goodman-5-ton-cooling-120000-btu-hr-heating-air-conditioner-multi-speed-furnace-system-14-3-seer2-92-afue-horizontal-r-32-glxs4ba6010-gr9s921205dn-chpta6030d4/'
+      }
+    },
+    downflow: {
+      silver: {
+        '1.5': 'https://wholesalehvacdirect.com/product/goodman-1-5-ton-13-4-seer2-80-afue-40000-btu-low-nox-gas-furnace-and-r32-air-conditioner-system-downflow-glxs3bn1810gc9s800403axcapfa1818c3/',
+        '2.0': 'https://wholesalehvacdirect.com/product/goodman-2-ton-13-4-seer2-80-afue-40000-btu-low-nox-gas-furnace-and-r32-air-conditioner-system-downflow-glxs3bn2410gc9s800403axcapfa2422a3/',
+        '2.5': 'https://wholesalehvacdirect.com/product/goodman-2-5-ton-13-4-seer2-80-afue-80000-btu-low-nox-gas-furnace-and-r32-air-conditioner-system-downflow-glxs3bn3010gc9s800804bxcapfa3022b3/',
+        '3.0': 'https://wholesalehvacdirect.com/product/goodman-3-ton-13-4-seer2-80-afue-80000-btu-low-nox-gas-furnace-and-r32-air-conditioner-system-downflow-glxs3bn3610gc9s800804bxcapfa3626b3/',
+        '3.5': 'https://wholesalehvacdirect.com/product/goodman-3-5-ton-13-4-seer2-80-afue-80000-btu-low-nox-gas-furnace-and-r32-air-conditioner-system-downflow-glxs3bn4210gc9s800805cxcapfa4226c3/',
+        '4.0': 'https://wholesalehvacdirect.com/product/goodman-3-5-ton-13-4-seer2-80-afue-80000-btu-low-nox-gas-furnace-and-r32-air-conditioner-system-downflow-glxs3bn4810gc9s801005cxcapfa6030c3/',
+        '5.0': 'https://wholesalehvacdirect.com/product/goodman-5-ton-13-4-seer2-80-afue-120000-btu-low-nox-gas-furnace-and-r32-air-conditioner-system-downflow-glxs3bn6010gm9c801205dncapfa6030d3/'
+      },
+      gold: {
+        '1.5': 'https://wholesalehvacdirect.com/product/goodman-1-5-ton-14-3-seer2-92-afue-40000-btu-goodman-gas-furnace-and-r32-air-conditioner-system-downflow-glxs4ba1810gc9s800403axcapfa1818c3/',
+        '2.0': 'https://wholesalehvacdirect.com/product/goodman-2-ton-14-3-seer2-92-afue-80000-btu-goodman-gas-furnace-and-r32-air-conditioner-system-downflow-glxs4ba2410gc9s800403axcapfa2422a3/',
+        '2.5': 'https://wholesalehvacdirect.com/product/goodman-2-5-ton-14-3-seer2-92-afue-80000-btu-goodman-gas-furnace-and-r32-air-conditioner-system-downflow-glxs4ba3010gr9s800803bcapta2422b3-copy/',
+        '3.0': 'https://wholesalehvacdirect.com/product/goodman-3-ton-14-3-seer2-92-afue-60000-btu-goodman-gas-furnace-and-air-conditioner-system-upflow-r32-glxs4ba3610gc9s800804bxcapfa3626b3/',
+        '3.5': 'https://wholesalehvacdirect.com/product/goodman-3-5-ton-14-3-seer2-92-afue-80000-btu-goodman-gas-furnace-and-r32-air-conditioner-system-downflow-glxs4ba4210gc9s800805cxcapfa4226c3/',
+        '4.0': 'https://wholesalehvacdirect.com/product/goodman-4-ton-14-3-seer2-92-afue-80000-btu-goodman-gas-furnace-and-r32-air-conditioner-system-downflow-glxs4ba4810gc9s801005cxcapfa6030c3/',
+        '5.0': 'https://wholesalehvacdirect.com/product/goodman-5-ton-14-3-seer2-92-afue-80000-btu-goodman-gas-furnace-and-r32-air-conditioner-system-downflow-glxs4ba6010gm9c801205dncapfa6030d3/'
       }
     }
-  };
+  }
+};
 
   const hvacSystems = {
-    ac: {
+  ac: {
+    silver: [
+      { tonnage: '1.5', ac: 'GLXS3BN1810', airHandler: 'AMST24BU1300', seer: '13.4' },
+      { tonnage: '2.0', ac: 'GLXS3BN2410', airHandler: 'AHVE24BP0301', seer: '13.4' },
+      { tonnage: '2.5', ac: 'GLXS3BN3010', airHandler: 'AMST30BU1300', seer: '13.4' },
+      { tonnage: '3.0', ac: 'GLXS3BN3610', airHandler: 'AMST36CU1300', seer: '13.4' },
+      { tonnage: '3.5', ac: 'GLXS3BN4210', airHandler: 'AMST42CU1300', seer: '13.4' },
+      { tonnage: '4.0', ac: 'GLXS4BA4810', airHandler: 'AMST48CU1300', seer: '13.4' },
+      { tonnage: '5.0', ac: 'GLXS3BN6010', airHandler: 'AMST60DU1300', seer: '13.4' }
+    ],
+    gold: [
+      { tonnage: '1.5', ac: 'GLXS4BA1810', airHandler: 'AMST24BU1300', seer: '14.3' },
+      { tonnage: '2.0', ac: 'GLXS4BA2410', airHandler: 'AMST24BU1300', seer: '14.3' },
+      { tonnage: '2.5', ac: 'GLXS4BA3010', airHandler: 'AMST30BU1300', seer: '14.3' },
+      { tonnage: '3.0', ac: 'GLXS4BA3610', airHandler: 'AMST36CU1300', seer: '14.3' },
+      { tonnage: '3.5', ac: 'GLXS4BA4210', airHandler: 'AMST42CU1300', seer: '14.3' },
+      { tonnage: '4.0', ac: 'GLXS4BA4810', airHandler: 'AMST48CU1300', seer: '14.3' },
+      { tonnage: '5.0', ac: 'GLXS4BA6010', airHandler: 'AMST60DU1300', seer: '14.3' }
+    ],
+    platinum: [
+      { tonnage: '1.5', ac: 'GLXS5BA1810', airHandler: 'AHVE24BP0300', seer: '15.2' },
+      { tonnage: '2.0', ac: 'GLXS5BA2410', airHandler: 'AHVE24BP0301', seer: '15.2' },
+      { tonnage: '2.5', ac: 'GLXS5BA3010', airHandler: 'AHVE36CP0300', seer: '15.2' },
+      { tonnage: '3.0', ac: 'GLXS5BA3610', airHandler: 'AHVE36CP0301', seer: '15.2' },
+      { tonnage: '3.5', ac: 'GLXS5BA4210', airHandler: 'AHVE42CP0300', seer: '15.2' },
+      { tonnage: '4.0', ac: 'GLXS5BA4810', airHandler: 'AHVE48CP1300', seer: '15.2' },
+      { tonnage: '5.0', ac: 'GLXS5BA6010', airHandler: 'AHVE60DP1300', seer: '15.2' }
+    ]
+  },
+  heatpump: {
+    silver: [
+      { tonnage: '1.5', heatpump: 'GLZS4BA1810', airHandler: 'AMST24BU1300', seer: '14.3' },
+      { tonnage: '2.0', heatpump: 'GLZS4BA2410', airHandler: 'AMST24BU1300', seer: '14.3' },
+      { tonnage: '2.5', heatpump: 'GLZS4BA3010', airHandler: 'AMST30BU1300', seer: '14.3' },
+      { tonnage: '3.0', heatpump: 'GLZS4BA3610', airHandler: 'AMST36CU1300', seer: '14.3' },
+      { tonnage: '3.5', heatpump: 'GLZS4BA4210', airHandler: 'AMST42CU1300', seer: '14.3' },
+      { tonnage: '4.0', heatpump: 'GLZS4BA4810', airHandler: 'AMST48CU1300', seer: '14.3' },
+      { tonnage: '5.0', heatpump: 'GLZS4BA6010', airHandler: 'AMST60DU1300', seer: '14.3' }
+    ],
+    gold: [
+      { tonnage: '1.5', heatpump: 'GLZS5BA1810', airHandler: 'AMST24BU1300', seer: '15.2' },
+      { tonnage: '2.0', heatpump: 'GLZS5BA2410', airHandler: 'AMST24BU1300', seer: '15.2' },
+      { tonnage: '2.5', heatpump: 'GLZS5BA3010', airHandler: 'AMST30BU1300', seer: '15.2' },
+      { tonnage: '3.0', heatpump: 'GLZS5BA3610', airHandler: 'AMST36CU1300', seer: '15.2' },
+      { tonnage: '3.5', heatpump: 'GLZS5BA4210', airHandler: 'AMST42CU1300', seer: '15.2' },
+      { tonnage: '4.0', heatpump: 'GLZS5BA4810', airHandler: 'AMST48CU1300', seer: '15.2' },
+      { tonnage: '5.0', heatpump: 'GLZS5BA6010', airHandler: 'AMST60DU1300', seer: '15.2' }
+    ],
+    platinum: [
+      { tonnage: '2.0', heatpump: 'GLZS5BA2410', airHandler: 'AHVE24BP0301', seer: '16.0' },
+      { tonnage: '2.5', heatpump: 'GLZS5BA3010', airHandler: 'AHVE36CP0300', seer: '16.0' },
+      { tonnage: '3.0', heatpump: 'GLZS5BA3610', airHandler: 'AHVE36CP0301', seer: '16.0' },
+      { tonnage: '3.5', heatpump: 'GLZS5BA4210', airHandler: 'AHVE42CP0300', seer: '16.0' },
+      { tonnage: '4.0', heatpump: 'GLZS5BA4810', airHandler: 'AHVE48CP1300', seer: '16.0' },
+      { tonnage: '5.0', heatpump: 'GLZS5BA6010', airHandler: 'AHVE60DP1300', seer: '16.0' }
+    ]
+  },
+  furnace: {
+    upflow: {
       silver: [
-        { tonnage: '1.5', ac: 'GLXS3BN1810', airHandler: 'AHVE24BP0300', seer: '13.4' },
-        { tonnage: '2.0', ac: 'GLXS3BN2410', airHandler: 'AHVE24BP0301', seer: '13.4' },
-        { tonnage: '2.5', ac: 'GLXS3BN3010', airHandler: 'AHVE36CP0300', seer: '13.4' },
-        { tonnage: '3.0', ac: 'GLXS3BN3610', airHandler: 'AHVE36CP0301', seer: '13.4' },
-        { tonnage: '3.5', ac: 'GLXS3BN4210', airHandler: 'AHVE42CP0300', seer: '13.4' },
-        { tonnage: '4.0', ac: 'GLXS3BN4810', airHandler: 'AHVE48CP1300', seer: '13.4' },
-        { tonnage: '5.0', ac: 'GLXS3BN6010', airHandler: 'AHVE60DP1300', seer: '13.4' }
+        { tonnage: '1.5', ac: 'GLXS3BN1810', furnace: 'GR9S800403AX', coil: 'CAPFA1714A6', seer: '13.4', afue: '80%' },
+        { tonnage: '2.0', ac: 'GLXS3BN2410', furnace: 'GR9S800403AX', coil: 'CAPFA2422A3', seer: '13.4', afue: '80%' },
+        { tonnage: '2.5', ac: 'GLXS3BN3010', furnace: 'GR9S800603AX', coil: 'CAPFA3022A3', seer: '13.4', afue: '80%' },
+        { tonnage: '3.0', ac: 'GLXS3BN3610', furnace: 'GR9S800603BX', coil: 'CAPFA3626B3', seer: '13.4', afue: '80%' },
+        { tonnage: '3.5', ac: 'GLXS3BN4210', furnace: 'GR9S800803BX', coil: 'CAPFA4226B3', seer: '13.4', afue: '80%' },
+        { tonnage: '4.0', ac: 'GLXS3BN4810', furnace: 'GR9S800804CX', coil: 'CAPFA6030C3', seer: '13.4', afue: '80%' },
+        { tonnage: '5.0', ac: 'GLXS3BN6010', furnace: 'GR9S801005CX', coil: 'CAPFA6030C3', seer: '13.4', afue: '80%' }
       ],
       gold: [
-        { tonnage: '1.5', ac: 'GLXS4BA1810', airHandler: 'AHVE24BP0300', seer: '14.3' },
-        { tonnage: '2.0', ac: 'GLXS4BA2410', airHandler: 'AHVE24BP0301', seer: '14.3' },
-        { tonnage: '2.5', ac: 'GLXS4BA3010', airHandler: 'AHVE36CP0300', seer: '14.3' },
-        { tonnage: '3.0', ac: 'GLXS4BA3610', airHandler: 'AHVE36CP0301', seer: '14.3' },
-        { tonnage: '3.5', ac: 'GLXS4BA4210', airHandler: 'AHVE42CP0300', seer: '14.3' },
-        { tonnage: '4.0', ac: 'GLXS4BA4810', airHandler: 'AHVE48CP1300', seer: '14.3' },
-        { tonnage: '5.0', ac: 'GLXS4BA6010', airHandler: 'AHVE60DP1300', seer: '14.3' }
-      ],
-      platinum: [
-        { tonnage: '1.5', ac: 'GLXS5BA1810', airHandler: 'AHVE24BP0300', seer: '15.2' },
-        { tonnage: '2.0', ac: 'GLXS5BA2410', airHandler: 'AHVE24BP0301', seer: '15.2' },
-        { tonnage: '2.5', ac: 'GLXS5BA3010', airHandler: 'AHVE36CP0300', seer: '15.2' },
-        { tonnage: '3.0', ac: 'GLXS5BA3610', airHandler: 'AHVE36CP0301', seer: '15.2' },
-        { tonnage: '3.5', ac: 'GLXS5BA4210', airHandler: 'AHVE42CP0300', seer: '15.2' },
-        { tonnage: '4.0', ac: 'GLXS5BA4810', airHandler: 'AHVE48CP1300', seer: '15.2' },
-        { tonnage: '5.0', ac: 'GLXS5BA6010', airHandler: 'AHVE60DP1300', seer: '15.2' }
+        { tonnage: '1.5', ac: 'GLXS4BA1810', furnace: 'GR9S920403AN', coil: 'CAPFA1714A6', seer: '14.3', afue: '92%' },
+        { tonnage: '2.0', ac: 'GLXS4BA2410', furnace: 'GR9S920403AN', coil: 'CAPFA2422A3', seer: '14.3', afue: '92%' },
+        { tonnage: '2.5', ac: 'GLXS4BA3010', furnace: 'GR9S920603BN', coil: 'CAPFA3022B3', seer: '14.3', afue: '92%' },
+        { tonnage: '3.0', ac: 'GLXS4BA3610', furnace: 'GR9S920603BN', coil: 'CAPFA3626B3', seer: '14.3', afue: '92%' },
+        { tonnage: '3.5', ac: 'GLXS4BA4210', furnace: 'GR9S920803BN', coil: 'CAPFA4226B3', seer: '14.3', afue: '92%' },
+        { tonnage: '4.0', ac: 'GLXS4BA4810', furnace: 'GR9S921004CN', coil: 'CAPFA6030C3', seer: '14.3', afue: '92%' },
+        { tonnage: '5.0', ac: 'GLXS4BA6010', furnace: 'GR9S921205DN', coil: 'CAPFA6030C3', seer: '14.3', afue: '92%' }
       ]
     },
-    heatpump: {
+    horizontal: {
       silver: [
-        { tonnage: '1.5', heatpump: 'GLZS4MA1810', airHandler: 'AHVE24BP0300', seer: '14.3' },
-        { tonnage: '2.0', heatpump: 'GLZS4MA2410', airHandler: 'AHVE24BP0301', seer: '14.3' },
-        { tonnage: '2.5', heatpump: 'GLZS4MA3010', airHandler: 'AHVE36CP0300', seer: '14.3' },
-        { tonnage: '3.0', heatpump: 'GLZS4MA3610', airHandler: 'AHVE36CP0301', seer: '14.3' },
-        { tonnage: '3.5', heatpump: 'GLZS4MA4210', airHandler: 'AHVE42CP0300', seer: '14.3' },
-        { tonnage: '4.0', heatpump: 'GLZS4MA4810', airHandler: 'AHVE48CP1300', seer: '14.3' },
-        { tonnage: '5.0', heatpump: 'GLZS4MA6010', airHandler: 'AHVE60DP1300', seer: '14.3' }
+        { tonnage: '1.5', ac: 'GLXS3BN1810', furnace: 'GR9S800403AX', coil: 'CHPTA1822A3', seer: '13.4', afue: '80%' },
+        { tonnage: '2.0', ac: 'GLXS3BN2410', furnace: 'GR9S800403AX', coil: 'CHPTA1822A4', seer: '13.4', afue: '80%' },
+        { tonnage: '2.5', ac: 'GLXS3BN3010', furnace: 'GR9S800603BX', coil: 'CHPTA3026B3', seer: '13.4', afue: '80%' },
+        { tonnage: '3.0', ac: 'GLXS3BN3610', furnace: 'GR9S800804CX', coil: 'CHPTA3630B3', seer: '13.4', afue: '80%' },
+        { tonnage: '3.5', ac: 'GLXS3BN4210', furnace: 'GR9S800804CX', coil: 'CHPTA4230C3', seer: '13.4', afue: '80%' },
+        { tonnage: '4.0', ac: 'GLXS3BN4810', furnace: 'GR9S801205DN', coil: 'CHPTA6030D3', seer: '13.4', afue: '80%' },
+        { tonnage: '5.0', ac: 'GLXS3BN6010', furnace: 'GR9S801205DN', coil: 'CHPTA6030D3', seer: '13.4', afue: '80%' }
       ],
       gold: [
-        { tonnage: '1.5', heatpump: 'GLZS4BA1810', airHandler: 'AHVE24BP0300', seer: '15.2' },
-        { tonnage: '2.0', heatpump: 'GLZS4BA2410', airHandler: 'AHVE24BP0301', seer: '15.2' },
-        { tonnage: '2.5', heatpump: 'GLZS4BA3010', airHandler: 'AHVE36CP0300', seer: '15.2' },
-        { tonnage: '3.0', heatpump: 'GLZS4BA3610', airHandler: 'AHVE36CP0301', seer: '15.2' },
-        { tonnage: '3.5', heatpump: 'GLZS4BA4210', airHandler: 'AHVE42CP0300', seer: '15.2' },
-        { tonnage: '4.0', heatpump: 'GLZS4BA4810', airHandler: 'AHVE48CP1300', seer: '15.2' },
-        { tonnage: '5.0', heatpump: 'GLZS4BA6010', airHandler: 'AHVE60DP1300', seer: '15.2' }
-      ],
-      platinum: [
-        { tonnage: '1.5', heatpump: 'GLZS5BA1810', airHandler: 'AHVE24BP0300', seer: '16.0' },
-        { tonnage: '2.0', heatpump: 'GLZS5BA2410', airHandler: 'AHVE24BP0301', seer: '16.0' },
-        { tonnage: '2.5', heatpump: 'GLZS5BA3010', airHandler: 'AHVE36CP0300', seer: '16.0' },
-        { tonnage: '3.0', heatpump: 'GLZS5BA3610', airHandler: 'AHVE36CP0301', seer: '16.0' },
-        { tonnage: '3.5', heatpump: 'GLZS5BA4210', airHandler: 'AHVE42CP0300', seer: '16.0' },
-        { tonnage: '4.0', heatpump: 'GLZS5BA4810', airHandler: 'AHVE48CP1300', seer: '16.0' },
-        { tonnage: '5.0', heatpump: 'GLZS5BA6010', airHandler: 'AHVE60DP1300', seer: '16.0' }
+        { tonnage: '1.5', ac: 'GLXS4BA1810', furnace: 'GR9S920403AN', coil: 'CHPTA1822A3', seer: '14.3', afue: '92%' },
+        { tonnage: '2.0', ac: 'GLXS4BA2410', furnace: 'GR9S920403AN', coil: 'CHPTA1822A4', seer: '14.3', afue: '92%' },
+        { tonnage: '2.5', ac: 'GLXS4BA3010', furnace: 'GR9S920603BN', coil: 'CHPTA3026B3', seer: '14.3', afue: '92%' },
+        { tonnage: '3.0', ac: 'GLXS4BA3610', furnace: 'GR9S920603BN', coil: 'CHPTA3630B3', seer: '14.3', afue: '92%' },
+        { tonnage: '3.5', ac: 'GLXS4BA4210', furnace: 'GR9S921004CN', coil: 'CHPTA4230C3', seer: '14.3', afue: '92%' },
+        { tonnage: '4.0', ac: 'GLXS4BA4810', furnace: 'GR9S921205DN', coil: 'CHPTA6030D3', seer: '14.3', afue: '92%' },
+        { tonnage: '5.0', ac: 'GLXS4BA6010', furnace: 'GR9S921205DN', coil: 'CHPTA6030D4', seer: '14.3', afue: '92%' }
       ]
     },
-    furnace: {
-      upflow: {
-        silver: [
-          { tonnage: '1.5', ac: 'GLXS3BN1810', furnace: 'GR9S800403AX', coil: 'CAPFA1714A6', seer: '13.4', afue: '80%' },
-          { tonnage: '2.0', ac: 'GLXS3BN2410', furnace: 'GR9S800403AX', coil: 'CAPFA2422A3', seer: '13.4', afue: '80%' },
-          { tonnage: '2.5', ac: 'GLXS3BN3010', furnace: 'GR9S800603AX', coil: 'CAPFA3022A3', seer: '13.4', afue: '80%' },
-          { tonnage: '3.0', ac: 'GLXS3BN3610', furnace: 'GR9S800603BX', coil: 'CAPFA3626B3', seer: '13.4', afue: '80%' },
-          { tonnage: '3.5', ac: 'GLXS3BN4210', furnace: 'GR9S800803BX', coil: 'CAPFA4226B3', seer: '13.4', afue: '80%' },
-          { tonnage: '4.0', ac: 'GLXS3BN4810', furnace: 'GR9S800804CX', coil: 'CAPFA6030C3', seer: '13.4', afue: '80%' },
-          { tonnage: '5.0', ac: 'GLXS3BN6010', furnace: 'GR9S801005CX', coil: 'CAPFA6030C3', seer: '13.4', afue: '80%' }
-        ],
-        gold: [
-          { tonnage: '1.5', ac: 'GLXS4BA1810', furnace: 'GR9S920403AN', coil: 'CAPFA1714A6', seer: '14.3', afue: '92%' },
-          { tonnage: '2.0', ac: 'GLXS4BA2410', furnace: 'GR9S920403AN', coil: 'CAPFA2422A3', seer: '14.3', afue: '92%' },
-          { tonnage: '2.5', ac: 'GLXS4BA3010', furnace: 'GR9S920603BN', coil: 'CAPFA3022B3', seer: '14.3', afue: '92%' },
-          { tonnage: '3.0', ac: 'GLXS4BA3610', furnace: 'GR9S920603BN', coil: 'CAPFA3626B3', seer: '14.3', afue: '92%' },
-          { tonnage: '3.5', ac: 'GLXS4BA4210', furnace: 'GR9S920803BN', coil: 'CAPFA4226B3', seer: '14.3', afue: '92%' },
-          { tonnage: '4.0', ac: 'GLXS4BA4810', furnace: 'GR9S921004CN', coil: 'CAPFA6030C3', seer: '14.3', afue: '92%' },
-          { tonnage: '5.0', ac: 'GLXS4BA6010', furnace: 'GR9S921205DN', coil: 'CAPFA6030C3', seer: '14.3', afue: '92%' }
-        ]
-      },
-      horizontal: {
-        silver: [
-          { tonnage: '1.5', ac: 'GLXS3BN1810', furnace: 'GR9S800403AX', coil: 'CHPTA1822A3', seer: '13.4', afue: '80%' },
-          { tonnage: '2.0', ac: 'GLXS3BN2410', furnace: 'GR9S800403AX', coil: 'CHPTA1822A4', seer: '13.4', afue: '80%' },
-          { tonnage: '2.5', ac: 'GLXS3BN3010', furnace: 'GR9S800603BX', coil: 'CHPTA3026B3', seer: '13.4', afue: '80%' },
-          { tonnage: '3.0', ac: 'GLXS3BN3610', furnace: 'GR9S800804CX', coil: 'CHPTA3630B3', seer: '13.4', afue: '80%' },
-          { tonnage: '3.5', ac: 'GLXS3BN4210', furnace: 'GR9S800804CX', coil: 'CHPTA4230C3', seer: '13.4', afue: '80%' },
-          { tonnage: '4.0', ac: 'GLXS3BN4810', furnace: 'GR9S801205DN', coil: 'CHPTA6030D3', seer: '13.4', afue: '80%' },
-          { tonnage: '5.0', ac: 'GLXS3BN6010', furnace: 'GR9S801205DN', coil: 'CHPTA6030D4', seer: '13.4', afue: '80%' }
-        ],
-        gold: [
-          { tonnage: '1.5', ac: 'GLXS4BA1810', furnace: 'GR9S920403AN', coil: 'CHPTA1822A3', seer: '14.3', afue: '92%' },
-          { tonnage: '2.0', ac: 'GLXS4BA2410', furnace: 'GR9S920403AN', coil: 'CHPTA1822A4', seer: '14.3', afue: '92%' },
-          { tonnage: '2.5', ac: 'GLXS4BA3010', furnace: 'GR9S920603BN', coil: 'CHPTA3026B3', seer: '14.3', afue: '92%' },
-          { tonnage: '3.0', ac: 'GLXS4BA3610', furnace: 'GR9S920603BN', coil: 'CHPTA3630B3', seer: '14.3', afue: '92%' },
-          { tonnage: '3.5', ac: 'GLXS4BA4210', furnace: 'GR9S921004CN', coil: 'CHPTA4230C3', seer: '14.3', afue: '92%' },
-          { tonnage: '4.0', ac: 'GLXS4BA4810', furnace: 'GR9S921205DN', coil: 'CHPTA6030D3', seer: '14.3', afue: '92%' },
-          { tonnage: '5.0', ac: 'GLXS4BA6010', furnace: 'GR9S921205DN', coil: 'CHPTA6030D4', seer: '14.3', afue: '92%' }
-        ]
-      },
-      downflow: {
-        silver: [
-          { tonnage: '1.5', ac: 'GLXS3BN1810', furnace: 'GC9S800403AX', coil: 'CAPFA1818C3', seer: '13.4', afue: '80%' },
-          { tonnage: '2.0', ac: 'GLXS3BN2410', furnace: 'GC9S800403AX', coil: 'CAPFA2422A3', seer: '13.4', afue: '80%' },
-          { tonnage: '2.5', ac: 'GLXS3BN3010', furnace: 'GC9S800804BX', coil: 'CAPFA3022B3', seer: '13.4', afue: '80%' },
-          { tonnage: '3.0', ac: 'GLXS3BN3610', furnace: 'GC9S800804BX', coil: 'CAPFA3626B3', seer: '13.4', afue: '80%' },
-          { tonnage: '3.5', ac: 'GLXS3BN4210', furnace: 'GC9S800805CX', coil: 'CAPFA4226C3', seer: '13.4', afue: '80%' },
-          { tonnage: '4.0', ac: 'GLXS3BN4810', furnace: 'GC9S801005CX', coil: 'CAPFA6030C3', seer: '13.4', afue: '80%' },
-          { tonnage: '5.0', ac: 'GLXS3BN6010', furnace: 'GM9C801205DN', coil: 'CAPFA6030D3', seer: '13.4', afue: '80%' }
-        ],
-        gold: [
-          { tonnage: '1.5', ac: 'GLXS4BA1810', furnace: 'GC9S800403AX', coil: 'CAPFA1818C3', seer: '14.3', afue: '80%' },
-          { tonnage: '2.0', ac: 'GLXS4BA2410', furnace: 'GC9S800403AX', coil: 'CAPFA2422A3', seer: '14.3', afue: '80%' },
-          { tonnage: '2.5', ac: 'GLXS4BA3010', furnace: 'GC9S800804BX', coil: 'CAPFA3022B3', seer: '14.3', afue: '80%' },
-          { tonnage: '3.0', ac: 'GLXS4BA3610', furnace: 'GC9S800804BX', coil: 'CAPFA3626B3', seer: '14.3', afue: '80%' },
-          { tonnage: '3.5', ac: 'GLXS4BA4210', furnace: 'GC9S800805CX', coil: 'CAPFA4226C3', seer: '14.3', afue: '80%' },
-          { tonnage: '4.0', ac: 'GLXS4BA4810', furnace: 'GC9S801005CX', coil: 'CAPFA6030C3', seer: '14.3', afue: '80%' },
-          { tonnage: '5.0', ac: 'GLXS4BA6010', furnace: 'GM9C801205DN', coil: 'CAPFA6030D3', seer: '14.3', afue: '80%' }
-        ]
-      }
+    downflow: {
+      silver: [
+        { tonnage: '1.5', ac: 'GLXS3BN1810', furnace: 'GC9S800403AX', coil: 'CAPFA1818C3', seer: '13.4', afue: '80%' },
+        { tonnage: '2.0', ac: 'GLXS3BN2410', furnace: 'GC9S800403AX', coil: 'CAPFA2422A3', seer: '13.4', afue: '80%' },
+        { tonnage: '2.5', ac: 'GLXS3BN3010', furnace: 'GC9S800804BX', coil: 'CAPFA3022B3', seer: '13.4', afue: '80%' },
+        { tonnage: '3.0', ac: 'GLXS3BN3610', furnace: 'GC9S800804BX', coil: 'CAPFA3626B3', seer: '13.4', afue: '80%' },
+        { tonnage: '3.5', ac: 'GLXS3BN4210', furnace: 'GC9S800805CX', coil: 'CAPFA4226C3', seer: '13.4', afue: '80%' },
+        { tonnage: '4.0', ac: 'GLXS3BN4810', furnace: 'GC9S801005CX', coil: 'CAPFA6030C3', seer: '13.4', afue: '80%' },
+        { tonnage: '5.0', ac: 'GLXS3BN6010', furnace: 'GM9C801205DN', coil: 'CAPFA6030D3', seer: '13.4', afue: '80%' }
+      ],
+      gold: [
+        { tonnage: '1.5', ac: 'GLXS4BA1810', furnace: 'GC9S800403AX', coil: 'CAPFA1818C3', seer: '14.3', afue: '80%' },
+        { tonnage: '2.0', ac: 'GLXS4BA2410', furnace: 'GC9S800403AX', coil: 'CAPFA2422A3', seer: '14.3', afue: '80%' },
+        { tonnage: '2.5', ac: 'GLXS4BA3010', furnace: 'GC9S800804BX', coil: 'CAPFA3022B3', seer: '14.3', afue: '80%' },
+        { tonnage: '3.0', ac: 'GLXS4BA3610', furnace: 'GC9S800804BX', coil: 'CAPFA3626B3', seer: '14.3', afue: '80%' },
+        { tonnage: '3.5', ac: 'GLXS4BA4210', furnace: 'GC9S800805CX', coil: 'CAPFA4226C3', seer: '14.3', afue: '80%' },
+        { tonnage: '4.0', ac: 'GLXS4BA4810', furnace: 'GC9S801005CX', coil: 'CAPFA6030C3', seer: '14.3', afue: '80%' },
+        { tonnage: '5.0', ac: 'GLXS4BA6010', furnace: 'GM9C801205DN', coil: 'CAPFA6030D3', seer: '14.3', afue: '80%' }
+      ]
     }
-  };
+  }
+};
 
   const states = ['Alabama', 'Arizona', 'Arkansas', 'California', 'Colorado', 'Connecticut', 'Delaware', 'Florida', 'Georgia', 'Idaho', 'Illinois', 'Indiana', 'Iowa', 'Kansas', 'Kentucky', 'Louisiana', 'Maine', 'Maryland', 'Massachusetts', 'Michigan', 'Minnesota', 'Mississippi', 'Missouri', 'Montana', 'Nebraska', 'Nevada', 'New Hampshire', 'New Jersey', 'New Mexico', 'New York', 'North Carolina', 'North Dakota', 'Ohio', 'Oklahoma', 'Oregon', 'Pennsylvania', 'Rhode Island', 'South Carolina', 'South Dakota', 'Tennessee', 'Texas', 'Utah', 'Vermont', 'Virginia', 'Washington', 'West Virginia', 'Wisconsin', 'Wyoming'];
 
   const thresholds = [
-    [1.75, '1.5'],
-    [2.25, '2.0'],
-    [2.75, '2.5'],
-    [3.25, '3.0'],
-    [3.75, '3.5'],
-    [4.5,  '4.0'],
-  ];
+  [1.77, '1.5'],  // up to 850 sqft
+  [2.40, '2.0'],  // up to 1150 sqft
+  [3.02, '2.5'],  // up to 1450 sqft
+  [3.65, '3.0'],  // up to 1750 sqft
+  [4.27, '3.5'],  // up to 2050 sqft
+  [4.90, '4.0'],  // up to 2350 sqft
+  // 5.0 ton is handled by the default for anything above 4.90
+];
 
   const calculateTonnage = (sqft) => {
     if (!sqft) return;
